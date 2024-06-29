@@ -1,13 +1,20 @@
 {
-  "name": "Simpang_Client",
+  "name": "simpang_client",
   "private": true,
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "dev:web": "dotenv -e .env.local -- turbo dev --filter=web",
+    "build:web": "dotenv -e .env -- turbo build --filter=web",
+    "dev:admin": "dotenv -e .env.local -- turbo dev --filter=admin",
+    "build:admin": "dotenv -e .env -- turbo build --filter=admin"
   },
   "devDependencies": {
+    "@simpang/eslint-config": "*",
+    "@simpang/typescript-config": "*",
+    "dotenv-cli": "^7.4.2",
     "prettier": "^3.2.5",
     "turbo": "^2.0.6",
     "typescript": "^5.4.5"
@@ -19,5 +26,13 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "axios": "^1.7.2",
+    "classnames": "^2.5.1",
+    "glob": "^10.4.2",
+    "jwt-decode": "^4.0.0",
+    "rimraf": "^5.0.7",
+    "sass": "^1.77.6"
+  }
 }
