@@ -47,12 +47,14 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
               <Link href={PATHS.HOME}>SIM PANG</Link>
             </li>
             <li>
+              <h3 className={styles.menuTitle}>심리테스트</h3>
               <ul>
-                <li>심리테스트</li>
                 <li>
                   <Link href={PATHS.CONTENTS.TOTAL} onClick={onClickMenuBtn}>
                     전체보기
                   </Link>
+                </li>
+                <li>
                   <Link href={PATHS.CONTENTS.LATEST} onClick={onClickMenuBtn}>
                     최신 심리테스트
                   </Link>
@@ -60,12 +62,14 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
               </ul>
             </li>
             <li>
+              <h3 className={styles.menuTitle}>회원 전용</h3>
               <ul>
-                <li>회원 전용</li>
                 <li>
                   <Link href={PATHS.MY_PAGE} onClick={onClickMenuBtn}>
                     mypage
                   </Link>
+                </li>
+                <li>
                   <Link href={PATHS.CONTENTS.REGISTER} onClick={onClickMenuBtn}>
                     컨텐츠 만들기
                   </Link>
@@ -73,15 +77,18 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
               </ul>
             </li>
             <li>
+              <h3 className={styles.menuTitle}>About</h3>
               <ul>
-                <li>About</li>
-                <li></li>
-                <Link href={PATHS.ABOUT.SITE_INFO} onClick={onClickMenuBtn}>
-                  심팡 소개
-                </Link>
-                <Link href={PATHS.ABOUT.DEV_INFO} onClick={onClickMenuBtn}>
-                  개발자 소개
-                </Link>
+                <li>
+                  <Link href={PATHS.ABOUT.SITE_INFO} onClick={onClickMenuBtn}>
+                    심팡 소개
+                  </Link>
+                </li>
+                <li>
+                  <Link href={PATHS.ABOUT.DEV_INFO} onClick={onClickMenuBtn}>
+                    개발자 소개
+                  </Link>
+                </li>
               </ul>
             </li>
           </ul>
