@@ -1,0 +1,21 @@
+@use 'styles/mixins' as m;
+@import 'variable';
+@import 'base.module';
+
+.mediaquery_wrap {
+  max-width: var(--max-width);
+  min-width: var(--min-width);
+  min-height: 640px;
+  background-color: var(--color-white);
+  margin: auto;
+
+  position: relative;
+
+  .content_wrap {
+    padding: 15px;
+  }
+}
+
+.back_shadow {
+  box-shadow: 0 4px 8px rgba(85, 85, 85, 0.1);
+}
