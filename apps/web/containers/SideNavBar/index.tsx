@@ -10,7 +10,7 @@ interface Props {
   onClickMenuBtn: () => void;
 }
 export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
-  const [isClosing, setIsClosing] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -21,13 +21,13 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
     }
 
     if (isOpen) {
-      setIsClosing(true);
+      setIsMenuOpen(true);
       document.addEventListener('mousedown', handleClickOutside);
       document.documentElement.classList.add('mobileCoverOpen');
     } else {
       document.removeEventListener('mousedown', handleClickOutside);
       setTimeout(() => {
-        setIsClosing(false);
+        setIsMenuOpen(false);
         document.documentElement.classList.remove('mobileCoverOpen');
       }, 300);
     }
@@ -39,7 +39,7 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
 
   return (
     <nav className={styles.wrap}>
-      {isClosing && (
+      {isMenuOpen && (
         <div
           className={`${styles.meunWrap} ${isOpen ? styles.open : styles.closed}`}>
           <ul ref={menuRef}>
