@@ -1,0 +1,24 @@
+@use 'styles/mixins' as m;
+
+.button {
+  width: 100%;
+  padding: 5px;
+  font-size: var(--font-size-m);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+
+  p {
+    padding: 10px;
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--border-radius-s);
+    transition: border-color 0.3s ease;
+    border: 1.5px dashed transparent;
+  }
+
+  &:hover {
+    p {
+      border-color: var(--border-color);
+      transition: border-color 0.3s ease;
+    }
+  }
+}
