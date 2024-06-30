@@ -2,8 +2,11 @@ export const PATHS = {
   HOME: '/',
   LOGIN: '/login',
   MY_PAGE: '/mypage',
-  POLICY: '/policy',
-  TERMS: '/terms',
+  RSS: '/api/rss',
+  LEGAL: {
+    POLICY: '/legal/policy',
+    TERMS: '/legal/terms',
+  },
   ABOUT: {
     SITE_INFO: '/about/site',
     DEV_INFO: '/about/dev',
