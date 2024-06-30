@@ -19,6 +19,19 @@
 
   --color-bg: #f6f6f6;
 
+  --border-color: #5e3b28;
+  --font-color: #5e3b28;
+
+  --font-size-xs: 0.6rem;
+  --font-size-s: 0.8rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.2rem;
+  --font-size-xl: 1.5rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
   --color-primary: #ff7a00;
   --color-subPoint: #ffc690;
 

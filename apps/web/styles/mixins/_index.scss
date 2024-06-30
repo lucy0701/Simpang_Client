@@ -1,14 +1,14 @@
 @forward 'flexbox';
 
-@mixin textEllipsis {
-  width: 100%;
+@mixin textEllipsis($width: 100%) {
+  width: $width;
   overflow: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
   white-space: nowrap;
 }
 
-@mixin btnStyles($width, $height, $background-image) {
+@mixin iconStyles($width, $height, $background-image) {
   width: $width;
   height: $height;
   background-repeat: no-repeat;

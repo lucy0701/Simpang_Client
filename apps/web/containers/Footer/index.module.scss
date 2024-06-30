@@ -11,7 +11,7 @@ $icon-size: 1rem;
   @include m.flexboxColumn(between, end);
 
   p {
-    font-size: 0.7rem;
+    font-size: var(--font-size-s);
     color: var(--color-white);
   }
 
@@ -26,13 +26,13 @@ $icon-size: 1rem;
       gap: 10px;
 
       .gitHubIcon {
-        @include m.btnStyles($icon-size, $icon-size, '/svgs/gitHub.svg');
+        @include m.iconStyles($icon-size, $icon-size, '/svgs/gitHub.svg');
       }
       .rssIcon {
-        @include m.btnStyles($icon-size, $icon-size, '/svgs/rss.svg');
+        @include m.iconStyles($icon-size, $icon-size, '/svgs/rss.svg');
       }
       .instagramIcon {
-        @include m.btnStyles($icon-size, $icon-size, '/svgs/instagram.svg');
+        @include m.iconStyles($icon-size, $icon-size, '/svgs/instagram.svg');
       }
     }
 
@@ -42,7 +42,7 @@ $icon-size: 1rem;
 
       span {
         color: var(--color-white);
-        font-size: 0.6rem;
+        font-size: var(--font-size-xs);
       }
     }
   }
