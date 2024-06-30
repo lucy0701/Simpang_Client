@@ -1,0 +1,49 @@
+@use 'styles/mixins' as m;
+
+$icon-size: 1rem;
+
+.wrap {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--color-primary);
+  position: absolute;
+  bottom: 0;
+  @include m.flexboxColumn(between, end);
+
+  p {
+    font-size: var(--font-size-s);
+    color: var(--color-white);
+  }
+
+  .contentsBox {
+    width: 100%;
+    height: 100%;
+    @include m.flexbox(between, end);
+    gap: 10px;
+
+    .iconBox {
+      @include m.flexbox(between);
+      gap: 10px;
+
+      .gitHubIcon {
+        @include m.iconStyles($icon-size, $icon-size, '/svgs/gitHub.svg');
+      }
+      .rssIcon {
+        @include m.iconStyles($icon-size, $icon-size, '/svgs/rss.svg');
+      }
+      .instagramIcon {
+        @include m.iconStyles($icon-size, $icon-size, '/svgs/instagram.svg');
+      }
+    }
+
+    .docsBox {
+      @include m.flexbox(around);
+      gap: 8px;
+
+      span {
+        color: var(--color-white);
+        font-size: var(--font-size-xs);
+      }
+    }
+  }
+}
