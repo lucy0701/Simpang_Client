@@ -11,7 +11,7 @@ $icon-size: 1rem;
   @include m.flexboxColumn(between, end);
 
   p {
-    font-size: 0.7rem;
+    font-size: var(--font-size-s);
     color: var(--color-white);
   }
 
@@ -42,7 +42,7 @@ $icon-size: 1rem;
 
       span {
         color: var(--color-white);
-        font-size: 0.6rem;
+        font-size: var(--font-size-xs);
       }
     }
   }

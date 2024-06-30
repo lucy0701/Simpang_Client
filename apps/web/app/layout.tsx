@@ -1,4 +1,4 @@
-import '../styles/globals.scss';
+import '../styles/_globals.scss';
 import { Noto_Sans_KR } from 'next/font/google';
 
 import type { Metadata } from 'next';
