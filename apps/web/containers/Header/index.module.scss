@@ -23,13 +23,13 @@ $title-width: 80px;
       gap: 20px;
     }
     .searchBtn {
-      @include m.btnStyles($button-size, $button-size, '/svgs/search.svg');
+      @include m.iconStyles($button-size, $button-size, '/svgs/search.svg');
     }
     .menuBtn {
-      @include m.btnStyles($button-size, $button-size, '/svgs/menu.svg');
+      @include m.iconStyles($button-size, $button-size, '/svgs/menu.svg');
     }
     .loginBtn {
-      @include m.btnStyles($button-size, $button-size, '/svgs/login.svg');
+      @include m.iconStyles($button-size, $button-size, '/svgs/login.svg');
     }
   }
 }
