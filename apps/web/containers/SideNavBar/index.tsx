@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import styles from './index.module.scss';
 
+import { PATHS } from '@/constants';
+
 interface Props {
   isOpen: boolean;
   onClickMenuBtn: () => void;
@@ -42,34 +44,43 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
           className={`${styles.meunWrap} ${isOpen ? styles.open : styles.closed}`}>
           <ul ref={menuRef}>
             <li>
-              <h2>SIM PANG</h2>
+              <Link href={PATHS.HOME}>SIM PANG</Link>
             </li>
             <li>
               <ul>
-                <li>TITLE01</li>
+                <li>심리테스트</li>
                 <li>
-                  <Link href='/' onClick={onClickMenuBtn}>
-                    Home
+                  <Link href={PATHS.CONTENTS.TOTAL} onClick={onClickMenuBtn}>
+                    전체보기
+                  </Link>
+                  <Link href={PATHS.CONTENTS.LATEST} onClick={onClickMenuBtn}>
+                    최신 심리테스트
                   </Link>
                 </li>
               </ul>
             </li>
             <li>
               <ul>
-                <li>TITLE02</li>
+                <li>회원 전용</li>
                 <li>
-                  <Link href='/' onClick={onClickMenuBtn}>
-                    My page
+                  <Link href={PATHS.MY_PAGE} onClick={onClickMenuBtn}>
+                    mypage
+                  </Link>
+                  <Link href={PATHS.CONTENTS.REGISTER} onClick={onClickMenuBtn}>
+                    컨텐츠 만들기
                   </Link>
                 </li>
               </ul>
             </li>
             <li>
               <ul>
-                <li>TITLE03</li>
+                <li>About</li>
                 <li></li>
-                <Link href='/' onClick={onClickMenuBtn}>
-                  INFO
+                <Link href={PATHS.ABOUT.SITE_INFO} onClick={onClickMenuBtn}>
+                  심팡 소개
+                </Link>
+                <Link href={PATHS.ABOUT.DEV_INFO} onClick={onClickMenuBtn}>
+                  개발자 소개
                 </Link>
               </ul>
             </li>
