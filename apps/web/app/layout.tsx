@@ -24,6 +24,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <head>
+        <script
+          async
+          src='https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.js'
+          integrity='sha384-4isBVZ02Sicjf8XHbphmDqKPF9IdtDHzQm7IdcIhsBHx14UU9s4FrOKdDrjDCm9M'
+          crossOrigin='anonymous'
+        />
+      </head>
       <body className={notoSansKr.className}>
         <div className='mediaquery_wrap'>
           <Header />
