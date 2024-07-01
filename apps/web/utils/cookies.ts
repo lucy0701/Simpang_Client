@@ -7,4 +7,5 @@ export const setCookie = (name: string, value: string, options?: any) =>
 
 export const getCookie = (name: string) => cookies.get(name);
 
-export const removeCookie = (name: string) => cookies.remove(name);
+export const removeCookie = (name: string, options?: any) =>
+  cookies.remove(name, { ...options });

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 
 import { PATHS } from '@/constants';
+import { kakaoLogout } from '@/services';
 
 interface Props {
   isOpen: boolean;
@@ -90,6 +91,9 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
                   </Link>
                 </li>
               </ul>
+            </li>
+            <li>
+              <button onClick={kakaoLogout}>Logout</button>
             </li>
           </ul>
         </div>

@@ -1,7 +1,7 @@
 'use client';
 import styles from './index.module.scss';
 
-import setKakaoLogin from '@/services/kakaoLogin';
+import { setKakaoLogin } from '@/services';
 import Image from 'next/image';
 
 export default function KakaoLogin() {

@@ -1,13 +1,12 @@
 import { TOKEN_NAME } from '@/constants';
-import { getCookie } from '@/utils/cookies';
-import { cookies } from 'next/headers';
+import { getCookie } from '@/utils';
 
 export const getHeaders = (): { authorization: string } | undefined => {
   const token = getCookie(TOKEN_NAME);
 
   if (token) {
     return {
-      authorization: `Bearer ${token}`,
+      authorization: token,
     };
   }
 
@@ -21,18 +20,6 @@ export const creatHeaders = (contentType: string) => {
     return {
       'Content-Type': contentType,
       Authorization: token.authorization,
-    };
-  }
-
-  return undefined;
-};
-
-export const getHeaders_ssr = (): { authorization: string } | undefined => {
-  const token = cookies().get(TOKEN_NAME);
-
-  if (token) {
-    return {
-      authorization: `Bearer ${token}`,
     };
   }
 

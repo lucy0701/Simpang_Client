@@ -40,7 +40,6 @@ export default function KakaoAuthHandle() {
           expires: getExpirationDate(decodedToken.exp),
         });
 
-        sessionStorage.setItem(TOKEN_NAME, token);
         sessionStorage.setItem(USER_INFO, JSON.stringify(userInfo));
 
         router.replace(PATHS.HOME);
