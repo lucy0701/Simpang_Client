@@ -7,9 +7,11 @@ import styles from './index.module.scss';
 import SideNavBar from '../SideNavBar';
 
 import { PATHS } from '@/constants';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const router = useRouter();
   const onClickMenuBtn = () => {
     setIsOpen(!isOpen);
   };
@@ -20,7 +22,10 @@ export default function Header() {
         <button className={styles.menuBtn} onClick={onClickMenuBtn} />
         <div className={styles.btnBox}>
           <button className={styles.searchBtn} />
-          <button className={styles.loginBtn} />
+          <button
+            className={styles.loginBtn}
+            onClick={() => router.push(PATHS.LOGIN)}
+          />
         </div>
       </div>
 
