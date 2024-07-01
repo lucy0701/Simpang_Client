@@ -7,6 +7,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:@tanstack/eslint-plugin-query/recommende',
     'plugin:@typescript-eslint/recommended',
     'prettier',
     require.resolve('@vercel/style-guide/eslint/next'),
