@@ -20,7 +20,7 @@ module.exports = {
     node: true,
     browser: true,
   },
-  plugins: ['only-warn', 'react', 'import'],
+  plugins: ['only-warn', 'eslint-config-turbo', 'import'],
   settings: {
     'import/resolver': {
       typescript: {
