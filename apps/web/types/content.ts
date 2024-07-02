@@ -11,12 +11,6 @@ export interface Contents {
   type: ContentType;
 }
 
-export interface ContentsData {
-  totalCount: number;
-  totalPage: number;
-  currentPage: number;
-  contents: Contents[];
-}
 
 export interface Question {
   index: number;
@@ -26,5 +20,3 @@ export interface Question {
     text: string;
   }[];
 }
-
-export const CONTENT_TYPE: ContentType[] = ['MBTI'];
