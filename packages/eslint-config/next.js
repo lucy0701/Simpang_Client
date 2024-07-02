@@ -48,7 +48,7 @@ module.exports = {
     'no-console': 'warn',
     'no-debugger': 'error',
     'no-trailing-spaces': 'error',
-    'jsx-quotes': ['error', 'prefer-single'],
+    'jsx-quotes': ['error', 'prefer-double'],
     'react-hooks/rules-of-hooks': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'react/jsx-uses-react': 'off',

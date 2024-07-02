@@ -5,8 +5,6 @@ export const getCurrentDateTime = () => {
 
 export const localeDate = `${new Date().toLocaleDateString('en-CA')}`;
 
-export const ISO_Date = new Date(
-  new Date().getTime() + 9 * 60 * 60 * 1000,
-).toISOString();
+export const ISO_Date = new Date(new Date().getTime() + 9 * 60 * 60 * 1000).toISOString();
 
-export const getExpirationDate = (date: number) => new Date((date + 3600) * 1000);
+export const getExpirationDate = (date: number) => new Date((date + 9 * 3600) * 1000);
