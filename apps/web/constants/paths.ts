@@ -12,9 +12,11 @@ export const PATHS = {
     DEV_INFO: '/about/dev',
   },
   CONTENTS: {
+    BASE:'/contents',
     TOTAL: '/contents/total',
     LATEST: '/contents/latest',
     REGISTER: '/contents/register',
+    RAMDOM: '/contents/random',
   },
 };
 

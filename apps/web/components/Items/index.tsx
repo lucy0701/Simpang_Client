@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import styles from './index.module.scss';
 
-import { SIMPANG_ALT } from '@/constants';
+import { PATHS, SIMPANG_ALT } from '@/constants';
 import { Contents } from '@/types';
 import Link from 'next/link';
 
@@ -15,7 +15,7 @@ const ImageItem = ({
   commentCount,
   likeCount,
 }: Partial<Contents>) => (
-  <Link href={`/contents/${_id}`} className={styles.wrap}>
+  <Link href={`${PATHS.CONTENTS.BASE}/${_id}`} className={styles.wrap}>
     <div className={styles.imgWrap}>
       <Image src={imageUrl!} alt={SIMPANG_ALT} fill sizes="100%" className={styles.image} />
       {title && <h3 className={styles.title}>{title}</h3>}
