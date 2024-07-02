@@ -12,14 +12,14 @@ interface Props<T> {
 const useInfiniteScroll = <T>({ getData, sort, size }: Props<T>) => {
   const observer = useRef<IntersectionObserver>();
 
-  const fetchContents = async ({ pageParam = 0 }) => {
+  const fetchData = async ({ pageParam = 0 }) => {
     const res = await getData({ page: pageParam, size, sort });
     return res.data;
   };
 
   const { data, error, fetchNextPage, hasNextPage, isFetching, status } = useInfiniteQuery({
-    queryKey: ['contents'],
-    queryFn: fetchContents,
+    queryKey: ['listings', sort],
+    queryFn: fetchData,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       return lastPage.totalPage > lastPage.currentPage ? lastPage.currentPage + 1 : undefined;
