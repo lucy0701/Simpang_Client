@@ -283,11 +283,11 @@ export default function Register() {
                 />
               </label>
               {questions[i]!.answers!.length > 1 && (
-                <Button text=" - answer" onClick={() => removeAnswer(i, j)} />
+                <Button size="small" text=" - answer" onClick={() => removeAnswer(i, j)} />
               )}
             </div>
           ))}
-          <Button text=" + answer" onClick={() => addAnswer(i)} />
+          <Button size="medium" text=" + answer" onClick={() => addAnswer(i)} />
           {questions.length > 1 && <Button text=" - question" onClick={() => removeQuestion(i)} />}
         </div>
       ))}

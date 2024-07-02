@@ -7,7 +7,7 @@ interface Props {
 
 const Titel = ({ title, content }: Props) => (
   <div>
-    {title && <h2 className={styles.title}>{title}</h2>}
+    {title && <h3 className={styles.title}>{title}</h3>}
     {content && <p className={styles.content}>{content}</p>}
   </div>
 );
