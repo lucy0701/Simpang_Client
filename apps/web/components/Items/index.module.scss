@@ -14,8 +14,7 @@ $icon-size: 0.8rem;
     overflow: hidden;
     object-fit: cover;
 
-    border-radius: var(--border-radius-s);
-    border: 2px solid var(--border-color);
+    @include m.borderStyles();
 
     margin-bottom: 5px;
   }
