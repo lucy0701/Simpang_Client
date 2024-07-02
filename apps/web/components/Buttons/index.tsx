@@ -1,12 +1,16 @@
+import { ButtonHTMLAttributes } from 'react';
 import styles from './index.module.scss';
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  onClick: () => void;
 }
 
-const Button = ({ text, onClick }: Props) => (
-  <button className={styles.button} onClick={onClick}>
+const Button = ({ text, onClick, type = 'button', ...rest }: Props) => (
+  <button
+    type={type || 'button'}
+    className={styles.button}
+    onClick={onClick}
+    {...rest}>
     <p>{text}</p>
   </button>
 );
