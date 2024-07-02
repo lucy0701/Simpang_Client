@@ -1,4 +1,5 @@
-import { PageParams } from '@/types';
+import { Contents, GetPageData, PageParams } from '@/types';
 import { apiBe } from '.';
 
-export const getContents = (params: PageParams) => apiBe(`/v1/contents`, { params });
+export const getContents = (params: PageParams) =>
+  apiBe<GetPageData<Contents>>(`/v1/contents`, { params });

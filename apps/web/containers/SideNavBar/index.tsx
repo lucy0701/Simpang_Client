@@ -66,13 +66,8 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
               <h3 className={styles.menuTitle}>심리테스트</h3>
               <ul>
                 <li>
-                  <Link href={PATHS.CONTENTS.TOTAL} onClick={onClickMenuBtn}>
+                  <Link href={PATHS.CONTENTS.BASE} onClick={onClickMenuBtn}>
                     전체보기
-                  </Link>
-                </li>
-                <li>
-                  <Link href={PATHS.CONTENTS.LATEST} onClick={onClickMenuBtn}>
-                    최신 심리테스트
                   </Link>
                 </li>
               </ul>

@@ -13,8 +13,6 @@ export const PATHS = {
   },
   CONTENTS: {
     BASE:'/contents',
-    TOTAL: '/contents/total',
-    LATEST: '/contents/latest',
     REGISTER: '/contents/register',
     RAMDOM: '/contents/random',
   },
