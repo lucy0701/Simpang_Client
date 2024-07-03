@@ -3,8 +3,8 @@ import { Noto_Sans_KR } from 'next/font/google';
 
 import type { Metadata } from 'next';
 
-import Footer from '@/containers/Footer';
-import Header from '@/containers/Header';
+import Footer from '@/containers/layout/Footer';
+import Header from '@/containers/layout/Header';
 import ReactQueryProviders from '@/components/ReactQueryProviders';
 
 export const metadata: Metadata = {

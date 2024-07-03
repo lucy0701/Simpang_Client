@@ -1,7 +1,7 @@
 'use client';
 import ImageItem from '@/components/Items';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { getContents } from '@/services/contents';
+import { getContentsAPI } from '@/services/contents';
 import { Contents, Sort } from '@/types';
 import { useState } from 'react';
 
@@ -9,7 +9,7 @@ import styles from './index.module.scss';
 import Button from '@/components/Buttons';
 
 export default function ContentList() {
-  const [sort, setSort] = useState<Sort>('asc');
+  const [sort, setSort] = useState<Sort>('desc');
 
   const {
     dataList: contents,
@@ -18,7 +18,7 @@ export default function ContentList() {
     error,
     isFetching,
   } = useInfiniteScroll<Contents>({
-    getData: getContents,
+    getData: getContentsAPI,
     sort,
     size: 10,
   });
@@ -34,8 +34,8 @@ export default function ContentList() {
   ) : (
     <div className={styles.wrap}>
       <div className={styles.btnBox}>
-        <Button size="medium" text="등록순" onClick={() => handleSort('desc')} />
-        <Button size="medium" text="최신순" onClick={() => handleSort('asc')} />
+        <Button size="medium" text="등록순" onClick={() => handleSort('asc')} />
+        <Button size="medium" text="최신순" onClick={() => handleSort('desc')} />
       </div>
 
       {contents &&
