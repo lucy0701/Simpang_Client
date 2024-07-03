@@ -1,6 +1,5 @@
 export * from './login';
 export * from './content';
-export * from './result';
 
 export type Sort = 'asc' | 'desc';
 

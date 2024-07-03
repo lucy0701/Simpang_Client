@@ -22,10 +22,7 @@ export default function Header() {
         <button className={styles.menuBtn} onClick={onClickMenuBtn} />
         <div className={styles.btnBox}>
           <button className={styles.searchBtn} />
-          <button
-            className={styles.loginBtn}
-            onClick={() => router.push(PATHS.LOGIN)}
-          />
+          <button className={styles.loginBtn} onClick={() => router.push(PATHS.LOGIN)} />
         </div>
       </div>
 

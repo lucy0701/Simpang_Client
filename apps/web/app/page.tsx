@@ -1,10 +1,10 @@
 import { BE_URL } from '@/constants';
 import Home from '@/containers/Home';
-import { ContentsData } from '@/types';
+import { Contents, GetPageData } from '@/types';
 
 export default async function Page() {
-  const latestContents = await fetch(`${BE_URL}/api/v1/contents/?size=6&sort=asc&page=1`).then(
-    (res) => res.json() as Promise<ContentsData>,
+  const latestContents = await fetch(`${BE_URL}/api/v1/contents/?size=6&sort=desc&page=1`).then(
+    (res) => res.json() as Promise<GetPageData<Contents>>,
   );
-  return <Home latestContents={latestContents.contents} />;
+  return <Home latestContents={latestContents.data} />;
 }
