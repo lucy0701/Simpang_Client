@@ -1,12 +1,27 @@
+import { ButtonHTMLAttributes } from 'react';
 import styles from './index.module.scss';
+import cx from 'classnames';
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  onClick: () => void;
+  skin?: 'base' | 'float';
+  size?: 'small' | 'medium' | 'large';
 }
 
-const Button = ({ text, onClick }: Props) => (
-  <button className={styles.button} onClick={onClick}>
+const Button = ({
+  text,
+  onClick,
+  type = 'button',
+  skin = 'base',
+  size = 'large',
+  ...rest
+}: Props) => (
+  <button
+    type={type || 'button'}
+    className={cx(styles[skin], skin === 'base' && styles[size!], styles.buttonWrap)}
+    onClick={onClick}
+    {...rest}
+  >
     <p>{text}</p>
   </button>
 );

@@ -1,12 +1,17 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 import styles from './index.module.scss';
 import SideNavBar from '../SideNavBar';
 
+import { PATHS } from '@/constants';
+import { useRouter } from 'next/navigation';
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const router = useRouter();
   const onClickMenuBtn = () => {
     setIsOpen(!isOpen);
   };
@@ -17,10 +22,13 @@ export default function Header() {
         <button className={styles.menuBtn} onClick={onClickMenuBtn} />
         <div className={styles.btnBox}>
           <button className={styles.searchBtn} />
-          <button className={styles.loginBtn} />
+          <button className={styles.loginBtn} onClick={() => router.push(PATHS.LOGIN)} />
         </div>
       </div>
-      <h1 className={styles.title}>심팡</h1>
+
+      <Link className={styles.titleBtn} href={PATHS.HOME}>
+        <h1>심팡</h1>
+      </Link>
     </header>
   );
 }

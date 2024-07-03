@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import styles from './index.module.scss';
 
-import { PATHS } from '@/constants';
+import { PATHS, USER_INFO } from '@/constants';
+import { kakaoLogout } from '@/services';
+import { UserInfo } from '@/types';
 
 interface Props {
   isOpen: boolean;
@@ -12,6 +14,20 @@ interface Props {
 export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement>(null);
+  const [user, setUser] = useState<UserInfo | null>();
+
+  const onClickLogoutBtn = async () => {
+    await kakaoLogout();
+    setUser(null);
+    onClickMenuBtn();
+  };
+
+  useEffect(() => {
+    const userInfo = sessionStorage.getItem(USER_INFO);
+    if (userInfo) {
+      setUser(JSON.parse(userInfo));
+    }
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -50,32 +66,31 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
               <h3 className={styles.menuTitle}>심리테스트</h3>
               <ul>
                 <li>
-                  <Link href={PATHS.CONTENTS.TOTAL} onClick={onClickMenuBtn}>
+                  <Link href={PATHS.CONTENTS.BASE} onClick={onClickMenuBtn}>
                     전체보기
                   </Link>
                 </li>
-                <li>
-                  <Link href={PATHS.CONTENTS.LATEST} onClick={onClickMenuBtn}>
-                    최신 심리테스트
-                  </Link>
-                </li>
               </ul>
             </li>
-            <li>
-              <h3 className={styles.menuTitle}>회원 전용</h3>
-              <ul>
-                <li>
-                  <Link href={PATHS.MY_PAGE} onClick={onClickMenuBtn}>
-                    mypage
-                  </Link>
-                </li>
-                <li>
-                  <Link href={PATHS.CONTENTS.REGISTER} onClick={onClickMenuBtn}>
-                    컨텐츠 만들기
-                  </Link>
-                </li>
-              </ul>
-            </li>
+            {user && (
+              <li>
+                <h3 className={styles.menuTitle}>회원 전용</h3>
+                <ul>
+                  <li>
+                    <Link href={PATHS.MY_PAGE} onClick={onClickMenuBtn}>
+                      mypage
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={PATHS.CONTENTS.REGISTER}
+                      onClick={onClickMenuBtn}>
+                      컨텐츠 만들기
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+            )}
             <li>
               <h3 className={styles.menuTitle}>About</h3>
               <ul>
@@ -91,6 +106,11 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
                 </li>
               </ul>
             </li>
+            {user && (
+              <li>
+                <button onClick={onClickLogoutBtn}>Logout</button>
+              </li>
+            )}
           </ul>
         </div>
       )}

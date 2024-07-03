@@ -3,8 +3,9 @@ import { Noto_Sans_KR } from 'next/font/google';
 
 import type { Metadata } from 'next';
 
-import Footer from '@/containers/Footer';
-import Header from '@/containers/Header';
+import Footer from '@/containers/layout/Footer';
+import Header from '@/containers/layout/Header';
+import ReactQueryProviders from '@/components/ReactQueryProviders';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -23,13 +24,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang="en">
+      <head>
+        <script
+          async
+          src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.js"
+          integrity="sha384-4isBVZ02Sicjf8XHbphmDqKPF9IdtDHzQm7IdcIhsBHx14UU9s4FrOKdDrjDCm9M"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={notoSansKr.className}>
-        <div className='mediaquery_wrap'>
-          <Header />
-          <div className='content_wrap'>{children}</div>
-          <Footer />
-        </div>
+        <ReactQueryProviders>
+          <div className="mediaquery_wrap">
+            <Header />
+            <div className="content_wrap">{children}</div>
+            <Footer />
+          </div>
+        </ReactQueryProviders>
       </body>
     </html>
   );

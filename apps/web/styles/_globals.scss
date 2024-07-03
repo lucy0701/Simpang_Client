@@ -5,17 +5,23 @@
 .mediaquery_wrap {
   max-width: var(--max-width);
   min-width: var(--min-width);
-  min-height: 640px;
   background-color: var(--color-white);
   margin: auto;
 
   position: relative;
 
   .content_wrap {
-    padding: 25px;
+    padding: 10px;
+    min-height: 640px;
+    margin-top: 30px;
   }
 }
 
 .back_shadow {
   box-shadow: 0 4px 8px rgba(85, 85, 85, 0.1);
+}
+
+.legalText {
+  white-space: pre-line;
+  font-size: 0.9rem;
 }

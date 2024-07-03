@@ -6,8 +6,6 @@ $icon-size: 1rem;
   width: 100%;
   padding: 10px;
   background-color: var(--color-primary);
-  position: absolute;
-  bottom: 0;
   @include m.flexboxColumn(between, end);
 
   p {

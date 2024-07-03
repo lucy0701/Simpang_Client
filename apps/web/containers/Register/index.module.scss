@@ -1,0 +1,27 @@
+@use 'styles/mixins' as m;
+
+.formWrap {
+  @include m.flexboxColumn(start, between);
+  gap: 10px;
+
+  input {
+    padding: 5px;
+    @include m.borderStyles($radius_size: --border-radius-xs);
+  }
+  label {
+    @include m.flexbox(start, between);
+    gap: 10px;
+  }
+
+  .selectBox {
+    @include m.flexbox(between);
+
+    select {
+      width: 85%;
+    }
+  }
+}
+.wrap_gap_10 {
+  @include m.flexboxColumn(start, between);
+  gap: 10px;
+}
