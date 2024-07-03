@@ -1,8 +1,8 @@
 import ImageItem from '@/components/Items';
-import { Result } from '@/types';
+import { IResult } from '@/types';
 
 interface Props {
-  resultData: Result;
+  resultData: IResult;
 }
 
 export default function ContentResult({ resultData }: Props) {

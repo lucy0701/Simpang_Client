@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios';
+
 export * from './login';
 export * from './content';
 
@@ -14,4 +16,18 @@ export interface GetPageData<T> {
   totalPage: number;
   currentPage: number;
   data: T[];
+}
+
+export interface IComment {
+  _id: string;
+  userId: string;
+  text: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface PaginationOptions<T> {
+  getData: (params: PageParams) => Promise<AxiosResponse<GetPageData<T>>>;
+  sort: Sort;
+  size: number;
 }

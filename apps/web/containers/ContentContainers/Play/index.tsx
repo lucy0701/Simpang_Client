@@ -2,13 +2,13 @@
 
 import Button from '@/components/Buttons';
 import { postResultAPI } from '@/services/contents';
-import { Question } from '@/types';
+import { IQuestion } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface Props {
-  questions: Question[];
+  questions: IQuestion[];
   contentId: string;
 }
 

@@ -1,8 +1,7 @@
 'use client';
 
 import { apiBe, getHeaders } from '@/services';
-import { ContentType, Question } from '@/types/content';
-import { Result } from '@/types/result';
+import { ContentType, IQuestion } from '@/types';
 import { ChangeEvent, useState } from 'react';
 import cx from 'classnames';
 
@@ -15,6 +14,12 @@ interface ContentData {
   content: string;
   imageUrls: { index: number; imageUrl: File | null }[];
   type: ContentType;
+}
+
+interface ResultData {
+  result: string;
+  title: string;
+  content: string;
 }
 
 const SCORE_OPTIONS = [-1, 1];
@@ -45,7 +50,7 @@ export default function Register() {
     imageUrls: [],
   });
 
-  const [questions, setQuestions] = useState<Question[]>([
+  const [questions, setQuestions] = useState<IQuestion[]>([
     {
       index: 0,
       question: '',
@@ -58,7 +63,7 @@ export default function Register() {
     },
   ]);
 
-  const [results, setResults] = useState<Result[]>([
+  const [results, setResults] = useState<ResultData[]>([
     {
       result: '',
       title: '',
@@ -109,7 +114,7 @@ export default function Register() {
 
   const addQuestion = () => {
     const newIndex = questions.length;
-    const newQuestion: Question = {
+    const newQuestion: IQuestion = {
       index: newIndex,
       question: '',
       answers: [{ score: 0, text: '' }],

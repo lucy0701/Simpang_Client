@@ -2,7 +2,7 @@
 import ImageItem from '@/components/Items';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getContentsAPI } from '@/services/contents';
-import { Contents, Sort } from '@/types';
+import { IContents, Sort } from '@/types';
 import { useState } from 'react';
 
 import styles from './index.module.scss';
@@ -17,7 +17,7 @@ export default function ContentList() {
     status,
     error,
     isFetching,
-  } = useInfiniteScroll<Contents>({
+  } = useInfiniteScroll<IContents>({
     getData: getContentsAPI,
     sort,
     size: 10,

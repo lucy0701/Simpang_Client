@@ -1,10 +1,10 @@
 import { BE_URL } from '@/constants';
 import ContentContainer from '@/containers/ContentContainers';
-import { Content } from '@/types';
+import { IContent } from '@/types';
 
-export default async function Page({ params }: { params: { contentId: string } }) {
-  const contentData = await fetch(`${BE_URL}/api/v1/contents/${params.contentId}`).then(
-    (res) => res.json() as Promise<Content>,
+export default async function Page({ params }: { params: { id: string } }) {
+  const contentData = await fetch(`${BE_URL}/api/v1/contents/${params.id}`).then(
+    (res) => res.json() as Promise<IContent>,
   );
   return <ContentContainer contentData={contentData} />;
 }

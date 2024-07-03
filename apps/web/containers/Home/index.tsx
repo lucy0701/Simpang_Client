@@ -1,5 +1,5 @@
 'use client';
-import { Contents } from '@/types';
+import { IContents } from '@/types';
 import styles from './index.module.scss';
 
 import Title from '@/components/Title';
@@ -7,7 +7,7 @@ import ImageItem from '@/components/Items';
 import RandomButton from '@/components/Buttons/RandomBtn';
 
 interface Props {
-  latestContents: Contents[];
+  latestContents: IContents[];
 }
 
 export default function Home({ latestContents }: Props) {

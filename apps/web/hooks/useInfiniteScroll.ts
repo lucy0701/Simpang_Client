@@ -1,24 +1,17 @@
-import { GetPageData, PageParams, Sort } from '@/types';
+import { PaginationOptions } from '@/types';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { AxiosResponse } from 'axios';
 import { useCallback, useMemo, useRef } from 'react';
 
-interface Props<T> {
-  getData: (params: PageParams) => Promise<AxiosResponse<GetPageData<T>>>;
-  sort: Sort;
-  size: number;
-}
-
-const useInfiniteScroll = <T>({ getData, sort, size }: Props<T>) => {
+const useInfiniteScroll = <T>({ getData, sort, size }: PaginationOptions<T>) => {
   const observer = useRef<IntersectionObserver>();
 
-  const fetchData = async ({ pageParam = 0 }) => {
+  const fetchData = async ({ pageParam = 1 }) => {
     const res = await getData({ page: pageParam, size, sort });
     return res.data;
   };
 
   const { data, error, fetchNextPage, hasNextPage, isFetching, status } = useInfiniteQuery({
-    queryKey: ['listings', sort],
+    queryKey: ['infiniteScrollData', sort],
     queryFn: fetchData,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
