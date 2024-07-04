@@ -1,3 +1,4 @@
+import Comments from '@/components/Comments';
 import ImageItem from '@/components/Items/ImageItem';
 import { IResult } from '@/types';
 
@@ -14,7 +15,9 @@ export default function ContentResult({ resultData }: Props) {
       <h3>{title}</h3>
       <p>{content}</p>
 
-      <div>댓글 영역</div>
+      <div>
+        <Comments contentId={contentId} />
+      </div>
     </div>
   );
 }

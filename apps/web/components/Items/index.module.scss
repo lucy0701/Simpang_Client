@@ -59,7 +59,7 @@ $icon-size: 0.8rem;
           @include m.iconStyles($icon-size, $icon-size, '/svgs/comment.svg');
         }
         .likeIcon {
-          @include m.iconStyles($icon-size, $icon-size, '/svgs/like.svg');
+          @include m.iconStyles($icon-size, $icon-size, '/svgs/like_mini.svg');
         }
       }
     }

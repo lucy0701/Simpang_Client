@@ -1,10 +1,10 @@
 'use client';
 import { IContent } from '@/types';
-import Image from 'next/image';
 import styles from './index.module.scss';
 import Button from '@/components/Buttons';
 import Comments from '@/components/Comments';
 import ImageItem from '@/components/Items/ImageItem';
+import IconButtonBox from '@/components/IconButtons';
 
 interface Props {
   contentData: Omit<IContent, 'questions'>;
@@ -23,21 +23,8 @@ export default function ContentPreview({ contentData, onClickPlayBtn }: Props) {
         <Button size="medium" text="시작하기" onClick={onClickPlayBtn} />
         <p>지금 까지 {count.playCount}명이 함께 했어요!</p>
       </div>
-      {/* 분리하기 */}
-      <div className={styles.btnBox}>
-        <button className={styles.likeIcon}>
-          <p>{count.likeCount}</p>
-        </button>
-        <button>
-          <Image
-            alt="Kakao sharing button"
-            src="/images/kakaotalk_sharing.png"
-            width={31}
-            height={32}
-          />
-        </button>
-        <button className={styles.linkIcon} />
-      </div>
+
+      <IconButtonBox count={count.likeCount} contentId={contentData._id} />
 
       <div>
         <Comments contentId={_id} />
