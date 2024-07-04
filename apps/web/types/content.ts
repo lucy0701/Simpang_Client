@@ -1,11 +1,11 @@
 export type ContentType = 'MBTI';
 
-export interface Content {
+export interface IContent {
   _id: string;
   title: string;
   content: string;
   imageUrl: string;
-  questions: Question[];
+  questions: IQuestion[];
   playCount: number;
   commentCount: number;
   likeCount: number;
@@ -13,7 +13,7 @@ export interface Content {
   creator: string;
 }
 
-export interface Contents {
+export interface IContents {
   _id: string;
   title: string;
   content: string;
@@ -24,7 +24,7 @@ export interface Contents {
   type: ContentType;
 }
 
-export interface Question {
+export interface IQuestion {
   index: number;
   question: string;
   answers: {
@@ -33,7 +33,7 @@ export interface Question {
   }[];
 }
 
-export interface Result {
+export interface IResult {
   _id: string;
   contentId: string;
   title: string;

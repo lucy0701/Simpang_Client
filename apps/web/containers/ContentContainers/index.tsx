@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import ContentPreview from './Preview';
-import { Content } from '@/types';
+import { IContent } from '@/types';
 import ContentPlay from './Play';
 
 interface Props {
-  contentData: Content;
+  contentData: IContent;
 }
 
 export default function ContentContainer({ contentData }: Props) {

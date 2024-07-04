@@ -1,0 +1,22 @@
+@use 'styles/mixins' as m;
+
+.imgWrap {
+  position: relative;
+}
+
+.preview {
+  @include m.imageWrap(_, 220px);
+}
+.thumbnail {
+  @include m.imageWrap(50px, 50px);
+}
+.reuslt {
+  @include m.imageWrap(340px, 450px);
+}
+
+.square {
+  @include m.borderStyles();
+}
+.circle {
+  @include m.borderStyles($radius_size: --border-radius-circle);
+}

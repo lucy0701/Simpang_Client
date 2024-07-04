@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 
 import { PATHS, USER_INFO } from '@/constants';
 import { kakaoLogout } from '@/services';
-import { UserInfo } from '@/types';
+import { decodeToken_csr } from '@/utils';
 
 interface Props {
   isOpen: boolean;
@@ -14,20 +14,13 @@ interface Props {
 export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement>(null);
-  const [user, setUser] = useState<UserInfo | null>();
+
+  const user = decodeToken_csr();
 
   const onClickLogoutBtn = async () => {
     await kakaoLogout();
-    setUser(null);
     onClickMenuBtn();
   };
-
-  useEffect(() => {
-    const userInfo = sessionStorage.getItem(USER_INFO);
-    if (userInfo) {
-      setUser(JSON.parse(userInfo));
-    }
-  }, []);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -56,8 +49,7 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
   return (
     <nav className={styles.wrap}>
       {isMenuOpen && (
-        <div
-          className={`${styles.meunWrap} ${isOpen ? styles.open : styles.closed}`}>
+        <div className={`${styles.meunWrap} ${isOpen ? styles.open : styles.closed}`}>
           <ul ref={menuRef}>
             <li>
               <Link href={PATHS.HOME}>SIM PANG</Link>
@@ -82,9 +74,7 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href={PATHS.CONTENTS.REGISTER}
-                      onClick={onClickMenuBtn}>
+                    <Link href={PATHS.CONTENTS.REGISTER} onClick={onClickMenuBtn}>
                       컨텐츠 만들기
                     </Link>
                   </li>

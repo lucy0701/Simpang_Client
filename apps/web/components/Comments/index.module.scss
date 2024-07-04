@@ -1,0 +1,17 @@
+@use 'styles/mixins' as m;
+
+.wrap {
+  width: 100%;
+  @include m.flexboxColumn(start, between);
+  gap: 20px;
+
+  .inputWrap {
+    @include m.flexbox(between);
+
+    .commentInput {
+      width: 78%;
+      padding: 9px;
+      @include m.borderStyles();
+    }
+  }
+}

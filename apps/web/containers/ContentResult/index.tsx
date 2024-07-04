@@ -1,8 +1,8 @@
-import ImageItem from '@/components/Items';
-import { Result } from '@/types';
+import ImageItem from '@/components/Items/ImageItem';
+import { IResult } from '@/types';
 
 interface Props {
-  resultData: Result;
+  resultData: IResult;
 }
 
 export default function ContentResult({ resultData }: Props) {
@@ -10,7 +10,7 @@ export default function ContentResult({ resultData }: Props) {
 
   return (
     <div>
-      <ImageItem imageUrl={imageUrl} />
+      <ImageItem skin="reuslt" imageUrl={imageUrl!} />
       <h3>{title}</h3>
       <p>{content}</p>
 

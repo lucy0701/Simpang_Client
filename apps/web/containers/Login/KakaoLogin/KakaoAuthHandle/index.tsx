@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  AUTHORIZATION,
-  BE_URL,
-  PATHS,
-  TOKEN_NAME,
-  USER_INFO,
-} from '@/constants';
+import { AUTHORIZATION, PATHS, TOKEN_NAME, USER_INFO } from '@/constants';
 import { apiBe } from '@/services';
 import { DecodedToken, UserInfo } from '@/types';
 import { decodeToken, setCookie } from '@/utils';
@@ -40,7 +34,7 @@ export default function KakaoAuthHandle() {
           expires: getExpirationDate(decodedToken.exp),
         });
 
-        sessionStorage.setItem(USER_INFO, JSON.stringify(userInfo));
+        localStorage.setItem(USER_INFO, JSON.stringify(userInfo));
 
         router.replace(PATHS.HOME);
       } catch (error) {

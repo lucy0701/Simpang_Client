@@ -1,0 +1,58 @@
+@use 'styles/mixins' as m;
+
+.wrap {
+  @include m.flexboxColumn();
+  gap: 10px;
+
+  .commentWrap {
+    width: 100%;
+    @include m.flexboxColumn();
+    gap: 10px;
+  }
+}
+
+// commentItem
+.commentBox {
+  width: 100%;
+  @include m.flexbox(between);
+  @include m.borderStyles();
+  padding: 5px 8px;
+
+  .commentTextBox {
+    width: 85%;
+    @include m.flexboxColumn(_, start);
+    gap: 2px;
+
+    .topBox {
+      width: 100%;
+      @include m.flexbox(between);
+
+      .userWrap {
+        @include m.flexbox();
+        gap: 10px;
+        font-size: 0.9rem;
+
+        .createTime {
+          font-size: 0.7rem;
+        }
+      }
+
+      .buttomBox {
+        @include m.flexbox();
+        gap: 10px;
+        margin-right: 10px;
+      }
+    }
+    .inputText {
+      width: 95%;
+      font-size: 1rem;
+      border-bottom: 2px dashed var(--border-color);
+      background-color: var(--color-gray-e);
+    }
+
+    .text {
+      padding: 0 5px;
+      height: 30px;
+    }
+  }
+}

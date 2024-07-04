@@ -1,12 +1,13 @@
 'use client';
-import ImageItem from '@/components/Items';
-import { Content } from '@/types';
+import { IContent } from '@/types';
 import Image from 'next/image';
 import styles from './index.module.scss';
 import Button from '@/components/Buttons';
+import Comments from '@/components/Comments';
+import ImageItem from '@/components/Items/ImageItem';
 
 interface Props {
-  contentData: Omit<Content, 'questions'>;
+  contentData: Omit<IContent, 'questions'>;
   onClickPlayBtn: () => void;
 }
 
@@ -38,7 +39,9 @@ export default function ContentPreview({ contentData, onClickPlayBtn }: Props) {
         <button className={styles.linkIcon} />
       </div>
 
-      <div>comment 창</div>
+      <div>
+        <Comments contentId={_id} />
+      </div>
     </div>
   );
 }

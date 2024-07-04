@@ -3,10 +3,10 @@ import Image from 'next/image';
 import styles from './index.module.scss';
 
 import { PATHS, SIMPANG_ALT } from '@/constants';
-import { Contents } from '@/types';
+import { IContents } from '@/types';
 import Link from 'next/link';
 
-const ImageItem = ({
+const ImageLinkItem = ({
   _id,
   imageUrl,
   title,
@@ -14,10 +14,10 @@ const ImageItem = ({
   playCount,
   commentCount,
   likeCount,
-}: Partial<Contents>) => (
+}: Partial<IContents>) => (
   <Link href={`${PATHS.CONTENTS.BASE}/${_id}`} className={styles.wrap}>
     <div className={styles.imgWrap}>
-      <Image src={imageUrl!} alt={SIMPANG_ALT} fill sizes="100%" className={styles.image} />
+      <Image src={imageUrl!} priority alt={SIMPANG_ALT} fill sizes="100%" className={styles.image} />
       {title && <h3 className={styles.title}>{title}</h3>}
     </div>
 
@@ -48,4 +48,4 @@ const ImageItem = ({
   </Link>
 );
 
-export default ImageItem;
+export default ImageLinkItem;

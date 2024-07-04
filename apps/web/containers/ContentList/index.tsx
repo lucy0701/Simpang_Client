@@ -1,8 +1,8 @@
 'use client';
-import ImageItem from '@/components/Items';
+import ImageLinkItem from '@/components/Items';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getContentsAPI } from '@/services/contents';
-import { Contents, Sort } from '@/types';
+import { IContents, Sort } from '@/types';
 import { useState } from 'react';
 
 import styles from './index.module.scss';
@@ -17,7 +17,7 @@ export default function ContentList() {
     status,
     error,
     isFetching,
-  } = useInfiniteScroll<Contents>({
+  } = useInfiniteScroll<IContents>({
     getData: getContentsAPI,
     sort,
     size: 10,
@@ -41,7 +41,7 @@ export default function ContentList() {
       {contents &&
         contents.map((content) => (
           <div key={content._id} ref={lastElementRef}>
-            <ImageItem {...content} />
+            <ImageLinkItem {...content} />
           </div>
         ))}
       {isFetching && <div>Carregando mais dados...</div>}
