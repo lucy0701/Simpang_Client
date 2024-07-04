@@ -3,7 +3,7 @@ import { IContents } from '@/types';
 import styles from './index.module.scss';
 
 import Title from '@/components/Title';
-import ImageItem from '@/components/Items';
+import ImageLinkItem from '@/components/Items';
 import RandomButton from '@/components/Buttons/RandomBtn';
 
 interface Props {
@@ -17,7 +17,7 @@ export default function Home({ latestContents }: Props) {
       <Title title="New" content="즐겨보세용" />
       <div>
         {latestContents.map((content) => (
-          <ImageItem key={content._id} {...content} />
+          <ImageLinkItem key={content._id} {...content} />
         ))}
       </div>
       <RandomButton />

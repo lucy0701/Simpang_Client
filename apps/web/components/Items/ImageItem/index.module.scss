@@ -1,0 +1,18 @@
+@use 'styles/mixins' as m;
+
+.preview {
+  @include m.imageWrap(_, 220px);
+}
+.thumbnail {
+  @include m.imageWrap(40px, 40px);
+}
+.reuslt {
+  @include m.imageWrap(340px, 450px);
+}
+
+.square {
+  @include m.borderStyles();
+}
+.circle {
+  @include m.borderStyles($radius_size: --border-radius-circle);
+}

@@ -6,7 +6,7 @@ import { PATHS, SIMPANG_ALT } from '@/constants';
 import { IContents } from '@/types';
 import Link from 'next/link';
 
-const ImageItem = ({
+const ImageLinkItem = ({
   _id,
   imageUrl,
   title,
@@ -48,4 +48,4 @@ const ImageItem = ({
   </Link>
 );
 
-export default ImageItem;
+export default ImageLinkItem;

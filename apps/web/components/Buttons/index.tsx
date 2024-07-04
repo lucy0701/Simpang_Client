@@ -18,7 +18,7 @@ const Button = ({
 }: Props) => (
   <button
     type={type || 'button'}
-    className={cx(styles[skin], skin === 'base' && styles[size!], styles.buttonWrap)}
+    className={cx(styles[skin], skin === 'base' && styles[size], styles.buttonWrap)}
     onClick={onClick}
     {...rest}
   >

@@ -1,5 +1,7 @@
 @forward 'flexbox';
 
+@use 'styles/mixins/flexbox' as fb;
+
 @mixin textEllipsis($width: 100%) {
   width: $width;
   overflow: hidden;
@@ -20,4 +22,20 @@
 @mixin borderStyles($border_size: 2px, $radius_size: --border-radius-s) {
   border: $border_size solid var(--border-color);
   border-radius: var($radius_size);
+}
+
+@mixin imageWrap($width, $height) {
+  width: $width;
+  height: $height;
+
+  position: relative;
+  overflow: hidden;
+
+  @include fb.flexboxColumn();
+  margin-bottom: 5px;
+
+  .image {
+    object-fit: cover;
+    object-position: center;
+  }
 }
