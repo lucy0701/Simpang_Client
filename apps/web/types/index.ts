@@ -20,10 +20,14 @@ export interface GetPageData<T> {
 
 export interface IComment {
   _id: string;
-  userId: string;
+  user: {
+    _id: string;
+    name: string;
+    thumbnail: string;
+  };
   text: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface PaginationOptions<T> {
