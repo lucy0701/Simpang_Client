@@ -32,7 +32,6 @@
   overflow: hidden;
 
   @include fb.flexboxColumn();
-  margin-bottom: 5px;
 
   .image {
     object-fit: cover;

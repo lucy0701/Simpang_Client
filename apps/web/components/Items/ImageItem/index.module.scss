@@ -1,10 +1,14 @@
 @use 'styles/mixins' as m;
 
+.imgWrap {
+  position: relative;
+}
+
 .preview {
   @include m.imageWrap(_, 220px);
 }
 .thumbnail {
-  @include m.imageWrap(40px, 40px);
+  @include m.imageWrap(50px, 50px);
 }
 .reuslt {
   @include m.imageWrap(340px, 450px);
