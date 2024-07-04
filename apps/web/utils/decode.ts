@@ -1,6 +1,6 @@
 import { jwtDecode } from 'jwt-decode';
 import { getCookie } from './cookies';
-import { DecodedToken, Token } from '@/types';
+import { DecodedToken, Token, UserToken } from '@/types';
 import { TOKEN_NAME } from '@/constants';
 
 export const decodeToken = (token: string) => {
@@ -18,7 +18,7 @@ export const decodeToken = (token: string) => {
   }
 };
 
-export const decodeToken_csr = () => {
+export const decodeToken_csr = (): UserToken => {
   const token = getCookie(TOKEN_NAME);
 
   if (!token) return null;

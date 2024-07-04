@@ -21,7 +21,7 @@ export const kakaoLogout = async () => {
   const headers = getHeaders();
   const res = await apiBe('/oauth2/kakao/logout', { headers });
   removeCookie(TOKEN_NAME, { path: '/' });
-  sessionStorage.removeItem(USER_INFO);
+  localStorage.removeItem(USER_INFO);
 
   return res;
 };

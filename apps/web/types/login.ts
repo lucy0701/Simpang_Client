@@ -17,3 +17,8 @@ export type UserInfo = {
   createdAt: string;
   thumbnail: string;
 };
+
+export type UserToken = {
+  id: string;
+  role: Role;
+} | null;
