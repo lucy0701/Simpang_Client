@@ -8,6 +8,8 @@ import { useState } from 'react';
 
 import styles from './index.module.scss';
 import Button from '@/components/Buttons';
+import Loading from '@/components/Loading';
+import RoundLoading from '@/components/Loading/RoundLoading';
 
 export default function ContentList() {
   const [sort, setSort] = useState<Sort>('desc');
@@ -30,7 +32,7 @@ export default function ContentList() {
   };
 
   return status === 'pending' ? (
-    <p>Loading...</p>
+    <Loading />
   ) : status === 'error' ? (
     <p>Error: {error?.message}</p>
   ) : (
@@ -46,7 +48,7 @@ export default function ContentList() {
             <ImageLinkItem {...content} />
           </div>
         ))}
-      {isFetching && <div>Carregando mais dados...</div>}
+      {isFetching && <RoundLoading />}
     </div>
   );
 }

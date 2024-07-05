@@ -6,6 +6,8 @@ import { useMemo } from 'react';
 
 import styles from './index.module.scss';
 import CommentItem from './CommentItem';
+import Loading from '@/components/Loading';
+import RoundLoading from '@/components/Loading/RoundLoading';
 
 interface Props {
   contentId: string;
@@ -42,7 +44,7 @@ const CommentList = ({ contentId, user }: Props) => {
   }, [comments]);
 
   return status === 'pending' ? (
-    <p>Loading...</p>
+    <RoundLoading />
   ) : status === 'error' ? (
     <p>Error: {error?.message}</p>
   ) : (
@@ -52,7 +54,7 @@ const CommentList = ({ contentId, user }: Props) => {
           <CommentItem key={i} contentId={contentId} comment={comment} user={user} />
         ))}
       </div>
-      {isFetching && <p>새로운 데이터를 가져오는 중...</p>}
+      {isFetching && <RoundLoading />}
       {hasNextPage && <Button text="More" size="small" onClick={() => fetchNextPage()} />}
     </div>
   );

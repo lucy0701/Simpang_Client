@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/Buttons';
+import CatLoading from '@/components/Loading/CatLoading';
 import { PATHS } from '@/constants';
 import { postResultAPI } from '@/services/contents';
 import { IQuestion } from '@/types';
@@ -17,6 +18,7 @@ export default function ContentPlay({ questions, contentId }: Props) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [scoreArr, setScoreArr] = useState(Array.from<number>({ length: 12 }).fill(0));
   const [scores, setScores] = useState<Array<number>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const queryClient = useQueryClient();
 
   const router = useRouter();
@@ -30,6 +32,7 @@ export default function ContentPlay({ questions, contentId }: Props) {
   });
 
   const handlePostResult = () => {
+    setIsLoading(true);
     postResult({ contentId, scores });
   };
 
@@ -56,18 +59,26 @@ export default function ContentPlay({ questions, contentId }: Props) {
       return newScore;
     });
 
-    if (scoreArr.length - 1 === currentIndex) scoreCalculator();
-    else setCurrentIndex((prev) => prev + 1);
+    if (scoreArr.length - 1 === currentIndex) {
+      scoreCalculator();
+    } else {
+      setCurrentIndex((prev) => prev + 1);
+    }
   };
 
-  return (
+  return isLoading ? (
+    <CatLoading />
+  ) : (
     <div>
-      <div>
-        <p>{questions[currentIndex]?.question}</p>
-        {questions[currentIndex]?.answers.map((answer, i) => (
-          <Button key={i} text={answer.text} onClick={() => onClickAnswerBtn(answer.score)} />
-        ))}
-      </div>
+      <p>{questions[currentIndex]?.question}</p>
+      {questions[currentIndex]?.answers.map((answer, i) => (
+        <Button
+          key={i}
+          disabled={isLoading}
+          text={answer.text}
+          onClick={() => onClickAnswerBtn(answer.score)}
+        />
+      ))}
     </div>
   );
 }
