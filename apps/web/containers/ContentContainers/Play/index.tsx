@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/Buttons';
+import { PATHS } from '@/constants';
 import { postResultAPI } from '@/services/contents';
 import { IQuestion } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -24,7 +25,7 @@ export default function ContentPlay({ questions, contentId }: Props) {
     mutationFn: postResultAPI,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['result'] });
-      router.push(`/results/${data._id}`);
+      router.push(`${PATHS.RESULTS}/${data._id}`);
     },
   });
 

@@ -17,7 +17,14 @@ const ImageLinkItem = ({
 }: Partial<IContents>) => (
   <Link href={`${PATHS.CONTENTS.BASE}/${_id}`} className={styles.wrap}>
     <div className={styles.imgWrap}>
-      <Image src={imageUrl!} priority alt={SIMPANG_ALT} fill sizes="100%" className={styles.image} />
+      <Image
+        src={imageUrl!}
+        priority
+        alt={SIMPANG_ALT}
+        fill
+        sizes="100%"
+        className={styles.image}
+      />
       {title && <h3 className={styles.title}>{title}</h3>}
     </div>
 
