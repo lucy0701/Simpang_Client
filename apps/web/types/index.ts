@@ -34,6 +34,7 @@ export interface PaginationOptions<T> {
   getData: (params: PageParams) => Promise<AxiosResponse<GetPageData<T>>>;
   sort: Sort;
   size: number;
+  queryKey: string;
 }
 
 export interface ShareKakaoProps {

@@ -16,6 +16,7 @@ export const PATHS = {
     REGISTER: '/contents/register',
     RAMDOM: '/contents/random',
   },
+  RESULTS: '/results'
 };
 
 export const EXTERNAL_Link = {

@@ -1,0 +1,36 @@
+@use 'styles/mixins' as m;
+
+.wrap {
+  .userWrap {
+    width: 80%;
+    padding: 10px;
+
+    @include m.flexbox(between);
+    @include m.borderStyles();
+
+    .userInfo {
+      width: 80%;
+
+      .user {
+        @include m.flexbox(between);
+
+        .roleTag {
+          font-size: var(--font-size-xs);
+          padding: 1px 5px;
+          @include m.borderStyles();
+        }
+      }
+    }
+  }
+
+  .createBtn {
+    padding: 3px 5px;
+    @include m.borderStyles();
+  }
+
+  .resultWrap {
+    width: 100%;
+    @include m.flexboxColumn(_, _);
+    gap: 20px;
+  }
+}

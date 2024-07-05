@@ -85,11 +85,6 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
                       mypage
                     </Link>
                   </li>
-                  <li>
-                    <Link href={PATHS.CONTENTS.REGISTER} onClick={onClickMenuBtn}>
-                      컨텐츠 만들기
-                    </Link>
-                  </li>
                 </ul>
               </li>
             )}
