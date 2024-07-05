@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 
 import styles from './index.module.scss';
 
-import { PATHS, USER_INFO } from '@/constants';
-import { kakaoLogout } from '@/services';
+import { PATHS } from '@/constants';
+import { kakaoLogoutAPI } from '@/services';
 import { decodeToken_csr } from '@/utils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface Props {
   isOpen: boolean;
@@ -15,10 +16,20 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement>(null);
 
+  const queryClient = useQueryClient();
+
   const user = decodeToken_csr();
 
-  const onClickLogoutBtn = async () => {
-    await kakaoLogout();
+  const { mutate: kakaoLogout } = useMutation({
+    mutationFn: () => kakaoLogoutAPI(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['login'] });
+      queryClient.invalidateQueries({ queryKey: ['like'] });
+    },
+  });
+
+  const onClickLogoutBtn = () => {
+    kakaoLogout();
     onClickMenuBtn();
   };
 
