@@ -6,6 +6,8 @@ import { getUserResultsAPI } from '@/services/contents';
 import { IUserResult } from '@/types';
 
 import styles from './index.module.scss';
+import Loading from '@/components/Loading';
+import RoundLoading from '@/components/Loading/RoundLoading';
 
 const ResultList = () => {
   const {
@@ -22,7 +24,7 @@ const ResultList = () => {
   });
 
   return status === 'pending' ? (
-    <p>Loading...</p>
+    <Loading />
   ) : status === 'error' ? (
     <p>Error: {error?.message}</p>
   ) : (
@@ -33,7 +35,7 @@ const ResultList = () => {
             <ResultItem {...data} />
           </div>
         ))}
-      {isFetching && <div>Carregando mais dados...</div>}
+      {isFetching && <RoundLoading />}
     </div>
   );
 };

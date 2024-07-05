@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
 import ResultList from './ResultList';
+import Loading from '@/components/Loading';
 
 interface UserProps {
   role: Role;
@@ -45,7 +46,7 @@ export default function Mypage() {
   const onClikeCreateBtn = () => router.push(PATHS.CONTENTS.REGISTER);
 
   return isLoading ? (
-    <div>Loading...</div>
+    <Loading />
   ) : (
     user && (
       <div className={styles.wrap}>

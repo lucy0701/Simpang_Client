@@ -1,5 +1,6 @@
 'use client';
 
+import Loading from '@/components/Loading';
 import { AUTHORIZATION, PATHS, TOKEN_NAME } from '@/constants';
 import { kakaoLoginAPI } from '@/services';
 import { DecodedToken } from '@/types';
@@ -40,7 +41,7 @@ export default function KakaoAuthHandle() {
   }, [code, kakaoLogin]);
 
   return status === 'pending' ? (
-    <div>Loading...</div>
+    <Loading />
   ) : status === 'error' ? (
     <p>Error:{error?.message}</p>
   ) : null;

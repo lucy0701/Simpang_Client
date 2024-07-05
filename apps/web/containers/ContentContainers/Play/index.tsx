@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/Buttons';
+import CatLoading from '@/components/Loading/CatLoading';
 import { PATHS } from '@/constants';
 import { postResultAPI } from '@/services/contents';
 import { IQuestion } from '@/types';
@@ -65,19 +66,19 @@ export default function ContentPlay({ questions, contentId }: Props) {
     }
   };
 
-  return (
+  return isLoading ? (
+    <CatLoading />
+  ) : (
     <div>
-      <div>
-        <p>{questions[currentIndex]?.question}</p>
-        {questions[currentIndex]?.answers.map((answer, i) => (
-          <Button
-            key={i}
-            disabled={isLoading}
-            text={answer.text}
-            onClick={() => onClickAnswerBtn(answer.score)}
-          />
-        ))}
-      </div>
+      <p>{questions[currentIndex]?.question}</p>
+      {questions[currentIndex]?.answers.map((answer, i) => (
+        <Button
+          key={i}
+          disabled={isLoading}
+          text={answer.text}
+          onClick={() => onClickAnswerBtn(answer.score)}
+        />
+      ))}
     </div>
   );
 }
