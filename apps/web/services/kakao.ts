@@ -18,6 +18,14 @@ export const setKakaoLogin = () => {
   window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${FE_URL}/login/kakao&response_type=code`;
 };
 
+export const kakaoLoginAPI = async (code: string) => {
+  const res = await apiBe(`/oauth2/kakao/login`, {
+    params: { code },
+  });
+
+  return res;
+};
+
 export const kakaoLogoutAPI = async () => {
   const headers = getHeaders();
   const res = await apiBe('/oauth2/kakao/logout', { headers });

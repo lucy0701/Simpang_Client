@@ -4,13 +4,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import styles from './index.module.scss';
 import { useState } from 'react';
 import { getTimeDifference } from '@/utils/dateTime';
-import { UserToken, IComment } from '@/types';
+import { DecodedToken, IComment } from '@/types';
 import cx from 'classnames';
 
 interface Props {
   contentId: string;
   comment: IComment;
-  user: UserToken;
+  user: DecodedToken;
 }
 
 const CommentItem = ({ contentId, comment, user }: Props) => {

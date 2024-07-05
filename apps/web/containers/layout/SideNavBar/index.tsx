@@ -21,6 +21,7 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
   const user = decodeToken_csr();
 
   const { mutate: kakaoLogout } = useMutation({
+    mutationKey: ['login'],
     mutationFn: () => kakaoLogoutAPI(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['login'] });
