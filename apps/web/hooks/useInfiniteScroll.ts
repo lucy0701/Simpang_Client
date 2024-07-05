@@ -2,7 +2,7 @@ import { PaginationOptions } from '@/types';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useCallback, useMemo, useRef } from 'react';
 
-const useInfiniteScroll = <T>({ getData, sort, size }: PaginationOptions<T>) => {
+const useInfiniteScroll = <T>({ getData, sort, size,queryKey }: PaginationOptions<T>) => {
   const observer = useRef<IntersectionObserver>();
 
   const fetchData = async ({ pageParam = 1 }) => {
@@ -11,7 +11,7 @@ const useInfiniteScroll = <T>({ getData, sort, size }: PaginationOptions<T>) => 
   };
 
   const { data, error, fetchNextPage, hasNextPage, isFetching, status } = useInfiniteQuery({
-    queryKey: ['infiniteScrollData', sort],
+    queryKey: [queryKey, sort],
     queryFn: fetchData,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

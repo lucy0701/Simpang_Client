@@ -1,4 +1,5 @@
 'use client';
+
 import ImageLinkItem from '@/components/Items';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getContentsAPI } from '@/services/contents';
@@ -21,6 +22,7 @@ export default function ContentList() {
     getData: getContentsAPI,
     sort,
     size: 10,
+    queryKey: 'contents',
   });
 
   const handleSort = (sort: Sort) => {
