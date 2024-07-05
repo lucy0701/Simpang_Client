@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import ResultList from './ResultList';
 import Loading from '@/components/Loading';
+import { FloatTopBtn } from '@/components/Buttons/FloatTopBtn';
+import RandomButton from '@/components/Buttons/RandomBtn';
 
 interface UserProps {
   role: Role;
@@ -70,6 +72,8 @@ export default function Mypage() {
           </button>
         )}
         <ResultList />
+        <FloatTopBtn position="right" />
+        <RandomButton position="left" />
       </div>
     )
   );

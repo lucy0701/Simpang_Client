@@ -8,6 +8,12 @@ export const decodeToken = (token: string) => {
     const decodedToken: Token = jwtDecode(token);
     const { sub, ...userToken } = decodedToken;
 
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    if (decodedToken.exp && decodedToken.exp < currentTime) {
+      return null;
+    }
+
     return {
       id: sub,
       ...userToken,
