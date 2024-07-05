@@ -1,0 +1,40 @@
+@use 'styles/mixins' as m;
+
+$icon-size: 1.2rem;
+
+.btnBox {
+  width: 90%;
+  padding: 8px 10px;
+  @include m.flexbox(between);
+  @include m.borderStyles();
+
+  font-size: var(--font-size-s);
+  gap: 30px;
+}
+
+.buttonWrap {
+  width: 70px;
+  @include m.flexboxColumn();
+  gap: 2px;
+
+  p {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .btnImage {
+    padding: 5px;
+    border-radius: 0.2rem;
+  }
+  .isOff {
+    background-color: var(--color-gray-9);
+  }
+  .isOn {
+    background-color: var(--color-primary);
+  }
+}
+
+.replayBtn {
+  width: 60%;
+  height: 45px;
+  @include m.borderStyles();
+}

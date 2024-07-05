@@ -22,3 +22,13 @@ export const getUserResultAPI = async (params: PageParams) => {
   const res = await apiBe(`/v1/results`, { params, headers });
   return res;
 };
+
+interface Props {
+  contentId: string;
+  type: 'Kakao' | 'Link';
+}
+
+export const postShareAPI = async ({ contentId, type }: Props) => {
+  const headers = getHeaders();
+  await apiBe.post(`/v1/shares/${contentId}?type=${type}`, {}, { headers });
+};

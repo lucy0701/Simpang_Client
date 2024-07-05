@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import CommentList from './CommentList';
 import { useMutation, useQueryClient } from '@tanstack/react-query';

@@ -35,3 +35,13 @@ export interface PaginationOptions<T> {
   sort: Sort;
   size: number;
 }
+
+export interface ShareKakaoProps {
+  contentId?: string;
+  resultId?: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  likeCount?: number;
+  commentCount?: number;
+}

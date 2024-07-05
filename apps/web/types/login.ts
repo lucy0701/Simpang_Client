@@ -4,6 +4,9 @@ export type Token = {
   sub: string;
   role: Role;
   exp: number;
+  name: string;
+  thumbnail: string;
+  createdAt: string;
 };
 
 export type DecodedToken =
@@ -12,13 +15,13 @@ export type DecodedToken =
     })
   | null;
 
-export type UserInfo = {
-  name: string;
-  createdAt: string;
-  thumbnail: string;
-};
+// export type UserInfo = {
+//   name: string;
+//   createdAt: string;
+//   thumbnail: string;
+// };
 
-export type UserToken = {
-  id: string;
-  role: Role;
-} | null;
+// export type UserToken = {
+//   id: string;
+//   role: Role;
+// } | null;

@@ -1,35 +1,11 @@
 @use 'styles/mixins' as m;
 
-$icon-size: 2rem;
-
 .wrap {
-  @include m.flexboxColumn(center, between);
+  @include m.flexboxColumn(_,_);
   gap: 20px;
 
   .contentWrap {
-    @include m.flexboxColumn(between);
+    @include m.flexboxColumn();
     gap: 10px;
-  }
-
-  .btnBox {
-    margin: auto;
-    padding: 8px 10px;
-    @include m.flexbox(between);
-    @include m.borderStyles();
-
-    gap: 15px;
-
-    .likeIcon {
-      @include m.iconStyles($icon-size, $icon-size, '/svgs/like.svg');
-
-      p {
-        font-weight: var(--font-weight-bold);
-        color: var(--color-white);
-      }
-    }
-
-    .linkIcon {
-      @include m.iconStyles($icon-size, $icon-size, '/svgs/link.svg');
-    }
   }
 }

@@ -1,6 +1,6 @@
 import Button from '@/components/Buttons';
 import { getCommentAPI } from '@/services/comment';
-import { PageParams, IComment, UserToken } from '@/types';
+import { PageParams, IComment, DecodedToken } from '@/types';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
@@ -9,7 +9,7 @@ import CommentItem from './CommentItem';
 
 interface Props {
   contentId: string;
-  user: UserToken;
+  user: DecodedToken;
 }
 
 const CommentList = ({ contentId, user }: Props) => {
