@@ -11,18 +11,21 @@ interface Props {
 
 export default function ContentContainer({ contentData }: Props) {
   const { questions, ...content } = contentData;
+  console.log('PSJ: contentData', contentData);
 
   const [onPlay, setOnPlay] = useState<boolean>(false);
 
   const onClickPlayBtn = () => setOnPlay(!onPlay);
 
   return (
-    <div>
-      {!onPlay ? (
-        <ContentPreview contentData={content} onClickPlayBtn={onClickPlayBtn} />
-      ) : (
-        <ContentPlay questions={questions} contentId={content._id} />
-      )}
-    </div>
+    contentData && (
+      <div>
+        {!onPlay ? (
+          <ContentPreview contentData={content} onClickPlayBtn={onClickPlayBtn} />
+        ) : (
+          <ContentPlay questions={questions} contentId={content._id} />
+        )}
+      </div>
+    )
   );
 }

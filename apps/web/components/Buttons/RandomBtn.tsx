@@ -1,10 +1,21 @@
 import { useRouter } from 'next/navigation';
-import Button from '.';
+import Button, { FloatButtonPosition } from '.';
 import { PATHS } from '@/constants';
 
-const RandomButton = () => {
+interface Props {
+  position?: FloatButtonPosition;
+}
+
+const RandomButton = ({ position = 'right' }: Props) => {
   const router = useRouter();
-  return <Button text="Random" skin="float" onClick={() => router.push(PATHS.CONTENTS.RAMDOM)} />;
+  return (
+    <Button
+      text="Random"
+      skin="float"
+      position={position}
+      onClick={() => router.push(PATHS.CONTENTS.RAMDOM)}
+    />
+  );
 };
 
 export default RandomButton;

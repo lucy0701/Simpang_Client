@@ -10,6 +10,8 @@ import styles from './index.module.scss';
 import Button from '@/components/Buttons';
 import Loading from '@/components/Loading';
 import RoundLoading from '@/components/Loading/RoundLoading';
+import { FloatTopBtn } from '@/components/Buttons/FloatTopBtn';
+import RandomButton from '@/components/Buttons/RandomBtn';
 
 export default function ContentList() {
   const [sort, setSort] = useState<Sort>('desc');
@@ -41,6 +43,9 @@ export default function ContentList() {
         <Button size="medium" text="등록순" onClick={() => handleSort('asc')} />
         <Button size="medium" text="최신순" onClick={() => handleSort('desc')} />
       </div>
+      
+      <FloatTopBtn position="right" />
+      <RandomButton position="left" />
 
       {contents &&
         contents.map((content) => (
