@@ -3,6 +3,7 @@ import { apiBe } from '.';
 import { getHeaders } from './util';
 import { TOKEN_NAME, USER_INFO } from '@/constants';
 import { removeCookie } from '@/utils';
+import { ShareKakaoProps } from '@/types';
 
 declare global {
   interface Window {
@@ -17,11 +18,78 @@ export const setKakaoLogin = () => {
   window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${FE_URL}/login/kakao&response_type=code`;
 };
 
-export const kakaoLogout = async () => {
+export const kakaoLogoutAPI = async () => {
   const headers = getHeaders();
   const res = await apiBe('/oauth2/kakao/logout', { headers });
   removeCookie(TOKEN_NAME, { path: '/' });
   localStorage.removeItem(USER_INFO);
 
   return res;
+};
+
+export const shareKakaotalk = ({
+  contentId,
+  title,
+  imageUrl,
+  description,
+  likeCount,
+  commentCount,
+}: ShareKakaoProps) => {
+  if (typeof window !== 'undefined' && !window.Kakao?.isInitialized())
+    window.Kakao.init(KAKAO_APP_KEY);
+
+  window.Kakao.Share.sendCustom({
+    templateId: 109727,
+
+    templateArgs: {
+      title,
+      description,
+      imageUrl,
+      button1: '심팡으로 가기',
+      button2: '테스트 하러 가기',
+      likeCount,
+      commentCount,
+      REGI_WEB_DOMAIN: `${FE_URL}/contents/${contentId}`,
+    },
+  });
+};
+
+export const shareKakaotalkResult = ({
+  contentId,
+  resultId,
+  title,
+  imageUrl,
+  description,
+}: ShareKakaoProps) => {
+  if (typeof window !== 'undefined' && !window.Kakao?.isInitialized())
+    window.Kakao.init(KAKAO_APP_KEY);
+
+  window.Kakao.Share.sendDefault({
+    objectType: 'feed',
+    content: {
+      title,
+      description,
+      imageUrl,
+      link: {
+        mobileWebUrl: `${FE_URL}/results/${resultId}`,
+        webUrl: `${FE_URL}/results/${resultId}`,
+      },
+    },
+    buttons: [
+      {
+        title: '테스트 하기',
+        link: {
+          mobileWebUrl: `${FE_URL}/contents/${contentId}`,
+          webUrl: `${FE_URL}/contents/${contentId}`,
+        },
+      },
+      {
+        title: '결과 보기',
+        link: {
+          mobileWebUrl: `${FE_URL}/results/${resultId}`,
+          webUrl: `${FE_URL}/results/${resultId}`,
+        },
+      },
+    ],
+  });
 };

@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 import Button from '@/components/Buttons';
 import Comments from '@/components/Comments';
 import ImageItem from '@/components/Items/ImageItem';
-import IconButtonBox from '@/components/IconButtons';
+import { IconButtonBox } from '@/components/IconButtonBox';
 
 interface Props {
   contentData: Omit<IContent, 'questions'>;
@@ -24,7 +24,7 @@ export default function ContentPreview({ contentData, onClickPlayBtn }: Props) {
         <p>지금 까지 {count.playCount}명이 함께 했어요!</p>
       </div>
 
-      <IconButtonBox count={count.likeCount} contentId={contentData._id} />
+      <IconButtonBox contentData={contentData} />
 
       <div>
         <Comments contentId={_id} />

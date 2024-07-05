@@ -34,7 +34,7 @@ $icon-size: 0.8rem;
   }
 
   .contentBox {
-    @include m.flexbox(end, between);
+    @include m.flexbox(between, end);
     gap: 0.8rem;
     padding: 0 15px;
 

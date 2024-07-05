@@ -3,7 +3,7 @@
 $icon-size: 1.2rem;
 
 .btnBox {
-  margin: auto;
+  width: 90%;
   padding: 8px 10px;
   @include m.flexbox(between);
   @include m.borderStyles();
@@ -19,7 +19,6 @@ $icon-size: 1.2rem;
 
   p {
     font-weight: var(--font-weight-bold);
-    //   color: var(--color-white);
   }
 
   .btnImage {
@@ -32,4 +31,10 @@ $icon-size: 1.2rem;
   .isOn {
     background-color: var(--color-primary);
   }
+}
+
+.replayBtn {
+  width: 60%;
+  height: 45px;
+  @include m.borderStyles();
 }

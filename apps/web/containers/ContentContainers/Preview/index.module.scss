@@ -1,14 +1,11 @@
 @use 'styles/mixins' as m;
 
-
 .wrap {
-  @include m.flexboxColumn(center, between);
+  @include m.flexboxColumn(_,_);
   gap: 20px;
 
   .contentWrap {
-    @include m.flexboxColumn(between);
+    @include m.flexboxColumn();
     gap: 10px;
   }
-
-
 }
