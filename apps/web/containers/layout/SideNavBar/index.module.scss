@@ -46,25 +46,55 @@
   height: 100%;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 120;
+
+  background-color: rgba(88, 88, 88, 0.357);
 
   > ul {
-    width: 40%;
+    width: 45%;
     height: 100%;
     padding: 10px 15px;
 
     @include m.flexboxColumn(start);
-    gap: 15px;
+    gap: 20px;
+
     background-color: var(--color-white);
 
     box-shadow: 10px 0 10px -5px rgba(85, 85, 85, 0.1);
 
     li {
       width: 100%;
+      @include m.flexboxColumn();
+      gap: 8px;
+
+      ul {
+        width: 100%;
+        @include m.flexboxColumn();
+        gap: 8px;
+
+        a {
+          text-align: center;
+          width: 100%;
+        }
+      }
 
       .menuTitle {
         font-size: var(--font-size-m);
-        margin-bottom: 2px;
+      }
+
+      .logoutBtn {
+        width: 50%;
+        height: 30px;
+
+        margin-top: 80px;
+        @include m.flexbox(around);
+        @include m.borderStyles(1.5px);
+
+        color: var(--font-color);
+
+        .logoutIcon {
+          @include m.iconStyles(1rem, 1rem, '/svgs/logout.svg');
+        }
       }
     }
   }

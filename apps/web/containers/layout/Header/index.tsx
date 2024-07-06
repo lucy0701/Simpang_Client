@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 import styles from './index.module.scss';
@@ -8,7 +9,6 @@ import SideNavBar from '../SideNavBar';
 
 import { PATHS } from '@/constants';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);

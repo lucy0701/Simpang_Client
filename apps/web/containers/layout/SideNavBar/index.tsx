@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 import styles from './index.module.scss';
 
@@ -13,7 +14,7 @@ interface Props {
   onClickMenuBtn: () => void;
 }
 export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>();
   const menuRef = useRef<HTMLUListElement>(null);
 
   const queryClient = useQueryClient();
@@ -50,7 +51,7 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
       setTimeout(() => {
         setIsMenuOpen(false);
         document.documentElement.classList.remove('mobileCoverOpen');
-      }, 300);
+      }, 400);
     }
 
     return () => {
@@ -64,7 +65,15 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
         <div className={`${styles.meunWrap} ${isOpen ? styles.open : styles.closed}`}>
           <ul ref={menuRef}>
             <li>
-              <Link href={PATHS.HOME}>SIM PANG</Link>
+              <Link href={PATHS.HOME}>
+                <Image
+                  priority
+                  alt="심팡"
+                  src="/images/simpang_title.png"
+                  width={170}
+                  height={70}
+                ></Image>
+              </Link>
             </li>
             {user && (
               <li>
@@ -95,7 +104,10 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
             </li>
             {user && (
               <li>
-                <button onClick={onClickLogoutBtn}>Logout</button>
+                <button className={styles.logoutBtn} onClick={onClickLogoutBtn}>
+                  Logout
+                  <div className={styles.logoutIcon} />
+                </button>
               </li>
             )}
           </ul>

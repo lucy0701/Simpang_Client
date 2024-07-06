@@ -12,10 +12,11 @@ export const PATHS = {
     DEV_INFO: '/about/dev',
   },
   CONTENTS: {
+    BASE: '/contents',
     REGISTER: '/contents/register',
     RAMDOM: '/contents/random',
   },
-  RESULTS: '/results'
+  RESULTS: '/results',
 };
 
 export const EXTERNAL_Link = {
