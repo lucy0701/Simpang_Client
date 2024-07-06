@@ -14,11 +14,16 @@
 
   --color-white: #ffffff;
   --color-black: #000000;
+  --color-red: #e11d1d;
 
   --color-bg: #f6f6f6;
+  --color-bg-primary: #fbd8c6;
 
-  --border-color: #5e3b28;
+  --color-primary: #ff7a00;
+  --color-subPoint: #ffc690;
+
   --font-color: #5e3b28;
+  --border-color: #5e3b28;
 
   --font-size-xs: 0.6rem;
   --font-size-s: 0.8rem;
@@ -29,11 +34,6 @@
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
-
-  --color-primary: #ff7a00;
-  --color-subPoint: #ffc690;
-
-  --color-red: #e11d1d;
 
   --max-width: 430px;
   --min-width: 320px;

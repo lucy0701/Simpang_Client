@@ -8,6 +8,7 @@ import SideNavBar from '../SideNavBar';
 
 import { PATHS } from '@/constants';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -28,6 +29,7 @@ export default function Header() {
 
       <Link className={styles.titleBtn} href={PATHS.HOME}>
         <h1>심팡</h1>
+        <Image priority alt="심팡" src="/images/simpang_title.png" width={220} height={90} />
       </Link>
     </header>
   );

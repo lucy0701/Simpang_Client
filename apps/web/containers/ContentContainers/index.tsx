@@ -11,7 +11,6 @@ interface Props {
 
 export default function ContentContainer({ contentData }: Props) {
   const { questions, ...content } = contentData;
-  console.log('PSJ: contentData', contentData);
 
   const [onPlay, setOnPlay] = useState<boolean>(false);
 
