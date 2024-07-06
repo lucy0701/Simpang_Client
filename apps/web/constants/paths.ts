@@ -12,7 +12,6 @@ export const PATHS = {
     DEV_INFO: '/about/dev',
   },
   CONTENTS: {
-    BASE:'/contents',
     REGISTER: '/contents/register',
     RAMDOM: '/contents/random',
   },

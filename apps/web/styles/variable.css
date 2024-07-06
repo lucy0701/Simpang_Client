@@ -17,13 +17,16 @@
   --color-red: #e11d1d;
 
   --color-bg: #f6f6f6;
-  --color-bg-primary: #fbd8c6;
+  --color-bg-primary: #f3e6d9;
+  --color-bg-pink: #fbd8c6;
+  --color-bg-yellow: #ffda9a;
 
-  --color-primary: #ff7a00;
+
+  --color-primary: #f3ebd9;
   --color-subPoint: #ffc690;
 
   --font-color: #5e3b28;
-  --border-color: #5e3b28;
+  --border-color: #775949;
 
   --font-size-xs: 0.6rem;
   --font-size-s: 0.8rem;
@@ -36,7 +39,7 @@
   --font-weight-bold: 700;
 
   --max-width: 430px;
-  --min-width: 320px;
+  --min-width: 300px;
 
   --border-radius-xs: 0.3rem;
   --border-radius-s: 0.4rem;

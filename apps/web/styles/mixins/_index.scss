@@ -22,6 +22,7 @@
 @mixin borderStyles($border_size: 2px, $radius_size: --border-radius-s) {
   border: $border_size solid var(--border-color);
   border-radius: var($radius_size);
+  overflow: hidden;
 }
 
 @mixin imageWrap($width, $height) {

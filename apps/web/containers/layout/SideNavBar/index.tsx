@@ -66,16 +66,6 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
             <li>
               <Link href={PATHS.HOME}>SIM PANG</Link>
             </li>
-            <li>
-              <h3 className={styles.menuTitle}>심리테스트</h3>
-              <ul>
-                <li>
-                  <Link href={PATHS.CONTENTS.BASE} onClick={onClickMenuBtn}>
-                    전체보기
-                  </Link>
-                </li>
-              </ul>
-            </li>
             {user && (
               <li>
                 <h3 className={styles.menuTitle}>회원 전용</h3>

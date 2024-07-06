@@ -19,7 +19,7 @@
 }
 
 .buttonWrap {
-  background-color: var(--color-primary);
+  background-color: var(--color-bg-primary);
 
   p {
     padding: 5px;
@@ -43,8 +43,8 @@
 }
 .medium {
   width: 40%;
-  padding: 4px;
-  font-size: var(--font-size-m);
+  padding: 3px;
+  font-size: var(--font-size-s);
 }
 .large {
   width: 100%;
