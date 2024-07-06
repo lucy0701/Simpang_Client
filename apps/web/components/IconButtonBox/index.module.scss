@@ -3,19 +3,24 @@
 $icon-size: 1.2rem;
 
 .btnBox {
-  width: 90%;
-  padding: 8px 10px;
+  padding: 8px 2px;
   @include m.flexbox(between);
   @include m.borderStyles();
 
   font-size: var(--font-size-s);
-  gap: 30px;
+}
+
+.resultBox {
+  width: 80%;
+}
+.baseBox {
+  width: 60%;
 }
 
 .buttonWrap {
   width: 70px;
   @include m.flexboxColumn();
-  gap: 2px;
+  gap: 4px;
 
   p {
     font-weight: var(--font-weight-bold);
@@ -29,12 +34,12 @@ $icon-size: 1.2rem;
     background-color: var(--color-gray-9);
   }
   .isOn {
-    background-color: var(--color-bg-primary);
+    background-color: var(--color-red);
   }
 }
 
 .replayBtn {
-  width: 60%;
+  width: 50%;
   height: 45px;
   @include m.borderStyles();
 }

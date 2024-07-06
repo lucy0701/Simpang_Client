@@ -19,14 +19,14 @@ export default function ContentPreview({ contentData, onClickPlayBtn }: Props) {
 
       <div className={styles.contentWrap}>
         <h3>{title}</h3>
-        <p>{content}</p>
+        <p className={styles.contentText}>{content}</p>
         <Button size="medium" text="시작하기" onClick={onClickPlayBtn} />
         <p>지금 까지 {count.playCount}명이 함께 했어요!</p>
       </div>
 
       <IconButtonBox contentData={contentData} />
 
-      <div>
+      <div className={styles.commentWrap}>
         <Comments contentId={_id} />
       </div>
     </div>

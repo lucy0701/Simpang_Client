@@ -2,16 +2,15 @@
 
 .wrap {
   @include m.flexboxColumn();
-  gap: 10px;
+  gap: 20px;
 
   .commentWrap {
     width: 100%;
     @include m.flexboxColumn();
-    gap: 10px;
+    gap: 15px;
   }
 }
 
-// commentItem
 .commentBox {
   width: 100%;
   @include m.flexbox(between);
@@ -21,7 +20,6 @@
   .commentTextBox {
     width: 85%;
     @include m.flexboxColumn(_, start);
-    gap: 2px;
 
     .topBox {
       width: 100%;
@@ -41,6 +39,10 @@
         @include m.flexbox();
         gap: 10px;
         margin-right: 10px;
+
+        button {
+          color: var(--color-gray-6);
+        }
       }
     }
     .inputText {

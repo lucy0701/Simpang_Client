@@ -31,7 +31,7 @@ const ResultList = () => {
     <div className={styles.resultWrap}>
       {results &&
         results.map((data) => (
-          <div key={data._id} ref={lastElementRef}>
+          <div key={data._id} className={styles.result} ref={lastElementRef}>
             <ResultItem {...data} />
           </div>
         ))}
