@@ -43,10 +43,10 @@ export default function Home({ latestContents }: Props) {
   ) : (
     <div className={styles.wrap}>
       <div className={styles.bannerWrap}>슬라이드 배너</div>
-      <WindowStyle title="NEW">
+      <WindowStyle title="NEW" color="blue">
         <div className={styles.btnBox}>
-          <Button size="medium" text="등록순" onClick={() => handleSort('asc')} />
-          <Button size="medium" text="최신순" onClick={() => handleSort('desc')} />
+          <Button size="medium" text="등록순" color="yellow" onClick={() => handleSort('asc')} />
+          <Button size="medium" text="최신순" color="yellow" onClick={() => handleSort('desc')} />
         </div>
 
         {contents &&

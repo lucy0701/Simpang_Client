@@ -7,12 +7,12 @@
 
   .titleBar {
     border-bottom: 2px solid var(--border-color);
-
     padding: 2px 10px;
 
     @include m.flexbox(between, end);
 
     .title {
+      padding: 2px;
       @include m.flexbox(between, end);
       gap: 7px;
       h3 {
@@ -39,6 +39,6 @@
   .clientArea {
     width: 100%;
     @include m.flexboxWrap($gap: 20px);
-    padding: 10px;
+    padding: 15px;
   }
 }

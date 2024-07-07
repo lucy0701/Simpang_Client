@@ -8,7 +8,7 @@ export const PATHS = {
     TERMS: '/legal/terms',
   },
   ABOUT: {
-    SITE_INFO: '/about/site',
+    SITE_INFO: '/about',
     DEV_INFO: '/about/dev',
   },
   CONTENTS: {

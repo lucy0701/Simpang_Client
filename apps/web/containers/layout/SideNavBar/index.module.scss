@@ -72,13 +72,14 @@
         gap: 8px;
 
         a {
-          text-align: center;
           width: 100%;
+          font-size: var(--font-size-l);
+          text-align: center;
         }
       }
 
       .menuTitle {
-        font-size: var(--font-size-m);
+        font-size: var(--font-size-l);
       }
     }
   }

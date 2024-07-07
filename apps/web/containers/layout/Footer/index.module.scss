@@ -21,16 +21,16 @@ $icon-size: 1rem;
 
     .iconBox {
       @include m.flexbox(between);
-      gap: 10px;
+      gap: 15px;
 
       .gitHubIcon {
-        @include m.iconStyles($icon-size, $icon-size, '/svgs/gitHub.svg');
+        @include m.iconStyles(1.3rem, 1.3rem, '/svgs/gitHub.svg');
       }
       .rssIcon {
-        @include m.iconStyles($icon-size, $icon-size, '/svgs/rss.svg');
+        @include m.iconStyles(1.2rem, 1.2rem, '/svgs/rss.svg');
       }
       .instagramIcon {
-        @include m.iconStyles($icon-size, $icon-size, '/svgs/instagram.svg');
+        @include m.iconStyles(1.4rem, 1.4rem, '/svgs/instagram.svg');
       }
     }
 
