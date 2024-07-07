@@ -12,7 +12,8 @@
     "@simpang/ui": "*",
     "next": "^14.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "swiper": "^11.1.4"
   },
   "devDependencies": {
     "@simpang/eslint-config": "*",
