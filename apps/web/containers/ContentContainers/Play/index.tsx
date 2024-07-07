@@ -8,6 +8,8 @@ import { IQuestion } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import styles from './index.module.scss';
+import cx from 'classnames';
 
 interface Props {
   questions: IQuestion[];
@@ -60,25 +62,59 @@ export default function ContentPlay({ questions, contentId }: Props) {
     });
 
     if (scoreArr.length - 1 === currentIndex) {
-      scoreCalculator();
+      if (scoreArr.includes(0)) {
+        const findIndex = scoreArr.indexOf(0);
+        setCurrentIndex(findIndex);
+      } else {
+        scoreCalculator();
+      }
     } else {
       setCurrentIndex((prev) => prev + 1);
     }
   };
 
+  const onClickProgressBtn = (index: number) => {
+    setCurrentIndex(index);
+  };
+
   return isLoading ? (
     <CatLoading />
   ) : (
-    <div>
-      <p>{questions[currentIndex]?.question}</p>
-      {questions[currentIndex]?.answers.map((answer, i) => (
+    <div className={styles.wrap}>
+      <div className={styles.progressBarWrap}>
+        {scoreArr.map((completion, i) => (
+          <button
+            key={i}
+            className={cx(
+              styles.dot,
+              completion ? styles.completion : '',
+              currentIndex === i ? styles.currentDot : '',
+            )}
+            onClick={() => onClickProgressBtn(i)}
+          />
+        ))}
+      </div>
+      <p className={styles.question}>{questions[currentIndex]?.question}</p>
+
+      <div className={styles.buttonBox}>
+        {questions[currentIndex]?.answers.map((answer, i) => (
+          <Button
+            key={i}
+            disabled={isLoading}
+            text={answer.text}
+            onClick={() => onClickAnswerBtn(answer.score)}
+          />
+        ))}
+      </div>
+
+      {currentIndex > 0 && (
         <Button
-          key={i}
-          disabled={isLoading}
-          text={answer.text}
-          onClick={() => onClickAnswerBtn(answer.score)}
+          text="이전"
+          size="small"
+          color="yellow"
+          onClick={() => setCurrentIndex(currentIndex - 1)}
         />
-      ))}
+      )}
     </div>
   );
 }

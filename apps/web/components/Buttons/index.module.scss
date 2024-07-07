@@ -8,19 +8,27 @@
     left: calc(50% - 185px);
   }
 }
+
 @media (max-width: 390px) {
   .right {
     right: 25px;
   }
-
   .left {
     left: 25px;
   }
 }
 
-.buttonWrap {
+.pink {
   background-color: var(--color-bg-pink);
+}
+.yellow {
+  background-color: var(--color-bg-yellow);
+}
+.blue {
+  background-color: var(--color-bg-blue);
+}
 
+.buttonWrap {
   p {
     padding: 5px;
     font-weight: var(--font-weight-bold);

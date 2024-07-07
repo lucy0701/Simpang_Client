@@ -1,0 +1,46 @@
+@use 'styles/mixins' as m;
+
+.wrap {
+  width: 100%;
+  @include m.flexboxColumn(between);
+  gap: 40px;
+
+  @include m.textEllipsis();
+  white-space: pre-wrap;
+
+  .question {
+    width: 100%;
+    padding: 5px;
+    min-height: 200px;
+    @include m.flexboxColumn();
+    font-size: var(--font-size-xl);
+  }
+
+  .buttonBox {
+    width: 70%;
+    @include m.flexboxColumn();
+    gap: 15px;
+  }
+
+  .progressBarWrap {
+    margin-top: 10px;
+    width: 85%;
+    @include m.flexbox(between);
+
+    .dot {
+      width: 15px;
+      height: 15px;
+      @include m.borderStyles(1.5px, --border-radius-circle);
+    }
+    .completion {
+      background-color: var(--color-bg-blue);
+    }
+
+    .currentDot {
+      width: 20px;
+      height: 20px;
+      @include m.borderStyles(2px, --border-radius-circle);
+      background-color: var(--color-bg-pink);
+    }
+  }
+}
