@@ -48,7 +48,7 @@ const CommentItem = ({ contentId, comment, user }: Props) => {
   };
 
   return (
-    <div className={styles.commentBox}>
+    <div className={cx(styles.commentBox, comment.user._id === user?.id ? styles.blue : '')}>
       <ImageItem skin="thumbnail" shape="circle" imageUrl={comment.user?.thumbnail} />
 
       <div className={styles.commentTextBox}>
@@ -80,11 +80,15 @@ const CommentItem = ({ contentId, comment, user }: Props) => {
         </div>
 
         {isModifying ? (
-          <input
-            defaultValue={comment.text}
-            className={cx(styles.inputText, styles.text)}
-            onChange={(e) => setText(e.target.value)}
-          />
+          <div className={styles.inputWrap}>
+            <input
+              defaultValue={comment.text}
+              maxLength={100}
+              className={cx(styles.inputText)}
+              onChange={(e) => setText(e.target.value)}
+            />
+            <p className={styles.textCount}> {text.length} / 100</p>
+          </div>
         ) : (
           <p className={styles.text}>{comment.text}</p>
         )}

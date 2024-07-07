@@ -7,11 +7,25 @@
 
   .inputWrap {
     @include m.flexbox(between);
+    @include m.borderStyles();
+    box-shadow: 3px 4px var(--border-color);
+    gap: 2px;
 
     .commentInput {
-      width: 78%;
-      padding: 9px;
-      @include m.borderStyles();
+      width: 73%;
+      padding: 10px;
+    }
+    .textCount {
+      text-align: end;
+      width: 10%;
+      font-size: var(--font-size-xs);
+    }
+
+    .submitBtn {
+      width: 15%;
+      height: 36px;
+      border-left: 2px solid var(--border-color);
+      background-color: var(--color-bg-yellow);
     }
   }
 }

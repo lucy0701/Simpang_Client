@@ -25,6 +25,7 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['login'] });
       queryClient.invalidateQueries({ queryKey: ['like'] });
+      window.location.reload();
     },
   });
 

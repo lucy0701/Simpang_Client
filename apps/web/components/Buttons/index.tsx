@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   skin?: 'base' | 'float';
   size?: 'small' | 'medium' | 'large';
-  color?: 'pink' | 'yellow' | 'blue';
+  color?: 'pink' | 'yellow' | 'blue' | 'green';
   position?: FloatButtonPosition;
 }
 
@@ -27,7 +27,7 @@ const Button = ({
     className={cx(
       styles[skin],
       skin === 'base' ? styles[size] : styles[position!],
-      styles[color],
+      color,
       styles.buttonWrap,
     )}
     onClick={onClick}

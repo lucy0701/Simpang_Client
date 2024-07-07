@@ -13,6 +13,7 @@ interface Props {
 
 export default function ContentPreview({ contentData, onClickPlayBtn }: Props) {
   const { _id, title, content, imageUrl, creator, ...count } = contentData;
+  
   return (
     <div className={styles.wrap}>
       <ImageItem imageUrl={imageUrl} />
