@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-
 import styles from './index.module.scss';
-
 import { PATHS } from '@/constants';
 import { kakaoLogoutAPI } from '@/services';
 import { decodeToken_csr } from '@/utils';
