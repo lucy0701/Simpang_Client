@@ -7,6 +7,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:@tanstack/eslint-plugin-query/recommende',
     'plugin:@typescript-eslint/recommended',
     'prettier',
     require.resolve('@vercel/style-guide/eslint/next'),
@@ -20,7 +21,7 @@ module.exports = {
     node: true,
     browser: true,
   },
-  plugins: ['only-warn', 'react', 'import'],
+  plugins: ['only-warn', 'eslint-config-turbo', 'import'],
   settings: {
     'import/resolver': {
       typescript: {
@@ -47,7 +48,7 @@ module.exports = {
     'no-console': 'warn',
     'no-debugger': 'error',
     'no-trailing-spaces': 'error',
-    'jsx-quotes': ['error', 'prefer-single'],
+    'jsx-quotes': ['error', 'prefer-double'],
     'react-hooks/rules-of-hooks': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'react/jsx-uses-react': 'off',

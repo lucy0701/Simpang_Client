@@ -41,7 +41,7 @@ h3 {
   color: var(--font-color);
 }
 
-input,
+// input,
 button {
   appearance: none;
 }
@@ -54,6 +54,7 @@ input {
   background-color: transparent;
   background-image: none !important;
   border: 0;
+  color: var(--font-color);
 }
 
 button {

@@ -1,0 +1,30 @@
+@use 'styles/mixins' as m;
+
+.wrap {
+  width: 100%;
+  @include m.flexboxColumn();
+  gap: 30px;
+
+  .contentWrap {
+    width: 100%;
+    @include m.flexboxColumn();
+    gap: 20px;
+
+    h3 {
+      text-align: center;
+      @include m.textEllipsis();
+    }
+    .contentText {
+      @include m.textEllipsis();
+      padding: 0 10px;
+      text-align: center;
+      white-space: pre-wrap;
+    }
+
+    .playBtnWrap {
+      width: 100%;
+      @include m.flexboxColumn();
+      gap: 5px;
+    }
+  }
+}

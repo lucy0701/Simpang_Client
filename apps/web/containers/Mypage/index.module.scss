@@ -1,0 +1,45 @@
+@use 'styles/mixins' as m;
+
+.wrap {
+  width: 100%;
+  @include m.flexboxColumn(_, _);
+  gap: 30px;
+
+  .userWrap {
+    width: 80%;
+    padding: 8px 10px;
+    margin: auto;
+
+    @include m.flexbox(between);
+    @include m.borderStyles();
+
+    img {
+      border-radius: var(--border-radius-s);
+    }
+
+    .userInfo {
+      width: 73%;
+      @include m.flexboxColumn(between, _);
+      gap: 5px;
+
+      .user {
+        @include m.flexbox(between);
+
+        .userName {
+          font-size: var(--font-size-m);
+        }
+
+        .roleTag {
+          font-size: var(--font-size-xs);
+          padding: 1px 5px;
+          @include m.borderStyles();
+        }
+      }
+    }
+  }
+  .resultWrap {
+    width: 100%;
+    @include m.flexboxColumn(_, _);
+    gap: 20px;
+  }
+}

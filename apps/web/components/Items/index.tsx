@@ -2,32 +2,27 @@ import Image from 'next/image';
 
 import styles from './index.module.scss';
 
-import { SIMPANG_ALT } from '@/constants';
+import { PATHS, SIMPANG_ALT } from '@/constants';
+import { IContents } from '@/types';
+import Link from 'next/link';
 
-interface Props {
-  url: string;
-  title?: string;
-  content?: string;
-  playCount?: number;
-  commentCount?: number;
-  likeConut?: number;
-}
-
-const ImageItem = ({
-  url,
+const ImageLinkItem = ({
+  _id,
+  imageUrl,
   title,
   content,
   playCount,
   commentCount,
-  likeConut,
-}: Props) => (
-  <div className={styles.wrap}>
+  likeCount,
+}: Partial<IContents>) => (
+  <Link href={`${PATHS.CONTENTS.BASE}/${_id}`} className={styles.wrap}>
     <div className={styles.imgWrap}>
       <Image
-        src={url}
+        src={imageUrl!}
+        priority
         alt={SIMPANG_ALT}
         fill
-        sizes='100%'
+        sizes="100%"
         className={styles.image}
       />
       {title && <h3 className={styles.title}>{title}</h3>}
@@ -37,10 +32,10 @@ const ImageItem = ({
       {content && <p className={styles.content}>{content}</p>}
 
       <div className={styles.countBox}>
-        {likeConut !== undefined && (
+        {likeCount !== undefined && (
           <div className={styles.counts}>
             <div className={styles.likeIcon} />
-            <span>{likeConut}</span>
+            <span>{likeCount}</span>
           </div>
         )}
         {playCount !== undefined && (
@@ -57,7 +52,7 @@ const ImageItem = ({
         )}
       </div>
     </div>
-  </div>
+  </Link>
 );
 
-export default ImageItem;
+export default ImageLinkItem;

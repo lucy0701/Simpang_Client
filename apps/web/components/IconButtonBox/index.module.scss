@@ -1,0 +1,52 @@
+@use 'styles/mixins' as m;
+
+$icon-size: 1.2rem;
+
+.btnBox {
+  padding: 8px 2px;
+  @include m.flexbox(between);
+  @include m.borderStyles();
+
+  font-size: var(--font-size-s);
+}
+
+.resultBox {
+  width: 80%;
+}
+.baseBox {
+  width: 60%;
+}
+
+.buttonWrap {
+  width: 70px;
+  @include m.flexboxColumn();
+  // gap: 1px;
+
+  p {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .btnImage {
+    padding: 5px;
+    border-radius: 0.2rem;
+  }
+  .isOff {
+    background-color: var(--color-gray-9);
+  }
+  .isOn {
+    background-color: var(--color-red);
+  }
+}
+
+.replayBtn {
+  width: 50%;
+  height: 45px;
+  font-size: var(--font-size-m);
+  @include m.borderStyles();
+  @include m.flexbox();
+  gap: 10px;
+
+  .replayIcon {
+    @include m.iconStyles(1rem, 1rem, '/svgs/replay.svg');
+  }
+}

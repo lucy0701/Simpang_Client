@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
   images: {
     remotePatterns: [
       {
@@ -10,7 +11,7 @@ const nextConfig = {
       },
       {
         protocol: 'http',
-        hostname: 'k.kakaocdn.net',
+        hostname: 't1.kakaocdn.net',
         port: '',
         pathname: '/**',
       },

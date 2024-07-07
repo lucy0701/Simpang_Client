@@ -5,17 +5,35 @@
 .mediaquery_wrap {
   max-width: var(--max-width);
   min-width: var(--min-width);
-  min-height: 640px;
   background-color: var(--color-white);
   margin: auto;
 
   position: relative;
 
   .content_wrap {
-    padding: 25px;
+    padding: 150px 10px 50px;
+    min-height: 540px;
   }
 }
 
 .back_shadow {
   box-shadow: 0 4px 8px rgba(85, 85, 85, 0.1);
+}
+
+.legalText {
+  white-space: pre-line;
+  font-size: 0.9rem;
+}
+
+.yellow {
+  background-color: var(--color-bg-yellow);
+}
+.pink {
+  background-color: var(--color-bg-pink);
+}
+.blue {
+  background-color: var(--color-bg-blue);
+}
+.green {
+  background-color: var(--color-bg-green);
 }

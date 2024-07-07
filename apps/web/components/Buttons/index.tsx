@@ -1,12 +1,38 @@
+import { ButtonHTMLAttributes } from 'react';
 import styles from './index.module.scss';
+import cx from 'classnames';
 
-interface Props {
+export type FloatButtonPosition = 'right' | 'left';
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  onClick: () => void;
+  skin?: 'base' | 'float';
+  size?: 'small' | 'medium' | 'large';
+  color?: 'pink' | 'yellow' | 'blue' | 'green';
+  position?: FloatButtonPosition;
 }
 
-const Button = ({ text, onClick }: Props) => (
-  <button className={styles.button} onClick={onClick}>
+const Button = ({
+  text,
+  onClick,
+  type = 'button',
+  skin = 'base',
+  size = 'large',
+  color = 'pink',
+  position,
+  ...rest
+}: Props) => (
+  <button
+    type={type || 'button'}
+    className={cx(
+      styles[skin],
+      skin === 'base' ? styles[size] : styles[position!],
+      color,
+      styles.buttonWrap,
+    )}
+    onClick={onClick}
+    {...rest}
+  >
     <p>{text}</p>
   </button>
 );

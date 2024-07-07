@@ -1,0 +1,102 @@
+@use 'styles/mixins' as m;
+
+// animation
+@keyframes slideIn {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.open {
+  overflow: hidden;
+
+  ul {
+    animation: slideIn 0.4s ease;
+  }
+}
+
+.closed {
+  overflow: hidden;
+
+  ul {
+    animation: slideOut 0.4s ease;
+    animation-fill-mode: forwards;
+  }
+}
+
+.meunWrap {
+  max-width: var(--max-width);
+  min-width: var(--min-width);
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  z-index: 130;
+
+  background-color: rgba(88, 88, 88, 0.357);
+
+  > ul {
+    width: 45%;
+    height: 100%;
+    padding: 10px 15px;
+    position: relative;
+
+    @include m.flexboxColumn(start);
+    gap: 20px;
+
+    background-color: var(--color-white);
+    box-shadow: 10px 0 10px -5px rgba(85, 85, 85, 0.1);
+
+    li {
+      width: 100%;
+      @include m.flexboxColumn();
+      gap: 8px;
+
+      ul {
+        width: 100%;
+        @include m.flexboxColumn();
+        gap: 8px;
+
+        a {
+          width: 100%;
+          font-size: var(--font-size-l);
+          text-align: center;
+        }
+      }
+
+      .menuTitle {
+        font-size: var(--font-size-l);
+      }
+    }
+  }
+  .logoutBtn {
+    width: 50%;
+    height: 30px;
+
+    position: absolute;
+    bottom: 30px;
+
+    @include m.flexbox(around);
+    @include m.borderStyles(1.5px);
+
+    color: var(--font-color);
+
+    .logoutIcon {
+      @include m.iconStyles(1rem, 1rem, '/svgs/logout.svg');
+    }
+  }
+}
