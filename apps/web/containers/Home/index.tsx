@@ -2,6 +2,12 @@
 import { IContents, Sort } from '@/types';
 import styles from './index.module.scss';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 import ImageLinkItem from '@/components/Items';
 import RandomButton from '@/components/Buttons/RandomBtn';
 import WindowStyle from '@/components/WindowStyles';
@@ -12,6 +18,9 @@ import Loading from '@/components/Loading';
 import FloatTopBtn from '@/components/Buttons/FloatTopBtn';
 import RoundLoading from '@/components/Loading/RoundLoading';
 import Button from '@/components/Buttons';
+import { SIMPANG_ALT } from '@/constants';
+import ImageItem from '@/components/Items/ImageItem';
+import { FloatBtnBox } from '@/components/Buttons/FloatBtnBox';
 
 interface Props {
   latestContents: IContents[];
@@ -42,7 +51,24 @@ export default function Home({ latestContents }: Props) {
     <p>Error: {error?.message}</p>
   ) : (
     <div className={styles.wrap}>
-      <div className={styles.bannerWrap}>슬라이드 배너</div>
+      <Swiper
+        className={styles.bannerWrap}
+        modules={[Pagination, Autoplay]}
+        spaceBetween={10}
+        slidesPerView={1}
+        slidesPerGroup={1}
+        speed={2000}
+        loop={true}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 3000 }}
+      >
+        {latestContents.map((t, i) => (
+          <SwiperSlide key={i} className={styles.slideItem}>
+            <ImageLinkItem imageUrl={t.imageUrl} _id={t._id} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
       <WindowStyle title="NEW" color="blue">
         <div className={styles.btnBox}>
           <Button size="medium" text="등록순" color="yellow" onClick={() => handleSort('asc')} />
@@ -58,8 +84,7 @@ export default function Home({ latestContents }: Props) {
       </WindowStyle>
       {isFetching && <RoundLoading />}
 
-      <FloatTopBtn position="right" />
-      <RandomButton position="left" />
+      <FloatBtnBox />
     </div>
   );
 }

@@ -16,6 +16,7 @@ import RandomButton from '@/components/Buttons/RandomBtn';
 import Image from 'next/image';
 import Button from '@/components/Buttons';
 import WindowStyle from '@/components/WindowStyles';
+import { FloatBtnBox } from '@/components/Buttons/FloatBtnBox';
 
 interface UserProps {
   role: Role;
@@ -75,8 +76,7 @@ export default function Mypage() {
           <ResultList />
         </WindowStyle>
 
-        <FloatTopBtn position="right" />
-        <RandomButton position="left" />
+        <FloatBtnBox />
       </div>
     )
   );

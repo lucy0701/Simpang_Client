@@ -4,12 +4,6 @@
   @include m.flexboxColumn(_, between);
   gap: 20px;
 
-  .bannerWrap {
-    width: 100%;
-    height: 200px;
-    background-color: antiquewhite;
-  }
-
   .btnBox {
     width: 100%;
     @include m.flexbox(around);
@@ -18,5 +12,11 @@
   .clientArea {
     @include m.flexbox();
     width: 100%;
+  }
+
+  .bannerWrap {
+    width: 100%;
+    height: 100%;
+    --swiper-theme-color: var(--color-bg-green);
   }
 }

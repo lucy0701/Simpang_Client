@@ -25,12 +25,9 @@ export default function DevInfo() {
             <Link href={EXTERNAL_Link.INSTAGRAM} target="_blank" prefetch={false}>
               <div className={styles.instagramIcon} />
             </Link>
-            <Link href={PATHS.RSS} target="_blank" prefetch={false}>
-              <div className={styles.rssIcon} />
-            </Link>
           </div>
 
-          <span>© 2024 Simpang. All rights reserved</span>
+          <p>© 2024 Simpang. All rights reserved</p>
         </div>
       </WindowStyle>
     </main>
