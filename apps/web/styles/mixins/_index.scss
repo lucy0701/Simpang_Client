@@ -19,8 +19,8 @@
   background-image: url($background-image);
 }
 
-@mixin borderStyles($border_size: 2px, $radius_size: --border-radius-s) {
-  border: $border_size solid var(--border-color);
+@mixin borderStyles($border_size: 2px, $radius_size: --border-radius-s, $border_color:--border-color) {
+  border: $border_size solid var($border_color);
   border-radius: var($radius_size);
   overflow: hidden;
 }

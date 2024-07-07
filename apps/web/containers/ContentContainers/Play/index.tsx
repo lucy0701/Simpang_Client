@@ -9,7 +9,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
-import cx from 'classnames';
 
 interface Props {
   questions: IQuestion[];
@@ -62,39 +61,33 @@ export default function ContentPlay({ questions, contentId }: Props) {
     });
 
     if (scoreArr.length - 1 === currentIndex) {
-      if (scoreArr.includes(0)) {
-        const findIndex = scoreArr.indexOf(0);
-        setCurrentIndex(findIndex);
-      } else {
-        scoreCalculator();
-      }
+      scoreCalculator();
     } else {
       setCurrentIndex((prev) => prev + 1);
     }
   };
 
-  const onClickProgressBtn = (index: number) => {
-    setCurrentIndex(index);
+  const calculateWidth = () => {
+    const percentage = ((currentIndex + 1) / scoreArr.length) * 100;
+    return `${percentage}%`;
   };
 
   return isLoading ? (
     <CatLoading />
   ) : (
     <div className={styles.wrap}>
-      <div className={styles.progressBarWrap}>
-        {scoreArr.map((completion, i) => (
-          <button
-            key={i}
-            className={cx(
-              styles.dot,
-              completion ? styles.completion : '',
-              currentIndex === i ? styles.currentDot : '',
-            )}
-            onClick={() => onClickProgressBtn(i)}
-          />
-        ))}
+      <div className={styles.question}>
+        <div className={styles.progressBarWrap}>
+          <div className={styles.progressBarBox}>
+            <div className={styles.progressBar} style={{ width: calculateWidth() }} />
+          </div>
+          <p>
+            {currentIndex + 1} / {scoreArr.length}
+          </p>
+        </div>
+
+        <p className={styles.question}>{questions[currentIndex]?.question}</p>
       </div>
-      <p className={styles.question}>{questions[currentIndex]?.question}</p>
 
       <div className={styles.buttonBox}>
         {questions[currentIndex]?.answers.map((answer, i) => (
@@ -107,14 +100,24 @@ export default function ContentPlay({ questions, contentId }: Props) {
         ))}
       </div>
 
-      {currentIndex > 0 && (
-        <Button
-          text="이전"
-          size="small"
-          color="yellow"
-          onClick={() => setCurrentIndex(currentIndex - 1)}
-        />
-      )}
+      <div className={styles.indexMoveBtnBox}>
+        {currentIndex > 0 && (
+          <Button
+            text="이전"
+            size="small"
+            color="yellow"
+            onClick={() => setCurrentIndex(currentIndex - 1)}
+          />
+        )}
+        {scoreArr[currentIndex] !== 0 && (
+          <Button
+            text="다음"
+            size="small"
+            color="yellow"
+            onClick={() => setCurrentIndex(currentIndex + 1)}
+          />
+        )}
+      </div>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 @use 'styles/mixins' as m;
 
 .wrap {
-  width: 100%;
+  margin-bottom: 30px;
   @include m.flexboxColumn(between);
-  gap: 40px;
+  gap: 30px;
 
   @include m.textEllipsis();
   white-space: pre-wrap;
@@ -11,7 +11,7 @@
   .question {
     width: 100%;
     padding: 5px;
-    min-height: 200px;
+    min-height: 250px;
     @include m.flexboxColumn();
     font-size: var(--font-size-xl);
   }
@@ -19,28 +19,37 @@
   .buttonBox {
     width: 70%;
     @include m.flexboxColumn();
-    gap: 15px;
+    gap: 30px;
   }
 
   .progressBarWrap {
-    margin-top: 10px;
     width: 85%;
-    @include m.flexbox(between);
+    @include m.flexboxColumn(_, end);
+    gap: 3px;
 
-    .dot {
-      width: 15px;
+    p {
+      font-size: var(--font-size-s);
+      color: var(--color-gray-8);
+    }
+
+    .progressBarBox {
+      width: 100%;
       height: 15px;
-      @include m.borderStyles(1.5px, --border-radius-circle);
-    }
-    .completion {
-      background-color: var(--color-bg-blue);
-    }
+      overflow: hidden;
+      @include m.borderStyles(2px, --border-radius-m, --color-gray-9);
 
-    .currentDot {
-      width: 20px;
-      height: 20px;
-      @include m.borderStyles(2px, --border-radius-circle);
-      background-color: var(--color-bg-pink);
+      .progressBar {
+        height: 100%;
+        border-radius: 0.5rem;
+        background: linear-gradient(to left, var(--color-bg-blue), var(--color-bg-pink));
+      }
     }
+  }
+
+  .indexMoveBtnBox {
+    width: 100%;
+    @include m.flexbox();
+    gap: 20px;
+    margin-top: 20px;
   }
 }
