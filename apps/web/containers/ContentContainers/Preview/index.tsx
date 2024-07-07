@@ -18,17 +18,19 @@ export default function ContentPreview({ contentData, onClickPlayBtn }: Props) {
       <ImageItem imageUrl={imageUrl} />
 
       <div className={styles.contentWrap}>
-        <h3>{title}</h3>
-        <p className={styles.contentText}>{content}</p>
-        <Button size="medium" text="시작하기" onClick={onClickPlayBtn} />
-        <p>지금 까지 {count.playCount}명이 함께 했어요!</p>
+        <div>
+          <h3>{title}</h3>
+          <p className={styles.contentText}>{content}</p>
+        </div>
+        <div className={styles.playBtnWrap}>
+          <Button size="medium" text="시작하기" onClick={onClickPlayBtn} />
+          <p>지금 까지 {count.playCount}명이 함께 했어요!</p>
+        </div>
       </div>
 
       <IconButtonBox contentData={contentData} />
 
-      <div className={styles.commentWrap}>
-        <Comments contentId={_id} />
-      </div>
+      <Comments contentId={_id} />
     </div>
   );
 }

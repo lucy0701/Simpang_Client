@@ -3,7 +3,7 @@
 .wrap {
   width: 100%;
   @include m.flexboxColumn();
-  gap: 20px;
+  gap: 30px;
 
   .contentWrap {
     width: 100%;
@@ -20,8 +20,11 @@
       text-align: center;
       white-space: pre-wrap;
     }
-  }
-  .commentWrap {
-    width: 100%;
+
+    .playBtnWrap {
+      width: 100%;
+      @include m.flexboxColumn();
+      gap: 5px;
+    }
   }
 }

@@ -119,6 +119,7 @@ const ReplayButton = ({ contentId }: Props) => {
 
   return (
     <button className={styles.replayBtn} onClick={onClickBtn}>
+      <div className={styles.replayIcon} />
       다시 하기
     </button>
   );

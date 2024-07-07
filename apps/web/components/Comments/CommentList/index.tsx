@@ -55,7 +55,7 @@ const CommentList = ({ contentId, user }: Props) => {
         ))}
       </div>
       {isFetching && <RoundLoading />}
-      {hasNextPage && <Button text="More" size="small" onClick={() => fetchNextPage()} />}
+      {hasNextPage && <Button text="More" color='yellow' size="small" onClick={() => fetchNextPage()} />}
     </div>
   );
 };

@@ -20,7 +20,7 @@ $icon-size: 1.2rem;
 .buttonWrap {
   width: 70px;
   @include m.flexboxColumn();
-  gap: 4px;
+  // gap: 1px;
 
   p {
     font-weight: var(--font-weight-bold);
@@ -41,5 +41,12 @@ $icon-size: 1.2rem;
 .replayBtn {
   width: 50%;
   height: 45px;
+  font-size: var(--font-size-m);
   @include m.borderStyles();
+  @include m.flexbox();
+  gap: 10px;
+
+  .replayIcon {
+    @include m.iconStyles(1rem, 1rem, '/svgs/replay.svg');
+  }
 }
