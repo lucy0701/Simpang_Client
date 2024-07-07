@@ -11,9 +11,8 @@
   position: relative;
 
   .content_wrap {
-    padding: 10px;
-    min-height: 640px;
-    margin : 40px 0 ;
+    padding: 150px 10px 50px;
+    min-height: 540px;
   }
 }
 
@@ -24,4 +23,17 @@
 .legalText {
   white-space: pre-line;
   font-size: 0.9rem;
+}
+
+.yellow {
+  background-color: var(--color-bg-yellow);
+}
+.pink {
+  background-color: var(--color-bg-pink);
+}
+.blue {
+  background-color: var(--color-bg-blue);
+}
+.green {
+  background-color: var(--color-bg-green);
 }

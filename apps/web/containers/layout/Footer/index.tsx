@@ -29,7 +29,7 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-      <p>© 2024 Simpang. All rights reserved </p>
+      <p>© 2024 Simpang. All rights reserved</p>
     </footer>
   );
 }

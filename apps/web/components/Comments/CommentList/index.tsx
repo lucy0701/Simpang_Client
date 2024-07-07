@@ -1,20 +1,20 @@
 import Button from '@/components/Buttons';
 import { getCommentAPI } from '@/services/comment';
 import { PageParams, IComment, DecodedToken } from '@/types';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useMemo } from 'react';
 
 import styles from './index.module.scss';
 import CommentItem from './CommentItem';
-import Loading from '@/components/Loading';
 import RoundLoading from '@/components/Loading/RoundLoading';
 
 interface Props {
   contentId: string;
   user: DecodedToken;
+  updateCommentCount: (num: number) => void;
 }
 
-const CommentList = ({ contentId, user }: Props) => {
+const CommentList = ({ contentId, user, updateCommentCount }: Props) => {
   const fetchData = async ({ pageParam = 1 }) => {
     const params: PageParams = { page: pageParam, size: 5, sort: 'desc' };
     const res = await getCommentAPI({ id: contentId, params });
@@ -43,6 +43,12 @@ const CommentList = ({ contentId, user }: Props) => {
     }, []);
   }, [comments]);
 
+  useEffect(() => {
+    if (comments?.pages[0]?.totalCount !== undefined) {
+      updateCommentCount(comments.pages[0].totalCount);
+    }
+  }, [comments, updateCommentCount]);
+
   return status === 'pending' ? (
     <RoundLoading />
   ) : status === 'error' ? (
@@ -55,7 +61,9 @@ const CommentList = ({ contentId, user }: Props) => {
         ))}
       </div>
       {isFetching && <RoundLoading />}
-      {hasNextPage && <Button text="More" size="small" onClick={() => fetchNextPage()} />}
+      {hasNextPage && (
+        <Button text="More" color="yellow" size="small" onClick={() => fetchNextPage()} />
+      )}
     </div>
   );
 };

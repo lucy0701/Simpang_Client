@@ -16,15 +16,15 @@ export default function ContentResult({ resultData }: Props) {
   return (
     <div className={styles.wrap}>
       <ImageItem skin="reuslt" imageUrl={imageUrl!} />
-      <h3>{title}</h3>
-      <p>{content}</p>
+      <div>
+        <h3>{title}</h3>
+        <p>{content}</p>
+      </div>
 
       <ResultKakaoSharingBtn resultData={resultData} />
       <ResultIconButtonBox resultData={resultData} />
 
-      <div>
-        <Comments contentId={contentId} />
-      </div>
+      <Comments contentId={contentId} />
     </div>
   );
 }

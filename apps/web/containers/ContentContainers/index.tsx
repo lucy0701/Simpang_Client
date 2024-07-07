@@ -11,7 +11,6 @@ interface Props {
 
 export default function ContentContainer({ contentData }: Props) {
   const { questions, ...content } = contentData;
-
   const [onPlay, setOnPlay] = useState<boolean>(false);
 
   const onClickPlayBtn = () => setOnPlay(!onPlay);

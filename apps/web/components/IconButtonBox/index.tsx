@@ -119,6 +119,7 @@ const ReplayButton = ({ contentId }: Props) => {
 
   return (
     <button className={styles.replayBtn} onClick={onClickBtn}>
+      <div className={styles.replayIcon} />
       다시 하기
     </button>
   );
@@ -126,7 +127,7 @@ const ReplayButton = ({ contentId }: Props) => {
 
 export const IconButtonBox = ({ contentData }: ContentData) => {
   return (
-    <div className={styles.btnBox}>
+    <div className={cx(styles.btnBox, styles.baseBox)}>
       <LikeButton contentId={contentData._id} />
       <KakaoSharingBtn contentData={contentData} />
       <LinkButton contentId={contentData._id} />
@@ -136,7 +137,7 @@ export const IconButtonBox = ({ contentData }: ContentData) => {
 
 export const ResultIconButtonBox = ({ resultData }: ResultData) => {
   return (
-    <div className={styles.btnBox}>
+    <div className={cx(styles.btnBox, styles.resultBox)}>
       <LikeButton contentId={resultData.contentId} />
       <ReplayButton contentId={resultData.contentId} />
       <LinkButton contentId={resultData.contentId} />

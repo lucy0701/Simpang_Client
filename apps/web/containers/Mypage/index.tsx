@@ -1,7 +1,6 @@
 'use client';
 
-import ImageItem from '@/components/Items/ImageItem';
-import { PATHS } from '@/constants';
+import { PATHS, SIMPANG_ALT } from '@/constants';
 import { Role } from '@/types';
 import { decodeToken_csr } from '@/utils';
 import { dateSplit } from '@/utils/dateTime';
@@ -12,8 +11,11 @@ import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import ResultList from './ResultList';
 import Loading from '@/components/Loading';
-import { FloatTopBtn } from '@/components/Buttons/FloatTopBtn';
+import FloatTopBtn from '@/components/Buttons/FloatTopBtn';
 import RandomButton from '@/components/Buttons/RandomBtn';
+import Image from 'next/image';
+import Button from '@/components/Buttons';
+import WindowStyle from '@/components/WindowStyles';
 
 interface UserProps {
   role: Role;
@@ -53,11 +55,11 @@ export default function Mypage() {
     user && (
       <div className={styles.wrap}>
         <div className={styles.userWrap}>
-          <ImageItem skin="thumbnail" imageUrl={user.thumbnail} />
+          <Image alt={SIMPANG_ALT + '유저 프로필'} src={user.thumbnail} width={60} height={60} />
 
           <div className={styles.userInfo}>
             <div className={styles.user}>
-              <p>{user.name}</p>
+              <p className={styles.userName}>{user.name}</p>
               <p className={styles.roleTag}>{role}</p>
             </div>
 
@@ -67,11 +69,12 @@ export default function Mypage() {
           </div>
         </div>
         {(user.role === 'Admin' || user.role === 'Creator') && (
-          <button className={styles.createBtn} onClick={onClikeCreateBtn}>
-            컨텐츠 만들기
-          </button>
+          <Button text={'컨텐츠 만들기'} onClick={onClikeCreateBtn} />
         )}
-        <ResultList />
+        <WindowStyle title="나의 결과 목록">
+          <ResultList />
+        </WindowStyle>
+
         <FloatTopBtn position="right" />
         <RandomButton position="left" />
       </div>

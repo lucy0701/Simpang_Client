@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { dateSplit } from '@/utils/dateTime';
 
 const ResultItem = ({ results, createdAt }: IUserResult) => (
-  <Link href={`${PATHS.RESULTS}/${results._id}`} className={styles.wrap}>
+  <Link href={`${PATHS.RESULTS}/${results._id}`} className={styles.resultItemWrap}>
     <div className={styles.imgWrap}>
       <Image
         src={results!.imageUrl!}

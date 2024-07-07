@@ -5,8 +5,8 @@ import CommentList from './CommentList';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postCommentAPI } from '@/services/comment';
 import styles from './index.module.scss';
-import Button from '../Buttons';
 import { decodeToken_csr } from '@/utils';
+import WindowStyle from '../WindowStyles';
 
 interface Props {
   contentId: string;
@@ -14,8 +14,9 @@ interface Props {
 
 const Comments = ({ contentId }: Props) => {
   const [text, setText] = useState('');
-  const queryClient = useQueryClient();
+  const [commentCount, setCommentCount] = useState<number>(0);
 
+  const queryClient = useQueryClient();
   const user = decodeToken_csr();
 
   const { mutate: postComment } = useMutation({
@@ -34,19 +35,27 @@ const Comments = ({ contentId }: Props) => {
     if (event.key === 'Enter' && !event.nativeEvent.isComposing) handlePostComment();
   };
 
+  const updateCommentCount = (num: number) => setCommentCount(num);
+
   return (
-    <div className={styles.wrap}>
-      <div className={styles.inputWrap}>
-        <input
-          value={text}
-          onKeyDown={onKeyDown}
-          className={styles.commentInput}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <Button size="small" text="저장" onClick={() => handlePostComment()} />
+    <WindowStyle title="댓글" content={commentCount} color="blue">
+      <div className={styles.wrap}>
+        <div className={styles.inputWrap}>
+          <input
+            value={text}
+            onKeyDown={onKeyDown}
+            className={styles.commentInput}
+            onChange={(e) => setText(e.target.value)}
+            maxLength={100}
+          />
+          <p className={styles.textCount}> {text.length} / 100</p>
+          <button className={styles.submitBtn} onClick={() => handlePostComment()}>
+            저장
+          </button>
+        </div>
+        <CommentList contentId={contentId} user={user} updateCommentCount={updateCommentCount} />
       </div>
-      <CommentList contentId={contentId} user={user} />
-    </div>
+    </WindowStyle>
   );
 };
 

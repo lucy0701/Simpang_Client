@@ -42,30 +42,61 @@
   max-width: var(--max-width);
   min-width: var(--min-width);
   width: 100%;
-  position: absolute;
+  position: fixed;
   height: 100%;
   top: 0;
-  left: 0;
-  z-index: 100;
+  z-index: 130;
+
+  background-color: rgba(88, 88, 88, 0.357);
 
   > ul {
-    width: 40%;
+    width: 45%;
     height: 100%;
     padding: 10px 15px;
+    position: relative;
 
     @include m.flexboxColumn(start);
-    gap: 15px;
-    background-color: var(--color-white);
+    gap: 20px;
 
+    background-color: var(--color-white);
     box-shadow: 10px 0 10px -5px rgba(85, 85, 85, 0.1);
 
     li {
       width: 100%;
+      @include m.flexboxColumn();
+      gap: 8px;
+
+      ul {
+        width: 100%;
+        @include m.flexboxColumn();
+        gap: 8px;
+
+        a {
+          width: 100%;
+          font-size: var(--font-size-l);
+          text-align: center;
+        }
+      }
 
       .menuTitle {
-        font-size: var(--font-size-m);
-        margin-bottom: 2px;
+        font-size: var(--font-size-l);
       }
+    }
+  }
+  .logoutBtn {
+    width: 50%;
+    height: 30px;
+
+    position: absolute;
+    bottom: 30px;
+
+    @include m.flexbox(around);
+    @include m.borderStyles(1.5px);
+
+    color: var(--font-color);
+
+    .logoutIcon {
+      @include m.iconStyles(1rem, 1rem, '/svgs/logout.svg');
     }
   }
 }

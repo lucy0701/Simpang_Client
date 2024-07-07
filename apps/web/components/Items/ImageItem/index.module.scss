@@ -1,6 +1,7 @@
 @use 'styles/mixins' as m;
 
 .imgWrap {
+  width: 100%;
   position: relative;
 }
 
@@ -8,7 +9,7 @@
   @include m.imageWrap(_, 220px);
 }
 .thumbnail {
-  @include m.imageWrap(50px, 50px);
+  @include m.imageWrap(45px, 45px);
 }
 .reuslt {
   @include m.imageWrap(340px, 450px);
