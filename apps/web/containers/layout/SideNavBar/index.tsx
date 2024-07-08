@@ -16,7 +16,6 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
   const menuRef = useRef<HTMLUListElement>(null);
 
   const queryClient = useQueryClient();
-
   const user = decodeToken_csr();
 
   const { mutate: kakaoLogout } = useMutation({
@@ -68,9 +67,9 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
                 <Image
                   priority
                   alt="심팡"
-                  src="/images/simpang_title.png"
-                  width={170}
-                  height={70}
+                  src="/images/pang.png"
+                  width={60}
+                  height={60}
                 ></Image>
               </Link>
             </li>

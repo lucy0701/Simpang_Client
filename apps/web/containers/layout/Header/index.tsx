@@ -47,7 +47,7 @@ export default function Header() {
           <div
             className={cx(styles.imageWrap, isDown ? styles.scrollDownLogo : styles.scrollupLogo)}
           >
-            <Image priority alt={SIMPANG_ALT} src="/images/simpang_title.png" fill sizes="100%" />
+            <Image priority alt={SIMPANG_ALT} src="/images/simpang_logo.png" fill sizes="100%" />
           </div>
         </Link>
 
