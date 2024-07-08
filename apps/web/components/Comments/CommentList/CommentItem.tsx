@@ -48,7 +48,9 @@ const CommentItem = ({ contentId, comment, user }: Props) => {
   };
 
   return (
-    <div className={cx(styles.commentBox, comment.user._id === user?.id ? styles.blue : '')}>
+    <div
+      className={cx(styles.commentBox, comment.user._id === user?.id ? styles.blue : styles.yellow)}
+    >
       <ImageItem skin="thumbnail" shape="circle" imageUrl={comment.user?.thumbnail} />
 
       <div className={styles.commentTextBox}>

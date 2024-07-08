@@ -19,7 +19,7 @@ const WindowStyle = ({ children, title, content, color = 'pink' }: Props) => {
         <div className={styles.barBtn}>
           <span>_</span>
           <span>ㅁ</span>
-          <span>x</span>
+          <span>⛌</span>
         </div>
       </div>
       <div className={styles.clientArea}>{children}</div>

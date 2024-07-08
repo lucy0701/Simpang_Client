@@ -8,19 +8,16 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import ImageLinkItem from '@/components/Items';
-import RandomButton from '@/components/Buttons/RandomBtn';
+import ContentItem from '@/components/Items/ContentItem';
 import WindowStyle from '@/components/WindowStyles';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getContentsAPI } from '@/services/contents';
 import { useState } from 'react';
 import Loading from '@/components/Loading';
-import FloatTopBtn from '@/components/Buttons/FloatTopBtn';
 import RoundLoading from '@/components/Loading/RoundLoading';
 import Button from '@/components/Buttons';
-import { SIMPANG_ALT } from '@/constants';
-import ImageItem from '@/components/Items/ImageItem';
 import { FloatBtnBox } from '@/components/Buttons/FloatBtnBox';
+import BannerItem from '@/components/Items/BannerItem';
 
 interface Props {
   latestContents: IContents[];
@@ -51,6 +48,10 @@ export default function Home({ latestContents }: Props) {
     <p>Error: {error?.message}</p>
   ) : (
     <div className={styles.wrap}>
+      <div className={styles.speechBubbleWrap}>
+        <p>Today's Pick </p>
+        <div className={styles.speechBubblePoint} />
+      </div>
       <Swiper
         className={styles.bannerWrap}
         modules={[Pagination, Autoplay]}
@@ -64,21 +65,21 @@ export default function Home({ latestContents }: Props) {
       >
         {latestContents.map((t, i) => (
           <SwiperSlide key={i} className={styles.slideItem}>
-            <ImageLinkItem imageUrl={t.imageUrl} _id={t._id} />
+            <BannerItem imageUrl={t.imageUrl} id={t._id} title={t.title} />
           </SwiperSlide>
         ))}
       </Swiper>
 
       <WindowStyle title="NEW" color="blue">
         <div className={styles.btnBox}>
-          <Button size="medium" text="등록순" color="yellow" onClick={() => handleSort('asc')} />
-          <Button size="medium" text="최신순" color="yellow" onClick={() => handleSort('desc')} />
+          <Button size="small" text="등록순" color="yellow" onClick={() => handleSort('asc')} />
+          <Button size="small" text="최신순" color="yellow" onClick={() => handleSort('desc')} />
         </div>
 
         {contents &&
           contents.map((content) => (
             <div key={content._id} className={styles.clientArea} ref={lastElementRef}>
-              <ImageLinkItem key={content._id} {...content} />
+              <ContentItem key={content._id} {...content} />
             </div>
           ))}
       </WindowStyle>

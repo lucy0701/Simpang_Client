@@ -2,11 +2,12 @@
 
 .wrap {
   @include m.flexboxColumn(_, between);
-  gap: 20px;
+  gap: 30px;
 
   .btnBox {
     width: 100%;
-    @include m.flexbox(around);
+    @include m.flexbox(end, around);
+    gap: 10px;
   }
 
   .clientArea {
@@ -17,6 +18,43 @@
   .bannerWrap {
     width: 100%;
     height: 100%;
-    --swiper-theme-color: var(--color-bg-green);
+    --swiper-pagination-bullet-inactive-color: var(--color-bg-yellow);
+    --swiper-pagination-bullet-inactive-opacity: 0.5;
+    --swiper-pagination-bullet-size: 10px;
+    --swiper-pagination-bullet-horizontal-gap: 6px;
+    --swiper-pagination-color: var(--color-bg-green);
+  }
+}
+
+// 말풍선
+.speechBubbleWrap {
+  padding: 5px 10px;
+  border-radius: 0.3rem;
+  position: absolute;
+  top: 118px;
+  right: 15px;
+  z-index: 60;
+
+  p {
+    font-size: var(--font-size-s);
+    color: var(--color-white);
+    font-weight: 500;
+  }
+
+  background: linear-gradient(to bottom right, var(--color-bg-green), var(--color-bg-blue) 65%);
+
+  // border: 2px solid var(--border-color);
+  @include m.flexbox();
+
+  .speechBubblePoint {
+    position: absolute;
+    bottom: -10px;
+    right: 15px;
+
+    width: 0;
+    height: 0;
+    border-top: 10px solid var(--color-bg-blue);
+    border-left: 2px solid transparent;
+    border-right: 10px solid transparent;
   }
 }
