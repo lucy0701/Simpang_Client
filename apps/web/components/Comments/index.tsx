@@ -1,16 +1,19 @@
 'use client';
 
-import { useState } from 'react';
-import CommentList from './CommentList';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postCommentAPI } from '@/services/comment';
-import styles from './index.module.scss';
-import { decodeToken_csr } from '@/utils';
-import WindowStyle from '../WindowStyles';
-
 import cx from 'classnames';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+
 import { PATHS } from '@/constants';
+import { postCommentAPI } from '@/services/comment';
+import { DecodedToken } from '@/types';
+import { decodeToken_csr } from '@/utils';
+
+import CommentList from './CommentList';
+import styles from './index.module.scss';
+import WindowStyle from '../WindowStyles';
 
 interface Props {
   contentId: string;
@@ -19,15 +22,15 @@ interface Props {
 const Comments = ({ contentId }: Props) => {
   const [text, setText] = useState('');
   const [commentCount, setCommentCount] = useState<number>(0);
-
+  const [user, setUser] = useState<DecodedToken>();
   const queryClient = useQueryClient();
-  const user = decodeToken_csr();
+
   const router = useRouter();
 
   const { mutate: postComment } = useMutation({
     mutationFn: postCommentAPI,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['loadMoreData', contentId] });
+      queryClient.invalidateQueries({ queryKey: ['loadMoreComment', contentId] });
       setText('');
     },
   });
@@ -43,11 +46,18 @@ const Comments = ({ contentId }: Props) => {
   const updateCommentCount = (num: number) => setCommentCount(num);
   const loginButton = () => router.push(PATHS.LOGIN);
 
+  useEffect(() => {
+    const userToken = decodeToken_csr();
+    if (userToken) {
+      setUser(userToken);
+    }
+  }, []);
+
   return (
     <WindowStyle title="댓글" content={commentCount} color="blue">
       <div className={styles.wrap}>
         <div className={styles.inputWrap}>
-          {user ? (
+          {user && user ? (
             <>
               <input
                 value={text}
@@ -67,7 +77,7 @@ const Comments = ({ contentId }: Props) => {
             </button>
           )}
         </div>
-        <CommentList contentId={contentId} user={user} updateCommentCount={updateCommentCount} />
+        <CommentList contentId={contentId} user={user!} updateCommentCount={updateCommentCount} />
       </div>
     </WindowStyle>
   );

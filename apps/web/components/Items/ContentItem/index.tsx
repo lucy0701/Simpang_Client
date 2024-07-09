@@ -1,10 +1,12 @@
 import Image from 'next/image';
-
-import styles from './index.module.scss';
+import Link from 'next/link';
 
 import { PATHS, SIMPANG_ALT } from '@/constants';
 import { IContents } from '@/types';
-import Link from 'next/link';
+
+import styles from './index.module.scss';
+
+
 
 const ContentItem = ({
   _id,

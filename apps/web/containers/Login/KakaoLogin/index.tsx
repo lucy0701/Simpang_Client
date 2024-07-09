@@ -1,19 +1,25 @@
 'use client';
 
-import { PATHS, SIMPANG_ALT } from '@/constants';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
 import styles from './index.module.scss';
 
+import { PATHS, SIMPANG_ALT } from '@/constants';
 import { setKakaoLogin } from '@/services';
-import Image from 'next/image';
 import { decodeToken_csr } from '@/utils';
-import { useRouter } from 'next/navigation';
 
 export default function KakaoLogin() {
   const token = decodeToken_csr();
 
   const router = useRouter();
 
-  if (token) return router.push(PATHS.HOME);
+  useEffect(() => {
+    if (token) {
+      router.push(PATHS.HOME);
+    }
+  }, [token, router]);
 
   return (
     <div className={styles.wrap}>

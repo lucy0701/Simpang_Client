@@ -1,22 +1,21 @@
 'use client';
 
-import { PATHS, SIMPANG_ALT } from '@/constants';
-import { Role } from '@/types';
-import { decodeToken_csr } from '@/utils';
-import { dateSplit } from '@/utils/dateTime';
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
 import ResultList from './ResultList';
-import Loading from '@/components/Loading';
-import FloatTopBtn from '@/components/Buttons/FloatTopBtn';
-import RandomButton from '@/components/Buttons/RandomBtn';
-import Image from 'next/image';
-import Button from '@/components/Buttons';
+
+import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
+import Button from '@/components/Buttons/Button';
+import { Loading } from '@/components/Loading';
 import WindowStyle from '@/components/WindowStyles';
-import { FloatBtnBox } from '@/components/Buttons/FloatBtnBox';
+import { PATHS, SIMPANG_ALT } from '@/constants';
+import { Role } from '@/types';
+import { decodeToken_csr } from '@/utils';
+import { dateSplit } from '@/utils/dateTime';
 
 interface UserProps {
   role: Role;

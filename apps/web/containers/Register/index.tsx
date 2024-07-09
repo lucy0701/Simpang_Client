@@ -1,13 +1,14 @@
 'use client';
 
-import { apiBe, getHeaders } from '@/services';
-import { ContentType, IQuestion } from '@/types';
-import { ChangeEvent, useState } from 'react';
 import cx from 'classnames';
+import { ChangeEvent, useState } from 'react';
 
 import styles from './index.module.scss';
-import Button from '@/components/Buttons';
+
+import Button from '@/components/Buttons/Button';
 import { CONTENT_TYPE } from '@/constants';
+import { apiBe, getHeaders } from '@/services';
+import { ContentType, IQuestion } from '@/types';
 
 interface ContentData {
   title: string;

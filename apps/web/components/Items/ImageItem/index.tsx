@@ -1,9 +1,10 @@
+import cx from 'classnames';
 import Image from 'next/image';
 
-import styles from './index.module.scss';
-import cx from 'classnames';
-
 import { SIMPANG_ALT } from '@/constants';
+
+import styles from './index.module.scss';
+
 
 interface Props {
   imageUrl: string;

@@ -1,5 +1,6 @@
-import styles from './index.module.scss';
 import cx from 'classnames';
+
+import styles from './index.module.scss';
 
 interface Props {
   children: React.ReactNode;
@@ -8,8 +9,7 @@ interface Props {
   color?: 'pink' | 'yellow' | 'blue' | 'green';
 }
 
-const WindowStyle = ({ children, title, content, color = 'pink' }: Props) => {
-  return (
+const WindowStyle = ({ children, title, content, color = 'pink' }: Props) => (
     <div className={styles.wrap}>
       <div className={cx(styles.titleBar, color)}>
         <div className={styles.title}>
@@ -25,5 +25,4 @@ const WindowStyle = ({ children, title, content, color = 'pink' }: Props) => {
       <div className={styles.clientArea}>{children}</div>
     </div>
   );
-};
 export default WindowStyle;

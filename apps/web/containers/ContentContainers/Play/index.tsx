@@ -1,14 +1,16 @@
 'use client';
 
-import Button from '@/components/Buttons';
-import CatLoading from '@/components/Loading/CatLoading';
-import { PATHS } from '@/constants';
-import { postResultAPI } from '@/services/contents';
-import { IQuestion } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+
 import styles from './index.module.scss';
+
+import Button from '@/components/Buttons/Button';
+import { CatLoading } from '@/components/Loading';
+import { PATHS } from '@/constants';
+import { postResultAPI } from '@/services/contents';
+import { IQuestion } from '@/types';
 
 interface Props {
   questions: IQuestion[];

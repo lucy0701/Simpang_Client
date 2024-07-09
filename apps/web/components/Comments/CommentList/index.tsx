@@ -1,12 +1,14 @@
-import Button from '@/components/Buttons';
-import { getCommentAPI } from '@/services/comment';
-import { PageParams, IComment, DecodedToken } from '@/types';
-import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
 
+
+import Button from '@/components/Buttons/Button';
+import { RoundLoading } from '@/components/Loading';
+import { getCommentAPI } from '@/services/comment';
+import { PageParams, IComment, DecodedToken } from '@/types';
+
 import styles from './index.module.scss';
-import CommentItem from './CommentItem';
-import RoundLoading from '@/components/Loading/RoundLoading';
+import CommentItem from '../CommentItem';
 
 interface Props {
   contentId: string;
@@ -29,19 +31,17 @@ const CommentList = ({ contentId, user, updateCommentCount }: Props) => {
     isFetching,
     status,
   } = useInfiniteQuery({
-    queryKey: ['loadMoreData', contentId],
+    queryKey: ['loadMoreComment', contentId],
     queryFn: fetchData,
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
-      return lastPage.totalPage > lastPage.currentPage ? lastPage.currentPage + 1 : undefined;
-    },
+    getNextPageParam: (lastPage) =>
+      lastPage.totalPage > lastPage.currentPage ? lastPage.currentPage + 1 : undefined,
   });
 
-  const dataList = useMemo(() => {
-    return comments?.pages.reduce((acc: IComment[], page) => {
-      return [...acc, ...page.data];
-    }, []);
-  }, [comments]);
+  const dataList = useMemo(
+    () => comments?.pages.reduce((acc: IComment[], page) => [...acc, ...page.data], []),
+    [comments],
+  );
 
   useEffect(() => {
     if (comments?.pages[0]?.totalCount !== undefined) {

@@ -1,11 +1,11 @@
 import Image from 'next/image';
-
-import styles from './index.module.scss';
+import Link from 'next/link';
 
 import { PATHS, SIMPANG_ALT } from '@/constants';
 import { IUserResult } from '@/types';
-import Link from 'next/link';
 import { dateSplit } from '@/utils/dateTime';
+
+import styles from './index.module.scss';
 
 const ResultItem = ({ results, createdAt }: IUserResult) => (
   <Link href={`${PATHS.RESULTS}/${results._id}`} className={styles.resultItemWrap}>
