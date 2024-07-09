@@ -4,11 +4,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-import styles from './index.module.scss';
-
 import { PATHS, SIMPANG_ALT } from '@/constants';
 import { setKakaoLogin } from '@/services';
 import { decodeToken_csr } from '@/utils';
+
+import styles from './index.module.scss';
 
 export default function KakaoLogin() {
   const token = decodeToken_csr();

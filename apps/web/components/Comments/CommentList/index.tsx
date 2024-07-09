@@ -2,13 +2,13 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
 
 
-import Button from '@/components/Buttons/Button';
-import { RoundLoading } from '@/components/Loading';
 import { getCommentAPI } from '@/services/comment';
 import { PageParams, IComment, DecodedToken } from '@/types';
 
 import styles from './index.module.scss';
 import CommentItem from '../CommentItem';
+import Button from '@/components/Buttons/Button';
+import { RoundLoading } from '@/components/Loading';
 
 interface Props {
   contentId: string;

@@ -1,7 +1,9 @@
 import { jwtDecode } from 'jwt-decode';
-import { getCookie } from './cookies';
-import { DecodedToken, Token } from '@/types';
+
 import { TOKEN_NAME } from '@/constants';
+import { DecodedToken, Token } from '@/types';
+
+import { getCookie } from './cookies';
 
 export const decodeToken = (token: string) => {
   try {

@@ -1,13 +1,15 @@
 'use client';
 
-import Link from 'next/link';
+import cx from 'classnames';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+
+import { PATHS, SIMPANG_ALT } from '@/constants';
+
 import styles from './index.module.scss';
 import SideNavBar from '../SideNavBar';
-import { PATHS, SIMPANG_ALT } from '@/constants';
-import { useRouter } from 'next/navigation';
-import cx from 'classnames';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);

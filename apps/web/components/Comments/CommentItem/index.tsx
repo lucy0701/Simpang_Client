@@ -3,12 +3,12 @@ import cx from 'classnames';
 import { useState } from 'react';
 
 
-import ImageItem from '@/components/Items/ImageItem';
 import { deleteCommentAPI, patchCommentAPI } from '@/services/comment';
 import { DecodedToken, IComment } from '@/types';
 import { getTimeDifference } from '@/utils/dateTime';
 
 import styles from './index.module.scss';
+import ImageItem from '@/components/Items/ImageItem';
 
 interface Props {
   contentId: string;

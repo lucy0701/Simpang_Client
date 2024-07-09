@@ -1,11 +1,13 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
-import styles from './index.module.scss';
+
 import { PATHS } from '@/constants';
 import { kakaoLogoutAPI } from '@/services';
 import { decodeToken_csr } from '@/utils';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import styles from './index.module.scss';
 
 interface Props {
   isOpen: boolean;
@@ -64,13 +66,7 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
           <ul ref={menuRef}>
             <li>
               <Link href={PATHS.HOME}>
-                <Image
-                  priority
-                  alt="심팡"
-                  src="/images/pang.png"
-                  width={60}
-                  height={60}
-                ></Image>
+                <Image priority alt="심팡" src="/images/pang.png" width={60} height={60}></Image>
               </Link>
             </li>
             {user && (

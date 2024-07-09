@@ -5,7 +5,6 @@ import cx from 'classnames';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-
 import { PATHS } from '@/constants';
 import { postCommentAPI } from '@/services/comment';
 import { DecodedToken } from '@/types';

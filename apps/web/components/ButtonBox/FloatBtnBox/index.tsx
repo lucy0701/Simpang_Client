@@ -2,12 +2,11 @@ import cx from 'classnames';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-
-import Button from '@/components/Buttons/Button';
 import { PATHS } from '@/constants';
 import { FloatButtonPosition } from '@/types';
 
 import styles from './index.module.scss';
+import Button from '@/components/Buttons/Button';
 
 interface Props {
   position?: FloatButtonPosition;

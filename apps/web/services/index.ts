@@ -1,8 +1,9 @@
 export * from './kakao';
 export * from './util';
 
-import { BE_URL } from '@/constants';
 import axios from 'axios';
+
+import { BE_URL } from '@/constants';
 
 export const apiBe = axios.create({
   baseURL: `${BE_URL}/api`,

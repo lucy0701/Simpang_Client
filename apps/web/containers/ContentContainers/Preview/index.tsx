@@ -1,11 +1,11 @@
 'use client';
-import styles from './index.module.scss';
+import { IContent } from '@/types';
 
+import styles from './index.module.scss';
 import { IconButtonBox } from '@/components/ButtonBox/IconButtonBox';
 import Button from '@/components/Buttons/Button';
 import Comments from '@/components/Comments';
 import ImageItem from '@/components/Items/ImageItem';
-import { IContent } from '@/types';
 
 interface Props {
   contentData: Omit<IContent, 'questions'>;

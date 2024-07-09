@@ -6,8 +6,6 @@ import { IContents } from '@/types';
 
 import styles from './index.module.scss';
 
-
-
 const ContentItem = ({
   _id,
   imageUrl,

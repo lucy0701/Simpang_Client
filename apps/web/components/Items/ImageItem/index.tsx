@@ -5,7 +5,6 @@ import { SIMPANG_ALT } from '@/constants';
 
 import styles from './index.module.scss';
 
-
 interface Props {
   imageUrl: string;
   shape?: 'circle' | 'square';

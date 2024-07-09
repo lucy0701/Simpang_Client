@@ -1,7 +1,9 @@
-import { DecodedToken } from '@/types';
-import { decodeToken } from './decode';
 import { cookies } from 'next/headers';
+
 import { TOKEN_NAME } from '@/constants';
+import { DecodedToken } from '@/types';
+
+import { decodeToken } from './decode';
 
 export const decodeToken_ssr = () => {
   const token = cookies().get(TOKEN_NAME);

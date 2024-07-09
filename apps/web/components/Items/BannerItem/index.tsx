@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-
-import Button from '@/components/Buttons/Button';
 import { PATHS, SIMPANG_ALT } from '@/constants';
 
 import styles from './index.module.scss';
+import Button from '@/components/Buttons/Button';
 
 interface Props {
   id: string;

@@ -5,17 +5,17 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import styles from './index.module.scss';
-import ResultList from './ResultList';
-
-import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
-import Button from '@/components/Buttons/Button';
-import { Loading } from '@/components/Loading';
-import WindowStyle from '@/components/WindowStyles';
 import { PATHS, SIMPANG_ALT } from '@/constants';
 import { Role } from '@/types';
 import { decodeToken_csr } from '@/utils';
 import { dateSplit } from '@/utils/dateTime';
+
+import styles from './index.module.scss';
+import ResultList from './ResultList';
+import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
+import Button from '@/components/Buttons/Button';
+import { Loading } from '@/components/Loading';
+import WindowStyle from '@/components/WindowStyles';
 
 interface UserProps {
   role: Role;

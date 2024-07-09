@@ -1,8 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
-import styles from './index.module.scss';
-import Image from 'next/image';
 import { EXTERNAL_Link } from '@/constants';
+
+import styles from './index.module.scss';
 import WindowStyle from '@/components/WindowStyles';
 
 export default function DevInfo() {

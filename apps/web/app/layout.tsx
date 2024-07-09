@@ -4,10 +4,11 @@ import { Noto_Sans_KR } from 'next/font/google';
 // import { Suspense } from 'react';
 
 
+import type { Metadata } from 'next';
+
 import ReactQueryProviders from '@/components/ReactQueryProviders';
 import Footer from '@/containers/layout/Footer';
 import Header from '@/containers/layout/Header';
-import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Create Next App',

@@ -1,12 +1,12 @@
 'use client';
 
 
-import Button from '@/components/Buttons/Button';
-import IconButton from '@/components/Buttons/IconButton';
 import { shareKakaotalk, shareKakaotalkResult } from '@/services';
 import { postShareAPI } from '@/services/contents';
 
 import { ContentData, ResultData } from '../IconButtons';
+import Button from '@/components/Buttons/Button';
+import IconButton from '@/components/Buttons/IconButton';
 
 const ICON_SIZE = 32;
 

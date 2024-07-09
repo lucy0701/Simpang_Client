@@ -1,5 +1,4 @@
 'use client';
-import { IContents, Sort } from '@/types';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -9,16 +8,18 @@ import { useState } from 'react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import styles from './index.module.scss';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import { getContentsAPI } from '@/services/contents';
+import { IContents, Sort } from '@/types';
 
+import styles from './index.module.scss';
 import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
 import Button from '@/components/Buttons/Button';
 import BannerItem from '@/components/Items/BannerItem';
 import ContentItem from '@/components/Items/ContentItem';
 import { Loading, RoundLoading } from '@/components/Loading';
 import WindowStyle from '@/components/WindowStyles';
-import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { getContentsAPI } from '@/services/contents';
+
 interface Props {
   latestContents: IContents[];
 }
