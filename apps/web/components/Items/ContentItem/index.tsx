@@ -10,7 +10,6 @@ const ContentItem = ({
   _id,
   imageUrl,
   title,
-  content,
   playCount,
   commentCount,
   likeCount,
@@ -25,11 +24,10 @@ const ContentItem = ({
         sizes="100%"
         className={styles.image}
       />
-      {title && <h3 className={styles.title}>{title}</h3>}
     </div>
 
     <div className={styles.contentBox}>
-      {content && <p className={styles.content}>{content}</p>}
+      {title && <p className={styles.title}>{title}</p>}
 
       <div className={styles.countBox}>
         {likeCount !== undefined && (

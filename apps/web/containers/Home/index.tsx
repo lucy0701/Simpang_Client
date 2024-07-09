@@ -70,7 +70,7 @@ export default function Home({ latestContents }: Props) {
         ))}
       </Swiper>
 
-      <WindowStyle title="NEW" color="blue">
+      <WindowStyle title="NEW" color="green">
         <div className={styles.btnBox}>
           <Button size="small" text="등록순" color="yellow" onClick={() => handleSort('asc')} />
           <Button size="small" text="최신순" color="yellow" onClick={() => handleSort('desc')} />

@@ -12,7 +12,7 @@ interface Props {
 export const FloatTopBtn = ({ position = 'left' }: Props) => {
   const onClickScrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  return <Button text="Top" position={position} skin="float" onClick={onClickScrollToTop} />;
+  return <Button text="Top" color='yellow' position={position} skin="float" onClick={onClickScrollToTop} />;
 };
 
 export const RandomButton = ({ position = 'right' }: Props) => {
@@ -21,6 +21,7 @@ export const RandomButton = ({ position = 'right' }: Props) => {
     <Button
       text="Random"
       skin="float"
+      color='green'
       position={position}
       onClick={() => router.push(PATHS.CONTENTS.RAMDOM)}
     />
