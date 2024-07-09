@@ -11,6 +11,12 @@
     box-shadow: 3px 4px var(--border-color);
     gap: 2px;
 
+    .nonLogin {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+    }
+
     .commentInput {
       width: 73%;
       padding: 10px;

@@ -7,6 +7,8 @@ $icon-size: 1.2rem;
   @include m.flexbox(between);
   @include m.borderStyles();
 
+  background-color: var(--color-bg-ivory);
+
   font-size: var(--font-size-s);
 }
 

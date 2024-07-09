@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import styles from './index.module.scss';
 import Image from 'next/image';
-import { EXTERNAL_Link, PATHS } from '@/constants';
+import { EXTERNAL_Link } from '@/constants';
 import WindowStyle from '@/components/WindowStyles';
 
 export default function DevInfo() {

@@ -38,9 +38,7 @@
     .gitHubIcon {
       @include m.iconStyles(1.8rem, 1.8rem, '/svgs/gitHub.svg');
     }
-    .rssIcon {
-      @include m.iconStyles(1.7rem, 1.7rem, '/svgs/rss.svg');
-    }
+
     .instagramIcon {
       @include m.iconStyles(2rem, 2rem, '/svgs/instagram.svg');
     }
