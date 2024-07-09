@@ -1,0 +1,23 @@
+@use 'styles/mixins' as m;
+
+$icon-size: 1.2rem;
+
+.buttonWrap {
+  width: 70px;
+  @include m.flexboxColumn();
+
+  p {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .btnImage {
+    padding: 5px;
+    border-radius: 0.2rem;
+  }
+  .isOff {
+    background-color: var(--color-gray-9);
+  }
+  .isOn {
+    background-color: var(--color-bg-blue);
+  }
+}

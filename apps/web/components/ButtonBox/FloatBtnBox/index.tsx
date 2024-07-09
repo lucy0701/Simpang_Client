@@ -1,9 +1,13 @@
-import Button, { FloatButtonPosition } from '.';
-import { useRouter } from 'next/navigation';
-import { PATHS } from '@/constants';
-import { useEffect, useState } from 'react';
-import styles from './index.module.scss';
 import cx from 'classnames';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+
+import Button from '@/components/Buttons/Button';
+import { PATHS } from '@/constants';
+import { FloatButtonPosition } from '@/types';
+
+import styles from './index.module.scss';
 
 interface Props {
   position?: FloatButtonPosition;
@@ -12,7 +16,15 @@ interface Props {
 export const FloatTopBtn = ({ position = 'left' }: Props) => {
   const onClickScrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  return <Button text="Top" color='yellow' position={position} skin="float" onClick={onClickScrollToTop} />;
+  return (
+    <Button
+      text="Top"
+      color="yellow"
+      position={position}
+      skin="float"
+      onClick={onClickScrollToTop}
+    />
+  );
 };
 
 export const RandomButton = ({ position = 'right' }: Props) => {
@@ -21,7 +33,7 @@ export const RandomButton = ({ position = 'right' }: Props) => {
     <Button
       text="Random"
       skin="float"
-      color='green'
+      color="green"
       position={position}
       onClick={() => router.push(PATHS.CONTENTS.RAMDOM)}
     />

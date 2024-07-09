@@ -2,27 +2,9 @@
 
 $icon-size: 1.2rem;
 
-.btnBox {
-  padding: 8px 2px;
-  @include m.flexbox(between);
-  @include m.borderStyles();
-
-  background-color: var(--color-bg-ivory);
-
-  font-size: var(--font-size-s);
-}
-
-.resultBox {
-  width: 80%;
-}
-.baseBox {
-  width: 60%;
-}
-
 .buttonWrap {
   width: 70px;
   @include m.flexboxColumn();
-  // gap: 1px;
 
   p {
     font-weight: var(--font-weight-bold);
