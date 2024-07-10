@@ -1,8 +1,5 @@
 import '../styles/_globals.scss';
-// import dynamic from 'next/dynamic';
 import { Noto_Sans_KR } from 'next/font/google';
-// import { Suspense } from 'react';
-
 
 import type { Metadata } from 'next';
 
@@ -24,8 +21,6 @@ const notoSansKr = Noto_Sans_KR({
   display: 'swap',
 });
 
-// const Loading = dynamic(() => import('./loading'), { ssr: false });
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -44,11 +39,10 @@ export default function RootLayout({
       <body className={notoSansKr.className}>
         <ReactQueryProviders>
           <div className="mediaquery_wrap">
-            {/* <Suspense fallback={<Loading />}> */}
             <Header />
+            <div id="modal-root" />
             <div className="content_wrap">{children}</div>
             <Footer />
-            {/* </Suspense> */}
           </div>
         </ReactQueryProviders>
       </body>

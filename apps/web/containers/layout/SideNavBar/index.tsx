@@ -60,7 +60,7 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
   }, [isOpen, onClickMenuBtn]);
 
   return (
-    <nav className={styles.wrap}>
+    <nav>
       {isMenuOpen && (
         <div className={`${styles.meunWrap} ${isOpen ? styles.open : styles.closed}`}>
           <ul ref={menuRef}>

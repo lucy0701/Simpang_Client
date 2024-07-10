@@ -7,11 +7,9 @@ import { decodeToken } from './decode';
 
 export const decodeToken_ssr = () => {
   const token = cookies().get(TOKEN_NAME);
-
   if (!token) return undefined;
 
   const decodedToken: DecodedToken = decodeToken(token?.value);
-
   if (!decodedToken) return null;
 
   return {

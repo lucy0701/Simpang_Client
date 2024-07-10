@@ -69,7 +69,7 @@ export default function Mypage() {
           </div>
         </div>
         {(user.role === 'Admin' || user.role === 'Creator') && (
-          <Button text={'컨텐츠 만들기'} onClick={onClikeCreateBtn} />
+          <Button color="yellow" text={'컨텐츠 만들기'} onClick={onClikeCreateBtn} />
         )}
         <WindowStyle title="나의 결과 목록">
           <ResultList />
