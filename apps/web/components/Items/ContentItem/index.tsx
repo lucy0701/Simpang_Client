@@ -1,16 +1,15 @@
 import Image from 'next/image';
-
-import styles from './index.module.scss';
+import Link from 'next/link';
 
 import { PATHS, SIMPANG_ALT } from '@/constants';
 import { IContents } from '@/types';
-import Link from 'next/link';
 
-const ImageLinkItem = ({
+import styles from './index.module.scss';
+
+const ContentItem = ({
   _id,
   imageUrl,
   title,
-  content,
   playCount,
   commentCount,
   likeCount,
@@ -25,11 +24,10 @@ const ImageLinkItem = ({
         sizes="100%"
         className={styles.image}
       />
-      {title && <h3 className={styles.title}>{title}</h3>}
     </div>
 
     <div className={styles.contentBox}>
-      {content && <p className={styles.content}>{content}</p>}
+      {title && <p className={styles.title}>{title}</p>}
 
       <div className={styles.countBox}>
         {likeCount !== undefined && (
@@ -55,4 +53,4 @@ const ImageLinkItem = ({
   </Link>
 );
 
-export default ImageLinkItem;
+export default ContentItem;

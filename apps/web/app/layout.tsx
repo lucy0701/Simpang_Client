@@ -3,11 +3,9 @@ import { Noto_Sans_KR } from 'next/font/google';
 
 import type { Metadata } from 'next';
 
+import ReactQueryProviders from '@/components/ReactQueryProviders';
 import Footer from '@/containers/layout/Footer';
 import Header from '@/containers/layout/Header';
-import ReactQueryProviders from '@/components/ReactQueryProviders';
-import { Suspense } from 'react';
-import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -22,8 +20,6 @@ const notoSansKr = Noto_Sans_KR({
   subsets: ['latin'],
   display: 'swap',
 });
-
-const Loading = dynamic(() => import('./loading'), { ssr: false });
 
 export default function RootLayout({
   children,
@@ -43,11 +39,10 @@ export default function RootLayout({
       <body className={notoSansKr.className}>
         <ReactQueryProviders>
           <div className="mediaquery_wrap">
-            <Suspense fallback={<Loading />}>
-              <Header />
-              <div className="content_wrap">{children}</div>
-              <Footer />
-            </Suspense>
+            <Header />
+            <div id="modal-root" />
+            <div className="content_wrap">{children}</div>
+            <Footer />
           </div>
         </ReactQueryProviders>
       </body>

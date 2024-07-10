@@ -1,14 +1,15 @@
 'use client';
 
-import Loading from '@/components/Loading';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+
+import { Loading } from '@/components/Loading';
 import { AUTHORIZATION, PATHS, TOKEN_NAME } from '@/constants';
 import { kakaoLoginAPI } from '@/services';
 import { DecodedToken } from '@/types';
 import { decodeToken, setCookie } from '@/utils';
 import { getExpirationDate } from '@/utils/dateTime';
-import { useMutation } from '@tanstack/react-query';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
 
 export default function KakaoAuthHandle() {
   const code = useSearchParams().get('code');

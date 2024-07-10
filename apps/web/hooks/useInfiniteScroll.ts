@@ -1,8 +1,9 @@
-import { PaginationOptions } from '@/types';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useCallback, useMemo, useRef } from 'react';
 
-const useInfiniteScroll = <T>({ getData, sort, size,queryKey }: PaginationOptions<T>) => {
+import { PaginationOptions } from '@/types';
+
+const useInfiniteScroll = <T>({ getData, sort, size, queryKey }: PaginationOptions<T>) => {
   const observer = useRef<IntersectionObserver>();
 
   const fetchData = async ({ pageParam = 1 }) => {
@@ -14,9 +15,8 @@ const useInfiniteScroll = <T>({ getData, sort, size,queryKey }: PaginationOption
     queryKey: [queryKey, sort],
     queryFn: fetchData,
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
-      return lastPage.totalPage > lastPage.currentPage ? lastPage.currentPage + 1 : undefined;
-    },
+    getNextPageParam: (lastPage) =>
+      lastPage.totalPage > lastPage.currentPage ? lastPage.currentPage + 1 : undefined,
   });
 
   const lastElementRef = useCallback(
@@ -36,11 +36,10 @@ const useInfiniteScroll = <T>({ getData, sort, size,queryKey }: PaginationOption
     [fetchNextPage, hasNextPage, isFetching, status],
   );
 
-  const dataList = useMemo(() => {
-    return data?.pages.reduce((acc: T[], page) => {
-      return [...acc, ...page.data];
-    }, []);
-  }, [data]);
+  const dataList = useMemo(
+    () => data?.pages.reduce((acc: T[], page) => [...acc, ...page.data], []),
+    [data],
+  );
 
   return {
     dataList,

@@ -1,9 +1,11 @@
-import { FE_URL, KAKAO_APP_KEY, REST_API_KEY } from '@/constants/env';
+import { TOKEN_NAME } from '@/constants';
+import { ShareKakaoProps } from '@/types';
+import { removeCookie } from '@/utils';
+
 import { apiBe } from '.';
 import { getHeaders } from './util';
-import { TOKEN_NAME } from '@/constants';
-import { removeCookie } from '@/utils';
-import { ShareKakaoProps } from '@/types';
+
+import { FE_URL, KAKAO_APP_KEY, REST_API_KEY } from '@/constants/env';
 
 declare global {
   interface Window {

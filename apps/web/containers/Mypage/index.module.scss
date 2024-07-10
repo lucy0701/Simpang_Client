@@ -37,9 +37,5 @@
       }
     }
   }
-  .resultWrap {
-    width: 100%;
-    @include m.flexboxColumn(_, _);
-    gap: 20px;
-  }
+
 }

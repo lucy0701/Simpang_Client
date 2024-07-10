@@ -1,13 +1,14 @@
 'use client';
 
+import cx from 'classnames';
+import { ChangeEvent, useState } from 'react';
+
+import { CONTENT_TYPE } from '@/constants';
 import { apiBe, getHeaders } from '@/services';
 import { ContentType, IQuestion } from '@/types';
-import { ChangeEvent, useState } from 'react';
-import cx from 'classnames';
 
 import styles from './index.module.scss';
-import Button from '@/components/Buttons';
-import { CONTENT_TYPE } from '@/constants';
+import Button from '@/components/Buttons/Button';
 
 interface ContentData {
   title: string;
@@ -187,7 +188,6 @@ export default function Register() {
     data!.imageUrls.forEach((image: { index: number; imageUrl: File | null }) => {
       if (image.imageUrl instanceof File) {
         formData.append(`imageUrls`, image.imageUrl);
-        console.log('PSJ: image.imageUrl', image.imageUrl);
       }
     });
 

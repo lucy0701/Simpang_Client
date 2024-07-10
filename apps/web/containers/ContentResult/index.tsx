@@ -1,10 +1,10 @@
+import styles from './index.module.scss';
+
+import { ResultIconButtonBox } from '@/components/ButtonBox/IconButtonBox';
+import { ResultKakaoSharingBtn } from '@/components/ButtonBox/SharingButtons';
 import Comments from '@/components/Comments';
-import { ResultIconButtonBox } from '@/components/IconButtonBox';
-import { ResultKakaoSharingBtn } from '@/components/IconButtonBox/SharingButton';
 import ImageItem from '@/components/Items/ImageItem';
 import { IResult } from '@/types';
-
-import styles from './index.module.scss';
 
 interface Props {
   resultData: IResult;

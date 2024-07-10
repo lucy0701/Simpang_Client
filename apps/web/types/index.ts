@@ -4,6 +4,7 @@ export * from './login';
 export * from './content';
 
 export type Sort = 'asc' | 'desc';
+export type FloatButtonPosition = 'right' | 'left';
 
 export interface PageParams {
   page: number;

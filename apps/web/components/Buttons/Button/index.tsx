@@ -1,8 +1,10 @@
-import { ButtonHTMLAttributes } from 'react';
-import styles from './index.module.scss';
 import cx from 'classnames';
+import { ButtonHTMLAttributes } from 'react';
 
-export type FloatButtonPosition = 'right' | 'left';
+import { FloatButtonPosition } from '@/types';
+
+import styles from './index.module.scss';
+
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;

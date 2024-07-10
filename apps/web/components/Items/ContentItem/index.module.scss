@@ -3,12 +3,12 @@
 $icon-size: 0.8rem;
 
 .wrap {
-  position: relative;
+  // position: relative;
   width: 100%;
 
   .imgWrap {
     width: 100%;
-    height: 220px;
+    height: 200px;
     min-width: 250px;
 
     position: relative;
@@ -16,7 +16,7 @@ $icon-size: 0.8rem;
 
     @include m.flexboxColumn();
     @include m.borderStyles();
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 
     .image {
       object-fit: cover;
@@ -24,26 +24,15 @@ $icon-size: 0.8rem;
     }
   }
 
-  .title {
-    width: 90%;
-    position: absolute;
-    bottom: 10px;
-    background-color: var(--color-white);
-    @include m.textEllipsis(90%);
-
-    text-align: center;
-    border-radius: var(--border-radius-s);
-    border: 2px solid var(--border-color);
-  }
-
   .contentBox {
     @include m.flexbox(between, end);
     gap: 0.8rem;
     padding: 0 15px;
 
-    .content {
+    .title {
+    font-size: var(--font-size-m);
       @include m.textEllipsis();
-      font-size: var(--font-size-m);
+      font-weight: var(--font-weight-bold);
     }
 
     .countBox {

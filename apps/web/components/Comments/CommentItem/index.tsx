@@ -1,11 +1,14 @@
-import ImageItem from '@/components/Items/ImageItem';
-import { deleteCommentAPI, patchCommentAPI } from '@/services/comment';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import styles from './index.module.scss';
-import { useState } from 'react';
-import { getTimeDifference } from '@/utils/dateTime';
-import { DecodedToken, IComment } from '@/types';
 import cx from 'classnames';
+import { useState } from 'react';
+
+
+import { deleteCommentAPI, patchCommentAPI } from '@/services/comment';
+import { DecodedToken, IComment } from '@/types';
+import { getTimeDifference } from '@/utils/dateTime';
+
+import styles from './index.module.scss';
+import ImageItem from '@/components/Items/ImageItem';
 
 interface Props {
   contentId: string;
@@ -22,7 +25,7 @@ const CommentItem = ({ contentId, comment, user }: Props) => {
   const { mutate: deleteComment } = useMutation({
     mutationFn: deleteCommentAPI,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['loadMoreData', contentId] });
+      queryClient.invalidateQueries({ queryKey: ['loadMoreComment', contentId] });
     },
   });
 
@@ -33,7 +36,7 @@ const CommentItem = ({ contentId, comment, user }: Props) => {
   const { mutate: patchComment } = useMutation({
     mutationFn: patchCommentAPI,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['loadMoreData', contentId] });
+      queryClient.invalidateQueries({ queryKey: ['loadMoreComment', contentId] });
       setIsModifying(!isModifying);
       setText('');
     },
@@ -48,7 +51,9 @@ const CommentItem = ({ contentId, comment, user }: Props) => {
   };
 
   return (
-    <div className={cx(styles.commentBox, comment.user._id === user?.id ? styles.blue : '')}>
+    <div
+      className={cx(styles.commentBox, comment.user._id === user?.id ? styles.blue : styles.yellow)}
+    >
       <ImageItem skin="thumbnail" shape="circle" imageUrl={comment.user?.thumbnail} />
 
       <div className={styles.commentTextBox}>

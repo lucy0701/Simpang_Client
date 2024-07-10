@@ -1,7 +1,9 @@
 import { jwtDecode } from 'jwt-decode';
-import { getCookie } from './cookies';
-import { DecodedToken, Token } from '@/types';
+
 import { TOKEN_NAME } from '@/constants';
+import { DecodedToken, Token } from '@/types';
+
+import { getCookie, removeCookie } from './cookies';
 
 export const decodeToken = (token: string) => {
   try {
@@ -11,6 +13,7 @@ export const decodeToken = (token: string) => {
     const currentTime = Math.floor(Date.now() / 1000);
 
     if (decodedToken.exp && decodedToken.exp < currentTime) {
+      removeCookie(TOKEN_NAME, { path: '/' });
       return null;
     }
 
@@ -19,7 +22,6 @@ export const decodeToken = (token: string) => {
       ...userToken,
     };
   } catch (error) {
-    console.error('Failed to decode token:', error);
     return null;
   }
 };

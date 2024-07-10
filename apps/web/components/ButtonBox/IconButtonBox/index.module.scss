@@ -1,0 +1,18 @@
+@use 'styles/mixins' as m;
+
+.resultBox {
+  width: 80%;
+}
+.baseBox {
+  width: 60%;
+}
+
+.btnBox {
+  padding: 8px 2px;
+  @include m.flexbox(between);
+  @include m.borderStyles();
+
+  background-color: var(--color-bg-ivory);
+
+  font-size: var(--font-size-s);
+}

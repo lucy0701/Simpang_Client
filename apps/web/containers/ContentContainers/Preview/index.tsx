@@ -1,10 +1,11 @@
 'use client';
 import { IContent } from '@/types';
+
 import styles from './index.module.scss';
-import Button from '@/components/Buttons';
+import { IconButtonBox } from '@/components/ButtonBox/IconButtonBox';
+import Button from '@/components/Buttons/Button';
 import Comments from '@/components/Comments';
 import ImageItem from '@/components/Items/ImageItem';
-import { IconButtonBox } from '@/components/IconButtonBox';
 
 interface Props {
   contentData: Omit<IContent, 'questions'>;
@@ -13,7 +14,7 @@ interface Props {
 
 export default function ContentPreview({ contentData, onClickPlayBtn }: Props) {
   const { _id, title, content, imageUrl, creator, ...count } = contentData;
-  
+
   return (
     <div className={styles.wrap}>
       <ImageItem imageUrl={imageUrl} />

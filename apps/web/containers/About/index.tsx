@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import styles from './index.module.scss';
 
 export default function About() {
@@ -26,8 +27,8 @@ export default function About() {
             <span>누구나 손쉽게 즐길 수 있도록 만들었습니다.</span>
           </p>
           <p>
-            <span>심팡</span>은 여러분이 즐길 수 있는 다양한 테스트를 제공하여, 변화하는 우리
-            자신과 주변의 세계를 더 재미있게 탐험할 수 있도록 도와줍니다.
+            <span>심팡</span>은 여러분이 즐길 수 있는 다양한 테스트를 제공하여, 변화하는 우리 자신과
+            주변의 세계를 더 재미있게 탐험할 수 있도록 도와줍니다.
           </p>
           <p>함께 즐겁고 의미 있는 여정을 떠나봐요! 🚀</p>
         </div>

@@ -1,0 +1,61 @@
+@use 'styles/mixins' as m;
+
+.wrap {
+  max-width: var(--max-width);
+  min-width: var(--min-width);
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  top: 0;
+  z-index: 200;
+  background-color: rgba(88, 88, 88, 0.357);
+
+  overflow: hidden;
+
+  .modalContainer {
+    width: 250px;
+    position: absolute;
+    top: 35%;
+    left: calc(50% - 125px);
+
+    border-radius: 0.5rem;
+    background-color: var(--color-bg-ivory);
+
+    .modalWrap {
+      position: relative;
+
+      .topCloseBtn {
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        right: 7px;
+        top: 7px;
+      }
+
+      .modal {
+        @include m.flexboxColumn();
+        gap: 20px;
+
+        p {
+          white-space: pre-wrap;
+          text-align: center;
+        }
+
+        .modalBtnBox {
+          @include m.flexbox();
+          gap: 40px;
+
+          button {
+            padding: 5px 12px;
+            @include m.borderStyles();
+          }
+          .checkBtn {
+            font-weight: var(--font-weight-bold);
+            background-color: var(--color-bg-yellow);
+          }
+        }
+      }
+    }
+  }
+}

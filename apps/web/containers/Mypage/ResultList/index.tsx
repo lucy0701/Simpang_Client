@@ -1,13 +1,12 @@
 'use client';
 
-import ResultItem from '@/components/Items/ResultItem';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getUserResultsAPI } from '@/services/contents';
 import { IUserResult } from '@/types';
 
 import styles from './index.module.scss';
-import Loading from '@/components/Loading';
-import RoundLoading from '@/components/Loading/RoundLoading';
+import ResultItem from '@/components/Items/ResultItem';
+import { Loading, RoundLoading } from '@/components/Loading';
 
 const ResultList = () => {
   const {

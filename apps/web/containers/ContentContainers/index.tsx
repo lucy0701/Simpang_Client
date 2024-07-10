@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import ContentPreview from './Preview';
+
 import { IContent } from '@/types';
+
 import ContentPlay from './Play';
+import ContentPreview from './Preview';
 
 interface Props {
   contentData: IContent;

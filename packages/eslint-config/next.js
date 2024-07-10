@@ -6,12 +6,13 @@ const project = resolve(process.cwd(), 'tsconfig.json');
 module.exports = {
   extends: [
     'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@tanstack/eslint-plugin-query/recommende',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
     'prettier',
     require.resolve('@vercel/style-guide/eslint/next'),
-    'turbo',
+    'eslint-config-turbo',
+    'next/core-web-vitals',
   ],
   globals: {
     React: true,
@@ -21,7 +22,7 @@ module.exports = {
     node: true,
     browser: true,
   },
-  plugins: ['only-warn', 'eslint-config-turbo', 'import'],
+  plugins: ['only-warn', 'import', 'react', '@tanstack/query'],
   settings: {
     'import/resolver': {
       typescript: {
@@ -68,36 +69,33 @@ module.exports = {
           ['parent', 'sibling', 'index'],
         ],
         pathGroups: [
+          { pattern: 'react', group: 'builtin' },
+          { pattern: 'react-dom', group: 'builtin', position: 'before' },
+          { pattern: 'next/*', group: 'builtin' },
+          { pattern: '@/types', group: 'type' },
           {
-            pattern: '@/type/*',
-            group: 'external',
+            pattern: '{@/services,@/services/*}',
+            group: 'type',
           },
+          { pattern: '{@/utils/**,@/utils/*,@/utils}', group: 'type' },
           {
-            pattern: '{../types, ../types/*}',
+            pattern: '@/constants',
             group: 'type',
           },
           {
-            pattern: '../interfaces',
-            group: 'type',
+            pattern: '@/hooks/*',
+            group: 'internal',
           },
           {
-            pattern: '{../utils/**, ../utils/*}',
-            group: 'type',
-          },
-          {
-            pattern: '../constants',
-            group: 'type',
-          },
-          {
-            pattern: '../middlewares',
+            pattern: '{@/containers/*,@/containers/**}',
             group: 'index',
           },
           {
-            pattern: '@/containers/*',
+            pattern: '{@/components/**,@/components/**/*}',
             group: 'index',
           },
           {
-            pattern: '../styles/**',
+            pattern: '{styles,./*.scss,../*.scss,./index.module.scss}',
             group: 'index',
           },
         ],

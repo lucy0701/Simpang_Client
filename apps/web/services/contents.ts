@@ -1,4 +1,5 @@
 import { IContents, GetPageData, PageParams, IResult, IUserResult } from '@/types';
+
 import { apiBe, getHeaders } from '.';
 
 export interface PostResultParams {

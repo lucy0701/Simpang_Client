@@ -1,6 +1,7 @@
 import { BE_URL } from '@/constants';
-import ContentContainer from '@/containers/ContentContainers';
 import { IContent } from '@/types';
+
+import ContentContainer from '@/containers/ContentContainers';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const contentData = await fetch(`${BE_URL}/api/v1/contents/${params.id}`).then(

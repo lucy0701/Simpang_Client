@@ -1,17 +1,24 @@
 'use client';
-import { IContents, Sort } from '@/types';
-import styles from './index.module.scss';
 
-import ImageLinkItem from '@/components/Items';
-import RandomButton from '@/components/Buttons/RandomBtn';
-import WindowStyle from '@/components/WindowStyles';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+import { useState } from 'react';
+import { Pagination, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getContentsAPI } from '@/services/contents';
-import { useState } from 'react';
-import Loading from '@/components/Loading';
-import FloatTopBtn from '@/components/Buttons/FloatTopBtn';
-import RoundLoading from '@/components/Loading/RoundLoading';
-import Button from '@/components/Buttons';
+import { IContents, Sort } from '@/types';
+
+import styles from './index.module.scss';
+import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
+import Button from '@/components/Buttons/Button';
+import BannerItem from '@/components/Items/BannerItem';
+import ContentItem from '@/components/Items/ContentItem';
+import { Loading, RoundLoading } from '@/components/Loading';
+import WindowStyle from '@/components/WindowStyles';
 
 interface Props {
   latestContents: IContents[];
@@ -42,24 +49,44 @@ export default function Home({ latestContents }: Props) {
     <p>Error: {error?.message}</p>
   ) : (
     <div className={styles.wrap}>
-      <div className={styles.bannerWrap}>슬라이드 배너</div>
-      <WindowStyle title="NEW" color="blue">
+      <div className={styles.speechBubbleWrap}>
+        <p>Today&apos;s Pick </p>
+        <div className={styles.speechBubblePoint} />
+      </div>
+      <Swiper
+        className={styles.bannerWrap}
+        modules={[Pagination, Autoplay]}
+        spaceBetween={10}
+        slidesPerView={1}
+        slidesPerGroup={1}
+        speed={2000}
+        loop={true}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 3000 }}
+      >
+        {latestContents.map((t, i) => (
+          <SwiperSlide key={i} className={styles.slideItem}>
+            <BannerItem imageUrl={t.imageUrl} id={t._id} title={t.title} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      <WindowStyle title="NEW" color="green">
         <div className={styles.btnBox}>
-          <Button size="medium" text="등록순" color="yellow" onClick={() => handleSort('asc')} />
-          <Button size="medium" text="최신순" color="yellow" onClick={() => handleSort('desc')} />
+          <Button size="small" text="등록순" color="yellow" onClick={() => handleSort('asc')} />
+          <Button size="small" text="최신순" color="yellow" onClick={() => handleSort('desc')} />
         </div>
 
         {contents &&
           contents.map((content) => (
             <div key={content._id} className={styles.clientArea} ref={lastElementRef}>
-              <ImageLinkItem key={content._id} {...content} />
+              <ContentItem key={content._id} {...content} />
             </div>
           ))}
       </WindowStyle>
       {isFetching && <RoundLoading />}
 
-      <FloatTopBtn position="right" />
-      <RandomButton position="left" />
+      <FloatBtnBox />
     </div>
   );
 }
