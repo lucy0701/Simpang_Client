@@ -7,7 +7,7 @@
   overflow: hidden;
 
   .imgWrap {
-    width: 45%;
+    width: 40%;
     height: 100%;
     position: relative;
     overflow: hidden;
@@ -18,7 +18,7 @@
     }
   }
   .contentBox {
-    width: 55%;
+    width: 60%;
     height: 100%;
     white-space: pre-wrap;
 
@@ -30,12 +30,15 @@
       @include m.textEllipsis();
       padding: 0 5px;
       border: 2px dashed var(--border-color);
+      font-size: 1.1rem;
     }
 
     .content {
       width: 100%;
       padding: 0 5px;
       height: 70%;
+      font-size: 0.9rem;
+
     }
 
     .date {
