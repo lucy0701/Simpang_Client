@@ -1,27 +1,118 @@
 @use 'styles/mixins' as m;
 
 .formWrap {
-  @include m.flexboxColumn(start, between);
-  gap: 10px;
+  @include m.flexboxColumn(between, start);
+  gap: 20px;
 
-  input {
-    padding: 5px;
-    @include m.borderStyles($radius_size: --border-radius-xs);
-  }
-  label {
-    @include m.flexbox(start, between);
+  .containerWrap {
+    width: 100%;
+    padding: 10px;
+
+    @include m.borderStyles();
+    @include m.flexboxColumn(between);
     gap: 10px;
   }
 
-  .selectBox {
+  label {
+    width: 100%;
     @include m.flexbox(between);
 
+    p {
+      width: 25%;
+      text-align: center;
+    }
+
     select {
-      width: 85%;
+      width: 75%;
+      padding: 4px;
+      @include m.borderStyles($radius_size: --border-radius-xs);
+    }
+
+    input {
+      width: 75%;
+      padding: 5px;
+      @include m.borderStyles($radius_size: --border-radius-xs);
+    }
+
+    .inputFile {
+      width: 70%;
+      border: none;
+      background-color: var(--color-gray-e);
     }
   }
-}
-.wrap_gap_10 {
-  @include m.flexboxColumn(start, between);
-  gap: 10px;
+
+  .labelBox {
+    width: 100%;
+    @include m.flexboxColumn(between, end);
+    gap: 10px;
+  }
+
+  .questionsBtn {
+    color: var(--color-white);
+    border-radius: var(--border-radius-s);
+  }
+  .minusBtn {
+    padding: 5px 8px;
+    font-size: var(--font-size-s);
+  }
+  .plusBtn {
+    width: 100%;
+    padding: 7px;
+    font-size: var(--font-size-m);
+  }
+
+  .questionLabelBox {
+    border-radius: var(--border-radius-m);
+    padding: 10px;
+
+    .questionLabel {
+      width: 100%;
+      @include m.flexbox(between);
+
+      background-color: var(--color-bg-yellow);
+      border-radius: var(--border-radius-s);
+    }
+
+    .answersTopBox {
+      width: 100%;
+      padding: 3px 12px;
+      background-color: var(--color-bg-ivory);
+
+      border-radius: var(--border-radius-s);
+      @include m.flexbox(between);
+
+      p {
+        span {
+          font-size: var(--font-size-s);
+          padding: 1px 7px;
+          border-radius: 3px;
+        }
+      }
+
+      .answerBox {
+        @include m.flexbox(between);
+        gap: 10px;
+        button {
+          width: 20px;
+          height: 20px;
+          border-radius: 1rem;
+          color: var(--color-white);
+        }
+      }
+    }
+
+    .answersLabel {
+      @include m.flexbox(start);
+      gap: 10px;
+
+      .radioWrap {
+        @include m.flexbox(start);
+        gap: 8px;
+      }
+    }
+  }
+
+  .resultSelect {
+    background-color: var(--color-bg-yellow);
+  }
 }

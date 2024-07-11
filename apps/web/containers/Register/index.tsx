@@ -112,6 +112,7 @@ export default function Register() {
   const handleResultChange = (index: number, field: string, value: string) => {
     setResults(results.map((r, i) => (i === index ? { ...r, [field]: value } : r)));
   };
+  const getSelectedValues = () => results.map((result) => result.result);
 
   const addQuestion = () => {
     const newIndex = questions.length;
@@ -135,7 +136,6 @@ export default function Register() {
         }
         return question;
       });
-
       return updatedQuestions;
     });
   };
@@ -176,10 +176,10 @@ export default function Register() {
     e.preventDefault();
 
     const formData = new FormData();
-
     const headers = getHeaders();
 
-    if (!data) return alert('데이터가 비어있습니다! 채워주세요');
+    if (data.type === 'MBTI' && questions.length < 4 && results.length < 16)
+      return alert('질문은 최소 4개 이상, 결과는 16개 이상 작성해주세요!');
 
     formData.append('type', data.type);
     formData.append('title', data.title);
@@ -204,153 +204,227 @@ export default function Register() {
 
       return response;
     } catch (error) {
-      console.error('Error submitting form:', error);
+      throw new Error('Failed to fetch data');
     }
   };
 
   return (
-    <form
-      className={cx(styles.formWrap, styles.wrap_gap_10)}
-      onSubmit={handleSubmit}
-      encType="multipart/form-data"
-    >
-      <label className={styles.selectBox}>
-        type:
+    <form className={styles.formWrap} onSubmit={handleSubmit} encType="multipart/form-data">
+      <label>
+        <p>카테고리</p>
         <select name="type" defaultValue={data.type} onChange={(e) => handleInputChange(e, 'type')}>
           {CONTENT_TYPE.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
           ))}
-          ;
         </select>
       </label>
       <label>
-        title:
+        <p>제목</p>
         <input
           type="text"
           name="title"
           value={data.title}
           onChange={(e) => handleInputChange(e, 'title')}
+          required
         />
       </label>
+
       <label>
-        content:
+        <p>설명</p>
         <input
           type="text"
           name="content"
           value={data.content}
           onChange={(e) => handleInputChange(e, 'content')}
+          required
         />
       </label>
+
       <label>
-        image:
-        <input type="file" name="image" accept="image/*" onChange={(e) => handleFileChange(e, 0)} />
+        <p>대표 이미지</p>
+        <input
+          type="file"
+          name="image"
+          className={styles.inputFile}
+          accept="image/*"
+          onChange={(e) => handleFileChange(e, 0)}
+          required
+        />
       </label>
-      <h3>Questions</h3>
-      {questions.map((question, i) => (
-        <div key={`question + ${i}`} className={styles.questionBox}>
-          <label>
-            질문 {i + 1}:
-            <input
-              type="text"
-              name={`question-${i}`}
-              value={question.question}
-              onChange={(e) => handleQuestionChange(i, 'question', e.target.value)}
-            />
-          </label>
-          {question.answers.map((answer, j) => (
-            <div key={`answers + ${j}`} className={styles.wrap_gap_10}>
-              대답 {`[${i + 1}-${j + 1}]`}:
-              <label>
-                점수:
-                {SCORE_OPTIONS.map((score) => (
-                  <label key={score}>
-                    <input
-                      type="radio"
-                      name={`score-${i}-${j}`}
-                      value={score}
-                      checked={answer.score === score}
-                      onChange={(e) =>
-                        handleAnswerChange(i, j, 'score', parseInt(e.target.value, 10))
-                      }
-                    />
-                    {score}
-                  </label>
-                ))}
-              </label>
-              <label>
-                내용:
+
+      <div className={styles.containerWrap}>
+        <h3>Questions ( total : {questions.length} )</h3>
+        {questions.map((question, i) => (
+          <div key={`question + ${i}`} className={cx(styles.labelBox, styles.questionLabelBox)}>
+            <label className={styles.questionLabel}>
+              <p>질문 {i + 1}</p>
+              <input
+                type="text"
+                name={`question-${i}`}
+                value={question.question}
+                onChange={(e) => handleQuestionChange(i, 'question', e.target.value)}
+                required
+              />
+            </label>
+
+            {question.answers.map((answer, j) => (
+              <div key={`answers + ${j}`} className={styles.labelBox}>
+                <div className={styles.answersTopBox}>
+                  <p>
+                    선택지 <span>{`${i + 1} - ${j + 1}`}</span>
+                  </p>
+                  <div className={styles.answerBox}>
+                    {questions[i]!.answers!.length > 1 && (
+                      <button type="button" className="blue" onClick={() => removeAnswer(i, j)}>
+                        –
+                      </button>
+                    )}
+                    <button type="button" className="deepPink" onClick={() => addAnswer(i)}>
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                <label className={styles.answersLabel}>
+                  <p>점수</p>
+                  {SCORE_OPTIONS.map((score) => (
+                    <div key={score} className={styles.radioWrap}>
+                      <input
+                        type="radio"
+                        name={`score-${i}-${j}`}
+                        value={score}
+                        checked={answer.score === score}
+                        onChange={(e) =>
+                          handleAnswerChange(i, j, 'score', parseInt(e.target.value, 10))
+                        }
+                        required
+                      />
+                      {score}
+                    </div>
+                  ))}
+                </label>
+
+                <label>
+                  <p>대답</p>
+                  <input
+                    type="text"
+                    name={`answer-${i}-${j}`}
+                    value={answer.text}
+                    onChange={(e) => handleAnswerChange(i, j, 'text', e.target.value)}
+                    required
+                  />
+                </label>
+              </div>
+            ))}
+
+            {questions.length > 1 && (
+              <button
+                type="button"
+                className={cx('blue', styles.questionsBtn, styles.minusBtn)}
+                onClick={() => removeQuestion(i)}
+              >
+                – Question
+              </button>
+            )}
+          </div>
+        ))}
+        <button
+          type="button"
+          className={cx('deepPink', styles.questionsBtn, styles.plusBtn)}
+          onClick={addQuestion}
+        >
+          + Question
+        </button>
+      </div>
+
+      <div className={styles.containerWrap}>
+        <h3>Results ( total : {results.length} )</h3>
+        {results.map((result, i) => (
+          <div key={i} className={styles.labelBox}>
+            <label>
+              <p>{result.result || '결과'}</p>
+              {data.type === 'MBTI' ? (
+                <select
+                  name="result"
+                  defaultValue=""
+                  className={styles.resultSelect}
+                  onChange={(e) => handleResultChange(i, 'result', e.target.value)}
+                >
+                  <option value="">결과를 선택하세요.</option>
+                  {MBTI_RESULT_TYPE.map((resultOption) => (
+                    <option
+                      key={resultOption}
+                      value={resultOption}
+                      disabled={getSelectedValues().includes(resultOption)}
+                    >
+                      {resultOption}
+                    </option>
+                  ))}
+                </select>
+              ) : (
                 <input
                   type="text"
-                  name={`answer-${i}-${j}`}
-                  value={answer.text}
-                  onChange={(e) => handleAnswerChange(i, j, 'text', e.target.value)}
+                  name="result"
+                  value={result.result}
+                  className={styles.resultSelect}
+                  onChange={(e) => handleResultChange(i, 'result', e.target.value)}
+                  required
                 />
-              </label>
-              {questions[i]!.answers!.length > 1 && (
-                <Button size="small" text=" - answer" onClick={() => removeAnswer(i, j)} />
               )}
-            </div>
-          ))}
-          <Button size="medium" text=" + answer" onClick={() => addAnswer(i)} />
-          {questions.length > 1 && <Button text=" - question" onClick={() => removeQuestion(i)} />}
-        </div>
-      ))}
-      <Button text=" + question" onClick={addQuestion} />
-      <h3>Results</h3>
-      {results.map((result, i) => (
-        <div key={i} className={styles.wrap_gap_10}>
-          <label className={styles.selectBox}>
-            {result.result || '결과'} :
-            <select
-              name="result"
-              value={result.result}
-              onChange={(e) => handleResultChange(i, 'result', e.target.value)}
-            >
-              {data.type === 'MBTI' &&
-                MBTI_RESULT_TYPE.map((title) => (
-                  <option key={title} value={title}>
-                    {title}
-                  </option>
-                ))}
-            </select>
-          </label>
-          <label>
-            {result.result || '결과'} 제목 :
-            <input
-              type="text"
-              name="resultTitle"
-              value={result.title}
-              onChange={(e) => handleResultChange(i, 'title', e.target.value)}
-            />
-          </label>
-          <label>
-            {result.result || '결과'} 내용 :
-            <input
-              type="text"
-              name="resultContent"
-              value={result.content}
-              onChange={(e) => handleResultChange(i, 'content', e.target.value)}
-            />
-          </label>
-          <label>
-            {result.result || '결과'} 이미지 :
-            <input
-              type="file"
-              name="resultImage"
-              accept="image/*"
-              onChange={(e) => handleFileChange(e, i + 1)}
-            />
-          </label>
-          {results.length > 1 && <Button text=" - results" onClick={() => removeResult(i)} />}
-        </div>
-      ))}
-      <Button text=" + results" onClick={addResult} />
-
-      <Button type="submit" text="Submit">
-        Submit
-      </Button>
+            </label>
+            <label>
+              <p>{result.result || '결과'} 제목</p>
+              <input
+                type="text"
+                name="resultTitle"
+                value={result.title}
+                onChange={(e) => handleResultChange(i, 'title', e.target.value)}
+                required
+              />
+            </label>
+            <label>
+              <p>{result.result || '결과'} 내용</p>
+              <input
+                type="text"
+                name="resultContent"
+                value={result.content}
+                onChange={(e) => handleResultChange(i, 'content', e.target.value)}
+                required
+              />
+            </label>
+            <label>
+              <p>{result.result || '결과'} 이미지</p>
+              <input
+                type="file"
+                name="resultImage"
+                accept="image/*"
+                className={styles.inputFile}
+                onChange={(e) => handleFileChange(e, i + 1)}
+                required
+              />
+            </label>
+            {results.length > 1 && (
+              <button
+                type="button"
+                className={cx('blue', styles.questionsBtn, styles.minusBtn)}
+                onClick={() => removeResult(i)}
+              >
+                – Results
+              </button>
+            )}
+          </div>
+        ))}
+        <button
+          type="button"
+          className={cx('deepPink', styles.questionsBtn, styles.plusBtn)}
+          onClick={addResult}
+        >
+          + Results
+        </button>
+      </div>
+      <Button type="submit" color="green" text="완료" />
     </form>
   );
 }
