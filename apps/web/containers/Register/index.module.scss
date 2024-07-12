@@ -1,27 +1,140 @@
 @use 'styles/mixins' as m;
 
 .formWrap {
-  @include m.flexboxColumn(start, between);
-  gap: 10px;
+  @include m.flexboxColumn(between, start);
+  gap: 20px;
 
-  input {
-    padding: 5px;
-    @include m.borderStyles($radius_size: --border-radius-xs);
+  .containerWrap {
+    width: 100%;
+    padding: 10px;
+
+    @include m.borderStyles();
+    @include m.flexboxColumn(between);
+    gap: 20px;
   }
+
   label {
-    @include m.flexbox(start, between);
-    gap: 10px;
-  }
-
-  .selectBox {
+    width: 100%;
     @include m.flexbox(between);
 
+    p {
+      width: 25%;
+      text-align: center;
+      font-size: var(--font-size-m);
+    }
+
     select {
-      width: 85%;
+      width: 75%;
+      padding: 4px;
+      font-size: var(--font-size-m);
+      @include m.borderStyles($radius_size: --border-radius-xs);
+    }
+
+    textarea,
+    input {
+      width: 75%;
+      padding: 5px;
+      font-size: var(--font-size-m);
+      @include m.borderStyles($radius_size: --border-radius-xs);
+    }
+
+    .inputFile {
+      width: 70%;
+      border: none;
+      background-color: var(--color-gray-e);
     }
   }
-}
-.wrap_gap_10 {
-  @include m.flexboxColumn(start, between);
-  gap: 10px;
+
+  .labelBox {
+    width: 100%;
+    @include m.flexboxColumn(between, end);
+    gap: 15px;
+  }
+
+  .questionLabelBox {
+    padding: 10px;
+    border-bottom: 1.5px dashed var(--color-gray-a);
+
+    .questionLabel {
+      width: 100%;
+      @include m.flexbox(between);
+
+      background-color: var(--color-bg-yellow);
+      border-radius: var(--border-radius-s);
+    }
+
+    .answersTopBox {
+      width: 100%;
+      padding: 3px 12px;
+      background-color: var(--color-bg-ivory);
+      border-radius: var(--border-radius-s);
+      @include m.flexbox(between);
+
+      .answerBox {
+        @include m.flexbox(between);
+        gap: 10px;
+      }
+    }
+
+    .answersWrap {
+      width: 100%;
+      @include m.flexbox(start);
+
+      p {
+        width: 25%;
+        text-align: center;
+      }
+
+      .radioWrap {
+        @include m.flexbox(start);
+        gap: 12px;
+
+        .radioLabel {
+          @include m.flexbox();
+          font-size: var(--font-size-m);
+          gap: 8px;
+        }
+
+        [type='radio'] {
+          appearance: none;
+          border: 2px solid var(--color-gray-c);
+          border-radius: 50%;
+          width: 1em;
+          height: 1em;
+        }
+
+        [type='radio']:checked {
+          background-color: var(--color-red);
+          border: 2px solid var(--color-red);
+        }
+      }
+    }
+  }
+
+  .btnBox {
+    @include m.flexbox(between);
+    gap: 15px;
+    padding-bottom: 10px;
+  }
+
+  button {
+    color: var(--color-white);
+    border-radius: var(--border-radius-s);
+    font-size: var(--font-size-m);
+    padding: 8px;
+  }
+  .miniBtn {
+    width: 100px;
+  }
+  .addBtn {
+    width: 100%;
+    font-size: var(--font-size-l);
+    @include m.borderStyles();
+  }
+  .minusAnswerBtn {
+    width: 25px;
+    height: 25px;
+    font-size: var(--font-size-xs);
+    border-radius: 1rem;
+  }
 }

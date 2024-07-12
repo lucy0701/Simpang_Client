@@ -42,6 +42,12 @@ const MBTI_RESULT_TYPE = [
   'ISTJ',
   'ISTP',
 ];
+const MBTI_QUESTIONS_TYPE = [
+  ['I', 'E'],
+  ['S', 'N'],
+  ['F', 'T'],
+  ['P', 'J'],
+];
 
 export default function Register() {
   const [data, setData] = useState<ContentData>({
@@ -60,6 +66,10 @@ export default function Register() {
           score: 0,
           text: '',
         },
+        {
+          score: 0,
+          text: '',
+        },
       ],
     },
   ]);
@@ -72,11 +82,7 @@ export default function Register() {
     },
   ]);
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    field: string,
-  ) => {
-    const { value } = e.target;
+  const handleInputChange = (value: string | number, field: string) => {
     setData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -97,14 +103,14 @@ export default function Register() {
     field: string,
     value: string | number,
   ) => {
-    const updatedQuestions = questions.map((q, i) => {
+    const updatedQuestions = questions.map((question, i) => {
       if (i === qIndex) {
-        const updatedAnswers = q.answers.map((a, j) =>
-          j === aIndex ? { ...a, [field]: value } : a,
+        const updatedAnswers = question.answers.map((answer, j) =>
+          j === aIndex ? { ...answer, [field]: value } : answer,
         );
-        return { ...q, answers: updatedAnswers };
+        return { ...question, answers: updatedAnswers };
       }
-      return q;
+      return question;
     });
     setQuestions(updatedQuestions);
   };
@@ -112,13 +118,16 @@ export default function Register() {
   const handleResultChange = (index: number, field: string, value: string) => {
     setResults(results.map((r, i) => (i === index ? { ...r, [field]: value } : r)));
   };
+  const getSelectedValues = () => results.map((result) => result.result);
 
   const addQuestion = () => {
-    const newIndex = questions.length;
     const newQuestion: IQuestion = {
-      index: newIndex,
+      index: 0,
       question: '',
-      answers: [{ score: 0, text: '' }],
+      answers: [
+        { score: 0, text: '' },
+        { score: 0, text: '' },
+      ],
     };
     setQuestions((prev) => [...prev, newQuestion]);
   };
@@ -135,7 +144,6 @@ export default function Register() {
         }
         return question;
       });
-
       return updatedQuestions;
     });
   };
@@ -176,10 +184,28 @@ export default function Register() {
     e.preventDefault();
 
     const formData = new FormData();
-
     const headers = getHeaders();
 
-    if (!data) return alert('데이터가 비어있습니다! 채워주세요');
+    const checkOddCountIndices = () => {
+      const indexCount = questions.reduce((acc, { index }) => {
+        if (typeof acc[index] === 'undefined') {
+          acc[index] = 0;
+        }
+        acc[index] += 1;
+        return acc;
+      }, [] as Array<number>);
+
+      const oddIndices = indexCount.filter((count) => count % 2 !== 0);
+
+      return oddIndices.length === 4;
+    };
+
+    if (data.type === 'MBTI' && questions.length < 4 && results.length !== 16)
+      return alert('MBTI의 질문은 최소 4개 이상, 결과는 16개로 작성해주세요!');
+
+    if (!checkOddCountIndices()) {
+      return alert('각 질문의 점수의 합이 0이 되지 않도록 홀 수로 작성해 주세요!');
+    }
 
     formData.append('type', data.type);
     formData.append('title', data.title);
@@ -204,153 +230,264 @@ export default function Register() {
 
       return response;
     } catch (error) {
-      console.error('Error submitting form:', error);
+      throw new Error('Failed to fetch data');
     }
   };
 
   return (
-    <form
-      className={cx(styles.formWrap, styles.wrap_gap_10)}
-      onSubmit={handleSubmit}
-      encType="multipart/form-data"
-    >
-      <label className={styles.selectBox}>
-        type:
-        <select name="type" defaultValue={data.type} onChange={(e) => handleInputChange(e, 'type')}>
+    <form className={styles.formWrap} onSubmit={handleSubmit} encType="multipart/form-data">
+      <label>
+        <p>카테고리</p>
+        <select
+          name="type"
+          defaultValue={data.type}
+          onChange={(e) => handleInputChange(e.target.value, 'type')}
+        >
           {CONTENT_TYPE.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
           ))}
-          ;
         </select>
       </label>
       <label>
-        title:
+        <p>제목</p>
         <input
           type="text"
           name="title"
           value={data.title}
-          onChange={(e) => handleInputChange(e, 'title')}
+          onChange={(e) => handleInputChange(e.target.value, 'title')}
+          required
+          maxLength={100}
         />
       </label>
+
       <label>
-        content:
-        <input
-          type="text"
+        <p>설명</p>
+        <textarea
           name="content"
           value={data.content}
-          onChange={(e) => handleInputChange(e, 'content')}
+          onChange={(e) => handleInputChange(e.target.value, 'content')}
+          required
+          rows={4}
+          maxLength={100}
         />
       </label>
+
       <label>
-        image:
-        <input type="file" name="image" accept="image/*" onChange={(e) => handleFileChange(e, 0)} />
+        <p>대표 이미지</p>
+        <input
+          type="file"
+          name="image"
+          className={styles.inputFile}
+          accept="image/*"
+          onChange={(e) => handleFileChange(e, 0)}
+          required
+        />
       </label>
-      <h3>Questions</h3>
-      {questions.map((question, i) => (
-        <div key={`question + ${i}`} className={styles.questionBox}>
-          <label>
-            질문 {i + 1}:
-            <input
-              type="text"
-              name={`question-${i}`}
-              value={question.question}
-              onChange={(e) => handleQuestionChange(i, 'question', e.target.value)}
-            />
-          </label>
-          {question.answers.map((answer, j) => (
-            <div key={`answers + ${j}`} className={styles.wrap_gap_10}>
-              대답 {`[${i + 1}-${j + 1}]`}:
+
+      <div className={styles.containerWrap}>
+        <h3>Questions ( total : {questions.length} )</h3>
+
+        {questions.map((question, i) => (
+          <div key={`question + ${i}`} className={cx(styles.labelBox, styles.questionLabelBox)}>
+            {data.type === 'MBTI' && (
               <label>
-                점수:
-                {SCORE_OPTIONS.map((score) => (
-                  <label key={score}>
-                    <input
-                      type="radio"
-                      name={`score-${i}-${j}`}
-                      value={score}
-                      checked={answer.score === score}
-                      onChange={(e) =>
-                        handleAnswerChange(i, j, 'score', parseInt(e.target.value, 10))
-                      }
-                    />
-                    {score}
-                  </label>
-                ))}
+                <p>질문 타입</p>
+                <select
+                  name="type"
+                  value={question.index}
+                  className="yellow"
+                  onChange={(e) => handleQuestionChange(i, 'index', parseInt(e.target.value, 10))}
+                >
+                  {MBTI_QUESTIONS_TYPE.map((option, index) => (
+                    <option key={`${option[0]}/${option[1]}`} value={index}>
+                      {`${option[0]} / ${option[1]}`}
+                    </option>
+                  ))}
+                </select>
               </label>
-              <label>
-                내용:
+            )}
+
+            <label>
+              <p>질문 {i + 1}</p>
+              <textarea
+                name={`question-${i}`}
+                rows={2}
+                value={question.question}
+                onChange={(e) => handleQuestionChange(i, 'question', e.target.value)}
+                required
+                maxLength={100}
+              />
+            </label>
+
+            {question.answers.map((answer, j) => (
+              <div key={`answers + ${j}`} className={styles.labelBox}>
+                <div className={styles.answersTopBox}>
+                  <p>선택지 {`${i + 1} - ${j + 1}`}</p>
+                  <div className={styles.answerBox}>
+                    {questions[i]!.answers!.length > 2 && (
+                      <button
+                        type="button"
+                        className={cx('blue', styles.minusAnswerBtn)}
+                        onClick={() => removeAnswer(i, j)}
+                      >
+                        ⎯
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <div className={styles.answersWrap}>
+                  <p>점수</p>
+                  <div className={styles.radioWrap}>
+                    {SCORE_OPTIONS.map((score, index) => (
+                      <label key={score} className={styles.radioLabel}>
+                        <input
+                          type="radio"
+                          name={`score-${i}-${j}`}
+                          value={score}
+                          checked={answer.score === score}
+                          onChange={(e) =>
+                            handleAnswerChange(i, j, 'score', parseInt(e.target.value, 10))
+                          }
+                          required
+                        />
+
+                        {data.type === 'MBTI' ? (
+                          <span>{MBTI_QUESTIONS_TYPE[question.index]![index]}</span>
+                        ) : (
+                          <span>score</span>
+                        )}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <label>
+                  <p>대답</p>
+                  <input
+                    type="text"
+                    name={`answer-${i}-${j}`}
+                    value={answer.text}
+                    onChange={(e) => handleAnswerChange(i, j, 'text', e.target.value)}
+                    required
+                    maxLength={100}
+                  />
+                </label>
+              </div>
+            ))}
+            <div className={styles.btnBox}>
+              {questions.length > 1 && (
+                <button
+                  type="button"
+                  className={cx('blue', styles.miniBtn)}
+                  onClick={() => removeQuestion(i)}
+                >
+                  – Question
+                </button>
+              )}
+              <button
+                type="button"
+                className={cx('deepPink', styles.miniBtn)}
+                onClick={() => addAnswer(i)}
+              >
+                + Answer
+              </button>
+            </div>
+          </div>
+        ))}
+
+        <button type="button" className={cx('deepPink', styles.addBtn)} onClick={addQuestion}>
+          + Question
+        </button>
+      </div>
+
+      <div className={styles.containerWrap}>
+        <h3>Results ( total : {results.length} )</h3>
+        {results.map((result, i) => (
+          <div key={i} className={styles.labelBox}>
+            <label>
+              <p>결과 타입</p>
+              {data.type === 'MBTI' ? (
+                <select
+                  name="result"
+                  value={result.result}
+                  className="yellow"
+                  onChange={(e) => handleResultChange(i, 'result', e.target.value)}
+                >
+                  <option value="">결과를 선택하세요.</option>
+                  {MBTI_RESULT_TYPE.map((resultOption) => (
+                    <option
+                      key={resultOption}
+                      value={resultOption}
+                      disabled={getSelectedValues().includes(resultOption)}
+                    >
+                      {resultOption}
+                    </option>
+                  ))}
+                </select>
+              ) : (
                 <input
                   type="text"
-                  name={`answer-${i}-${j}`}
-                  value={answer.text}
-                  onChange={(e) => handleAnswerChange(i, j, 'text', e.target.value)}
+                  name="result"
+                  value={result.result}
+                  className="yellow"
+                  onChange={(e) => handleResultChange(i, 'result', e.target.value)}
+                  required
                 />
-              </label>
-              {questions[i]!.answers!.length > 1 && (
-                <Button size="small" text=" - answer" onClick={() => removeAnswer(i, j)} />
               )}
-            </div>
-          ))}
-          <Button size="medium" text=" + answer" onClick={() => addAnswer(i)} />
-          {questions.length > 1 && <Button text=" - question" onClick={() => removeQuestion(i)} />}
-        </div>
-      ))}
-      <Button text=" + question" onClick={addQuestion} />
-      <h3>Results</h3>
-      {results.map((result, i) => (
-        <div key={i} className={styles.wrap_gap_10}>
-          <label className={styles.selectBox}>
-            {result.result || '결과'} :
-            <select
-              name="result"
-              value={result.result}
-              onChange={(e) => handleResultChange(i, 'result', e.target.value)}
-            >
-              {data.type === 'MBTI' &&
-                MBTI_RESULT_TYPE.map((title) => (
-                  <option key={title} value={title}>
-                    {title}
-                  </option>
-                ))}
-            </select>
-          </label>
-          <label>
-            {result.result || '결과'} 제목 :
-            <input
-              type="text"
-              name="resultTitle"
-              value={result.title}
-              onChange={(e) => handleResultChange(i, 'title', e.target.value)}
-            />
-          </label>
-          <label>
-            {result.result || '결과'} 내용 :
-            <input
-              type="text"
-              name="resultContent"
-              value={result.content}
-              onChange={(e) => handleResultChange(i, 'content', e.target.value)}
-            />
-          </label>
-          <label>
-            {result.result || '결과'} 이미지 :
-            <input
-              type="file"
-              name="resultImage"
-              accept="image/*"
-              onChange={(e) => handleFileChange(e, i + 1)}
-            />
-          </label>
-          {results.length > 1 && <Button text=" - results" onClick={() => removeResult(i)} />}
-        </div>
-      ))}
-      <Button text=" + results" onClick={addResult} />
-
-      <Button type="submit" text="Submit">
-        Submit
-      </Button>
+            </label>
+            <label>
+              <p>결과 제목</p>
+              <input
+                type="text"
+                name="resultTitle"
+                value={result.title}
+                onChange={(e) => handleResultChange(i, 'title', e.target.value)}
+                required
+                maxLength={100}
+              />
+            </label>
+            <label>
+              <p>결과 내용</p>
+              <textarea
+                name="resultContent"
+                value={result.content}
+                onChange={(e) => handleResultChange(i, 'content', e.target.value)}
+                required
+                rows={4}
+                cols={50}
+                maxLength={100}
+              />
+            </label>
+            <label>
+              <p>결과 이미지</p>
+              <input
+                type="file"
+                name="resultImage"
+                accept="image/*"
+                className={styles.inputFile}
+                onChange={(e) => handleFileChange(e, i + 1)}
+                required
+              />
+            </label>
+            {results.length > 1 && (
+              <button
+                type="button"
+                className={cx('blue', styles.miniBtn)}
+                onClick={() => removeResult(i)}
+              >
+                – Results
+              </button>
+            )}
+          </div>
+        ))}
+        <button type="button" className={cx('deepPink', styles.addBtn)} onClick={addResult}>
+          + Results
+        </button>
+      </div>
+      <Button type="submit" color="green" text="완료" />
     </form>
   );
 }
