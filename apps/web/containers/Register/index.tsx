@@ -66,6 +66,10 @@ export default function Register() {
           score: 0,
           text: '',
         },
+        {
+          score: 0,
+          text: '',
+        },
       ],
     },
   ]);
@@ -99,14 +103,14 @@ export default function Register() {
     field: string,
     value: string | number,
   ) => {
-    const updatedQuestions = questions.map((q, i) => {
+    const updatedQuestions = questions.map((question, i) => {
       if (i === qIndex) {
-        const updatedAnswers = q.answers.map((a, j) =>
-          j === aIndex ? { ...a, [field]: value } : a,
+        const updatedAnswers = question.answers.map((answer, j) =>
+          j === aIndex ? { ...answer, [field]: value } : answer,
         );
-        return { ...q, answers: updatedAnswers };
+        return { ...question, answers: updatedAnswers };
       }
-      return q;
+      return question;
     });
     setQuestions(updatedQuestions);
   };
@@ -120,7 +124,10 @@ export default function Register() {
     const newQuestion: IQuestion = {
       index: 0,
       question: '',
-      answers: [{ score: 0, text: '' }],
+      answers: [
+        { score: 0, text: '' },
+        { score: 0, text: '' },
+      ],
     };
     setQuestions((prev) => [...prev, newQuestion]);
   };
@@ -251,17 +258,19 @@ export default function Register() {
           value={data.title}
           onChange={(e) => handleInputChange(e.target.value, 'title')}
           required
+          maxLength={100}
         />
       </label>
 
       <label>
         <p>설명</p>
-        <input
-          type="text"
+        <textarea
           name="content"
           value={data.content}
           onChange={(e) => handleInputChange(e.target.value, 'content')}
           required
+          rows={4}
+          maxLength={100}
         />
       </label>
 
@@ -302,54 +311,58 @@ export default function Register() {
 
             <label>
               <p>질문 {i + 1}</p>
-              <input
-                type="text"
+              <textarea
                 name={`question-${i}`}
+                rows={2}
                 value={question.question}
-                className="yellow"
                 onChange={(e) => handleQuestionChange(i, 'question', e.target.value)}
                 required
+                maxLength={100}
               />
             </label>
 
             {question.answers.map((answer, j) => (
               <div key={`answers + ${j}`} className={styles.labelBox}>
                 <div className={styles.answersTopBox}>
-                  <p>
-                    선택지 <span>{`${i + 1} - ${j + 1}`}</span>
-                  </p>
+                  <p>선택지 {`${i + 1} - ${j + 1}`}</p>
                   <div className={styles.answerBox}>
-                    {questions[i]!.answers!.length > 1 && (
-                      <button type="button" className="blue" onClick={() => removeAnswer(i, j)}>
-                        –
+                    {questions[i]!.answers!.length > 2 && (
+                      <button
+                        type="button"
+                        className={cx('blue', styles.minusAnswerBtn)}
+                        onClick={() => removeAnswer(i, j)}
+                      >
+                        ⎯
                       </button>
                     )}
-                    <button type="button" className="deepPink" onClick={() => addAnswer(i)}>
-                      +
-                    </button>
                   </div>
                 </div>
 
-                <label className={styles.answersLabel}>
+                <div className={styles.answersWrap}>
                   <p>점수</p>
-                  {SCORE_OPTIONS.map((score, index) => (
-                    <div key={score} className={styles.radioWrap}>
-                      <input
-                        type="radio"
-                        name={`score-${i}-${j}`}
-                        value={score}
-                        checked={answer.score === score}
-                        onChange={(e) =>
-                          handleAnswerChange(i, j, 'score', parseInt(e.target.value, 10))
-                        }
-                        required
-                      />
-                      {data.type === 'MBTI'
-                        ? `${MBTI_QUESTIONS_TYPE[question.index]![index]}`
-                        : score}
-                    </div>
-                  ))}
-                </label>
+                  <div className={styles.radioWrap}>
+                    {SCORE_OPTIONS.map((score, index) => (
+                      <label key={score} className={styles.radioLabel}>
+                        <input
+                          type="radio"
+                          name={`score-${i}-${j}`}
+                          value={score}
+                          checked={answer.score === score}
+                          onChange={(e) =>
+                            handleAnswerChange(i, j, 'score', parseInt(e.target.value, 10))
+                          }
+                          required
+                        />
+
+                        {data.type === 'MBTI' ? (
+                          <span>{MBTI_QUESTIONS_TYPE[question.index]![index]}</span>
+                        ) : (
+                          <span>score</span>
+                        )}
+                      </label>
+                    ))}
+                  </div>
+                </div>
 
                 <label>
                   <p>대답</p>
@@ -359,27 +372,33 @@ export default function Register() {
                     value={answer.text}
                     onChange={(e) => handleAnswerChange(i, j, 'text', e.target.value)}
                     required
+                    maxLength={100}
                   />
                 </label>
               </div>
             ))}
-
-            {questions.length > 1 && (
+            <div className={styles.btnBox}>
+              {questions.length > 1 && (
+                <button
+                  type="button"
+                  className={cx('blue', styles.miniBtn)}
+                  onClick={() => removeQuestion(i)}
+                >
+                  – Question
+                </button>
+              )}
               <button
                 type="button"
-                className={cx('blue', styles.questionsBtn, styles.minusBtn)}
-                onClick={() => removeQuestion(i)}
+                className={cx('deepPink', styles.miniBtn)}
+                onClick={() => addAnswer(i)}
               >
-                – Question
+                + Answer
               </button>
-            )}
+            </div>
           </div>
         ))}
-        <button
-          type="button"
-          className={cx('deepPink', styles.questionsBtn, styles.plusBtn)}
-          onClick={addQuestion}
-        >
+
+        <button type="button" className={cx('deepPink', styles.addBtn)} onClick={addQuestion}>
           + Question
         </button>
       </div>
@@ -427,16 +446,19 @@ export default function Register() {
                 value={result.title}
                 onChange={(e) => handleResultChange(i, 'title', e.target.value)}
                 required
+                maxLength={100}
               />
             </label>
             <label>
               <p>결과 내용</p>
-              <input
-                type="text"
+              <textarea
                 name="resultContent"
                 value={result.content}
                 onChange={(e) => handleResultChange(i, 'content', e.target.value)}
                 required
+                rows={4}
+                cols={50}
+                maxLength={100}
               />
             </label>
             <label>
@@ -453,7 +475,7 @@ export default function Register() {
             {results.length > 1 && (
               <button
                 type="button"
-                className={cx('blue', styles.questionsBtn, styles.minusBtn)}
+                className={cx('blue', styles.miniBtn)}
                 onClick={() => removeResult(i)}
               >
                 – Results
@@ -461,11 +483,7 @@ export default function Register() {
             )}
           </div>
         ))}
-        <button
-          type="button"
-          className={cx('deepPink', styles.questionsBtn, styles.plusBtn)}
-          onClick={addResult}
-        >
+        <button type="button" className={cx('deepPink', styles.addBtn)} onClick={addResult}>
           + Results
         </button>
       </div>

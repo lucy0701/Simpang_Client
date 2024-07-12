@@ -10,7 +10,7 @@
 
     @include m.borderStyles();
     @include m.flexboxColumn(between);
-    gap: 10px;
+    gap: 20px;
   }
 
   label {
@@ -20,17 +20,21 @@
     p {
       width: 25%;
       text-align: center;
+      font-size: var(--font-size-m);
     }
 
     select {
       width: 75%;
       padding: 4px;
+      font-size: var(--font-size-m);
       @include m.borderStyles($radius_size: --border-radius-xs);
     }
 
+    textarea,
     input {
       width: 75%;
       padding: 5px;
+      font-size: var(--font-size-m);
       @include m.borderStyles($radius_size: --border-radius-xs);
     }
 
@@ -44,26 +48,12 @@
   .labelBox {
     width: 100%;
     @include m.flexboxColumn(between, end);
-    gap: 10px;
-  }
-
-  .questionsBtn {
-    color: var(--color-white);
-    border-radius: var(--border-radius-s);
-  }
-  .minusBtn {
-    padding: 5px 8px;
-    font-size: var(--font-size-s);
-  }
-  .plusBtn {
-    width: 100%;
-    padding: 7px;
-    font-size: var(--font-size-m);
+    gap: 15px;
   }
 
   .questionLabelBox {
-    border-radius: var(--border-radius-m);
     padding: 10px;
+    border-bottom: 1.5px dashed var(--color-gray-a);
 
     .questionLabel {
       width: 100%;
@@ -77,38 +67,74 @@
       width: 100%;
       padding: 3px 12px;
       background-color: var(--color-bg-ivory);
-
       border-radius: var(--border-radius-s);
       @include m.flexbox(between);
-
-      p {
-        span {
-          font-size: var(--font-size-s);
-          padding: 1px 7px;
-          border-radius: 3px;
-        }
-      }
 
       .answerBox {
         @include m.flexbox(between);
         gap: 10px;
-        button {
-          width: 20px;
-          height: 20px;
-          border-radius: 1rem;
-          color: var(--color-white);
-        }
       }
     }
 
-    .answersLabel {
+    .answersWrap {
+      width: 100%;
       @include m.flexbox(start);
-      gap: 10px;
+
+      p {
+        width: 25%;
+        text-align: center;
+      }
 
       .radioWrap {
         @include m.flexbox(start);
-        gap: 8px;
+        gap: 12px;
+
+        .radioLabel {
+          @include m.flexbox();
+          font-size: var(--font-size-m);
+          gap: 8px;
+        }
+
+        [type='radio'] {
+          appearance: none;
+          border: 2px solid var(--color-gray-c);
+          border-radius: 50%;
+          width: 1em;
+          height: 1em;
+        }
+
+        [type='radio']:checked {
+          background-color: var(--color-red);
+          border: 2px solid var(--color-red);
+        }
       }
     }
+  }
+
+  .btnBox {
+    @include m.flexbox(between);
+    gap: 15px;
+    padding-bottom: 10px;
+  }
+
+  button {
+    color: var(--color-white);
+    border-radius: var(--border-radius-s);
+    font-size: var(--font-size-m);
+    padding: 8px;
+  }
+  .miniBtn {
+    width: 100px;
+  }
+  .addBtn {
+    width: 100%;
+    font-size: var(--font-size-l);
+    @include m.borderStyles();
+  }
+  .minusAnswerBtn {
+    width: 25px;
+    height: 25px;
+    font-size: var(--font-size-xs);
+    border-radius: 1rem;
   }
 }
