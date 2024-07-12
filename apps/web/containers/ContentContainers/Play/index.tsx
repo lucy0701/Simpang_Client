@@ -17,11 +17,18 @@ interface Props {
   contentId: string;
 }
 
+interface ScoreArr {
+  index: number;
+  score: number;
+}
+
 export default function ContentPlay({ questions, contentId }: Props) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [scoreArr, setScoreArr] = useState(Array.from<number>({ length: 12 }).fill(0));
-  const [scores, setScores] = useState<Array<number>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [scores, setScores] = useState<Array<number>>([0, 0, 0, 0]);
+  const [playScores, setPlayScores] = useState<ScoreArr[]>(
+    questions.map((question) => ({ index: question.index, score: 0 })),
+  );
   const queryClient = useQueryClient();
 
   const router = useRouter();
@@ -40,37 +47,35 @@ export default function ContentPlay({ questions, contentId }: Props) {
   };
 
   useEffect(() => {
-    if (scoreArr.length - 1 === currentIndex) handlePostResult();
+    if (playScores.length - 1 === currentIndex) handlePostResult();
   }, [scores]);
 
-  const scoreCalculator = (index = 0) => {
-    const newScores: Array<number> = [];
-    for (let i = 0; i < scoreArr.length; i += 3) {
-      const sumScore = scoreArr
-        .slice(index * 3, (index + 1) * 3)
-        .reduce((acc, cur) => acc + cur, 0);
-      newScores.push(sumScore);
-    }
+  const calculateScoreSum = () => {
+    const newScores = [0, 0, 0, 0];
+
+    playScores.forEach(({ index, score }) => {
+      newScores[index] += score;
+    });
 
     setScores(newScores);
   };
 
   const onClickAnswerBtn = (currentScore: number) => {
-    setScoreArr((prev) => {
+    setPlayScores((prev) => {
       const newScore = [...prev];
-      newScore[currentIndex] = currentScore;
+      newScore[currentIndex]!.score = currentScore;
       return newScore;
     });
 
-    if (scoreArr.length - 1 === currentIndex) {
-      scoreCalculator();
+    if (playScores.length - 1 === currentIndex) {
+      calculateScoreSum();
     } else {
       setCurrentIndex((prev) => prev + 1);
     }
   };
 
   const calculateWidth = () => {
-    const percentage = ((currentIndex + 1) / scoreArr.length) * 100;
+    const percentage = ((currentIndex + 1) / playScores.length) * 100;
     return `${percentage}%`;
   };
 
@@ -84,7 +89,7 @@ export default function ContentPlay({ questions, contentId }: Props) {
             <div className={styles.progressBar} style={{ width: calculateWidth() }} />
           </div>
           <p>
-            {currentIndex + 1} / {scoreArr.length}
+            {currentIndex + 1} / {playScores.length}
           </p>
         </div>
 
@@ -111,7 +116,7 @@ export default function ContentPlay({ questions, contentId }: Props) {
             onClick={() => setCurrentIndex(currentIndex - 1)}
           />
         )}
-        {scoreArr[currentIndex] !== 0 && (
+        {playScores[currentIndex]?.score !== 0 && (
           <Button
             text="다음"
             size="small"

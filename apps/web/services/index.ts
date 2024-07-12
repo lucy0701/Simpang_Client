@@ -7,7 +7,7 @@ import { BE_URL } from '@/constants';
 
 export const apiBe = axios.create({
   baseURL: `${BE_URL}/api`,
-  timeout: 3_000,
+  timeout: 5_000,
   withCredentials: true,
 });
 
