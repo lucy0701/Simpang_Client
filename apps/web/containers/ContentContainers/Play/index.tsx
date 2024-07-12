@@ -54,6 +54,9 @@ export default function ContentPlay({ questions, contentId }: Props) {
     const newScores = [0, 0, 0, 0];
 
     playScores.forEach(({ index, score }) => {
+      if (newScores[index] === undefined) {
+        newScores[index] = 0;
+      }
       newScores[index] += score;
     });
 
