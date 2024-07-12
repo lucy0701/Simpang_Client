@@ -42,6 +42,12 @@ const MBTI_RESULT_TYPE = [
   'ISTJ',
   'ISTP',
 ];
+const MBTI_QUESTIONS_TYPE = [
+  ['I', 'E'],
+  ['S', 'N'],
+  ['F', 'T'],
+  ['P', 'J'],
+];
 
 export default function Register() {
   const [data, setData] = useState<ContentData>({
@@ -72,11 +78,7 @@ export default function Register() {
     },
   ]);
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    field: string,
-  ) => {
-    const { value } = e.target;
+  const handleInputChange = (value: string | number, field: string) => {
     setData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -115,9 +117,8 @@ export default function Register() {
   const getSelectedValues = () => results.map((result) => result.result);
 
   const addQuestion = () => {
-    const newIndex = questions.length;
     const newQuestion: IQuestion = {
-      index: newIndex,
+      index: 0,
       question: '',
       answers: [{ score: 0, text: '' }],
     };
@@ -178,8 +179,26 @@ export default function Register() {
     const formData = new FormData();
     const headers = getHeaders();
 
-    if (data.type === 'MBTI' && questions.length < 4 && results.length < 16)
-      return alert('질문은 최소 4개 이상, 결과는 16개 이상 작성해주세요!');
+    const checkOddCountIndices = () => {
+      const indexCount = questions.reduce((acc, { index }) => {
+        if (typeof acc[index] === 'undefined') {
+          acc[index] = 0;
+        }
+        acc[index] += 1;
+        return acc;
+      }, [] as Array<number>);
+
+      const oddIndices = indexCount.filter((count) => count % 2 !== 0);
+
+      return oddIndices.length === 4;
+    };
+
+    if (data.type === 'MBTI' && questions.length < 4 && results.length !== 16)
+      return alert('MBTI의 질문은 최소 4개 이상, 결과는 16개로 작성해주세요!');
+
+    if (!checkOddCountIndices()) {
+      return alert('각 질문의 점수의 합이 0이 되지 않도록 홀 수로 작성해 주세요!');
+    }
 
     formData.append('type', data.type);
     formData.append('title', data.title);
@@ -212,7 +231,11 @@ export default function Register() {
     <form className={styles.formWrap} onSubmit={handleSubmit} encType="multipart/form-data">
       <label>
         <p>카테고리</p>
-        <select name="type" defaultValue={data.type} onChange={(e) => handleInputChange(e, 'type')}>
+        <select
+          name="type"
+          defaultValue={data.type}
+          onChange={(e) => handleInputChange(e.target.value, 'type')}
+        >
           {CONTENT_TYPE.map((option) => (
             <option key={option} value={option}>
               {option}
@@ -226,7 +249,7 @@ export default function Register() {
           type="text"
           name="title"
           value={data.title}
-          onChange={(e) => handleInputChange(e, 'title')}
+          onChange={(e) => handleInputChange(e.target.value, 'title')}
           required
         />
       </label>
@@ -237,7 +260,7 @@ export default function Register() {
           type="text"
           name="content"
           value={data.content}
-          onChange={(e) => handleInputChange(e, 'content')}
+          onChange={(e) => handleInputChange(e.target.value, 'content')}
           required
         />
       </label>
@@ -256,14 +279,34 @@ export default function Register() {
 
       <div className={styles.containerWrap}>
         <h3>Questions ( total : {questions.length} )</h3>
+
         {questions.map((question, i) => (
           <div key={`question + ${i}`} className={cx(styles.labelBox, styles.questionLabelBox)}>
-            <label className={styles.questionLabel}>
+            {data.type === 'MBTI' && (
+              <label>
+                <p>질문 타입</p>
+                <select
+                  name="type"
+                  value={question.index}
+                  className="yellow"
+                  onChange={(e) => handleQuestionChange(i, 'index', parseInt(e.target.value, 10))}
+                >
+                  {MBTI_QUESTIONS_TYPE.map((option, index) => (
+                    <option key={`${option[0]}/${option[1]}`} value={index}>
+                      {`${option[0]} / ${option[1]}`}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
+
+            <label>
               <p>질문 {i + 1}</p>
               <input
                 type="text"
                 name={`question-${i}`}
                 value={question.question}
+                className="yellow"
                 onChange={(e) => handleQuestionChange(i, 'question', e.target.value)}
                 required
               />
@@ -289,7 +332,7 @@ export default function Register() {
 
                 <label className={styles.answersLabel}>
                   <p>점수</p>
-                  {SCORE_OPTIONS.map((score) => (
+                  {SCORE_OPTIONS.map((score, index) => (
                     <div key={score} className={styles.radioWrap}>
                       <input
                         type="radio"
@@ -301,7 +344,9 @@ export default function Register() {
                         }
                         required
                       />
-                      {score}
+                      {data.type === 'MBTI'
+                        ? `${MBTI_QUESTIONS_TYPE[question.index]![index]}`
+                        : score}
                     </div>
                   ))}
                 </label>
@@ -344,12 +389,12 @@ export default function Register() {
         {results.map((result, i) => (
           <div key={i} className={styles.labelBox}>
             <label>
-              <p>{result.result || '결과'}</p>
+              <p>결과 타입</p>
               {data.type === 'MBTI' ? (
                 <select
                   name="result"
-                  defaultValue=""
-                  className={styles.resultSelect}
+                  value={result.result}
+                  className="yellow"
                   onChange={(e) => handleResultChange(i, 'result', e.target.value)}
                 >
                   <option value="">결과를 선택하세요.</option>
@@ -368,14 +413,14 @@ export default function Register() {
                   type="text"
                   name="result"
                   value={result.result}
-                  className={styles.resultSelect}
+                  className="yellow"
                   onChange={(e) => handleResultChange(i, 'result', e.target.value)}
                   required
                 />
               )}
             </label>
             <label>
-              <p>{result.result || '결과'} 제목</p>
+              <p>결과 제목</p>
               <input
                 type="text"
                 name="resultTitle"
@@ -385,7 +430,7 @@ export default function Register() {
               />
             </label>
             <label>
-              <p>{result.result || '결과'} 내용</p>
+              <p>결과 내용</p>
               <input
                 type="text"
                 name="resultContent"
@@ -395,7 +440,7 @@ export default function Register() {
               />
             </label>
             <label>
-              <p>{result.result || '결과'} 이미지</p>
+              <p>결과 이미지</p>
               <input
                 type="file"
                 name="resultImage"
