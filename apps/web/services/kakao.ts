@@ -22,7 +22,7 @@ export const setKakaoLogin = () => {
 
 export const kakaoLoginAPI = async (code: string) => {
   const res = await apiBe(`/oauth2/kakao/login`, {
-    params: { code },
+    params: { code, url: FE_URL + '/login/kakao' },
   });
 
   return res;

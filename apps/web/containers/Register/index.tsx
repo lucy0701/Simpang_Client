@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from 'react';
 
 import { CONTENT_TYPE } from '@/constants';
 import { apiBe, getHeaders } from '@/services';
+import { uploadToImageBB } from '@/services/upload';
 import { ContentType, IQuestion } from '@/types';
 
 import styles from './index.module.scss';
@@ -13,7 +14,7 @@ import Button from '@/components/Buttons/Button';
 interface ContentData {
   title: string;
   content: string;
-  imageUrls: { index: number; imageUrl: File | null }[];
+  imageUrl: string;
   type: ContentType;
 }
 
@@ -21,6 +22,7 @@ interface ResultData {
   result: string;
   title: string;
   content: string;
+  imageUrl: string;
 }
 
 const SCORE_OPTIONS = [-1, 1];
@@ -42,6 +44,14 @@ const MBTI_RESULT_TYPE = [
   'ISTJ',
   'ISTP',
 ];
+
+const initialResults = MBTI_RESULT_TYPE.map((type) => ({
+  result: type,
+  title: '',
+  content: '',
+  imageUrl: '',
+}));
+
 const MBTI_QUESTIONS_TYPE = [
   ['I', 'E'],
   ['S', 'N'],
@@ -50,11 +60,11 @@ const MBTI_QUESTIONS_TYPE = [
 ];
 
 export default function Register() {
-  const [data, setData] = useState<ContentData>({
+  const [content, setContent] = useState<ContentData>({
     type: 'MBTI',
     title: '',
     content: '',
-    imageUrls: [],
+    imageUrl: '',
   });
 
   const [questions, setQuestions] = useState<IQuestion[]>([
@@ -74,23 +84,18 @@ export default function Register() {
     },
   ]);
 
-  const [results, setResults] = useState<ResultData[]>([
-    {
-      result: '',
-      title: '',
-      content: '',
-    },
-  ]);
+  const [results, setResults] = useState<ResultData[]>(initialResults);
 
   const handleInputChange = (value: string | number, field: string) => {
-    setData((prev) => ({ ...prev, [field]: value }));
+    setContent((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>, index?: number) => {
     const file = e.target.files?.[0] ?? null;
-    const updateImageUrls = [...data.imageUrls];
-    updateImageUrls[index] = { index, imageUrl: file };
-    setData((prevData) => ({ ...prevData, imageUrls: updateImageUrls }));
+    const imageUrl = await uploadToImageBB(file!);
+
+    if (index === -1) setContent((prev) => ({ ...prev, imageUrl }));
+    setResults(results.map((r, i) => (i === index ? { ...r, imageUrl } : r)));
   };
 
   const handleQuestionChange = (index: number, field: string, value: string | number) => {
@@ -118,7 +123,6 @@ export default function Register() {
   const handleResultChange = (index: number, field: string, value: string) => {
     setResults(results.map((r, i) => (i === index ? { ...r, [field]: value } : r)));
   };
-  const getSelectedValues = () => results.map((result) => result.result);
 
   const addQuestion = () => {
     const newQuestion: IQuestion = {
@@ -148,16 +152,6 @@ export default function Register() {
     });
   };
 
-  const addResult = () =>
-    setResults([
-      ...results,
-      {
-        result: '',
-        title: '',
-        content: '',
-      },
-    ]);
-
   const removeQuestion = (index: number) => {
     setQuestions((prev) => prev.filter((_, i) => i !== index));
   };
@@ -176,14 +170,9 @@ export default function Register() {
     );
   };
 
-  const removeResult = (index: number) => {
-    setResults((prev) => prev.filter((_, i) => i !== index));
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData();
     const headers = getHeaders();
 
     const checkOddCountIndices = () => {
@@ -200,31 +189,24 @@ export default function Register() {
       return oddIndices.length === 4;
     };
 
-    if (data.type === 'MBTI' && questions.length < 4 && results.length !== 16)
+    if (content.type === 'MBTI' && questions.length < 4 && results.length !== 16)
       return alert('MBTI의 질문은 최소 4개 이상, 결과는 16개로 작성해주세요!');
 
     if (!checkOddCountIndices()) {
       return alert('각 질문의 점수의 합이 0이 되지 않도록 홀 수로 작성해 주세요!');
     }
 
-    formData.append('type', data.type);
-    formData.append('title', data.title);
-    formData.append('content', data.content);
-
-    data!.imageUrls.forEach((image: { index: number; imageUrl: File | null }) => {
-      if (image.imageUrl instanceof File) {
-        formData.append(`imageUrls`, image.imageUrl);
-      }
-    });
-
-    formData.append('questions', JSON.stringify(questions));
-    formData.append('results', JSON.stringify(results));
+    const contentData = {
+      ...content,
+      questions,
+      results,
+    };
 
     try {
-      const response = await apiBe.post('/v1/contents', formData, {
+      const response = await apiBe.post('/v1/contents', contentData, {
         headers: {
           ...headers,
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         },
       });
 
@@ -235,12 +217,12 @@ export default function Register() {
   };
 
   return (
-    <form className={styles.formWrap} onSubmit={handleSubmit} encType="multipart/form-data">
+    <form className={styles.formWrap} onSubmit={handleSubmit}>
       <label>
         <p>카테고리</p>
         <select
           name="type"
-          defaultValue={data.type}
+          defaultValue={content.type}
           onChange={(e) => handleInputChange(e.target.value, 'type')}
         >
           {CONTENT_TYPE.map((option) => (
@@ -255,7 +237,7 @@ export default function Register() {
         <input
           type="text"
           name="title"
-          value={data.title}
+          value={content.title}
           onChange={(e) => handleInputChange(e.target.value, 'title')}
           required
           maxLength={100}
@@ -266,11 +248,11 @@ export default function Register() {
         <p>설명</p>
         <textarea
           name="content"
-          value={data.content}
+          value={content.content}
           onChange={(e) => handleInputChange(e.target.value, 'content')}
           required
           rows={4}
-          maxLength={100}
+          maxLength={500}
         />
       </label>
 
@@ -281,7 +263,7 @@ export default function Register() {
           name="image"
           className={styles.inputFile}
           accept="image/*"
-          onChange={(e) => handleFileChange(e, 0)}
+          onChange={(e) => handleFileChange(e, -1)}
           required
         />
       </label>
@@ -291,7 +273,7 @@ export default function Register() {
 
         {questions.map((question, i) => (
           <div key={`question + ${i}`} className={cx(styles.labelBox, styles.questionLabelBox)}>
-            {data.type === 'MBTI' && (
+            {content.type === 'MBTI' && (
               <label>
                 <p>질문 타입</p>
                 <select
@@ -313,11 +295,11 @@ export default function Register() {
               <p>질문 {i + 1}</p>
               <textarea
                 name={`question-${i}`}
-                rows={2}
+                rows={4}
                 value={question.question}
                 onChange={(e) => handleQuestionChange(i, 'question', e.target.value)}
                 required
-                maxLength={100}
+                maxLength={200}
               />
             </label>
 
@@ -354,7 +336,7 @@ export default function Register() {
                           required
                         />
 
-                        {data.type === 'MBTI' ? (
+                        {content.type === 'MBTI' ? (
                           <span>{MBTI_QUESTIONS_TYPE[question.index]![index]}</span>
                         ) : (
                           <span>score</span>
@@ -366,8 +348,7 @@ export default function Register() {
 
                 <label>
                   <p>대답</p>
-                  <input
-                    type="text"
+                  <textarea
                     name={`answer-${i}-${j}`}
                     value={answer.text}
                     onChange={(e) => handleAnswerChange(i, j, 'text', e.target.value)}
@@ -407,39 +388,9 @@ export default function Register() {
         <h3>Results ( total : {results.length} )</h3>
         {results.map((result, i) => (
           <div key={i} className={styles.labelBox}>
+            <h3 className={styles.resultH3}>{result.result}</h3>
             <label>
-              <p>결과 타입</p>
-              {data.type === 'MBTI' ? (
-                <select
-                  name="result"
-                  value={result.result}
-                  className="yellow"
-                  onChange={(e) => handleResultChange(i, 'result', e.target.value)}
-                >
-                  <option value="">결과를 선택하세요.</option>
-                  {MBTI_RESULT_TYPE.map((resultOption) => (
-                    <option
-                      key={resultOption}
-                      value={resultOption}
-                      disabled={getSelectedValues().includes(resultOption)}
-                    >
-                      {resultOption}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <input
-                  type="text"
-                  name="result"
-                  value={result.result}
-                  className="yellow"
-                  onChange={(e) => handleResultChange(i, 'result', e.target.value)}
-                  required
-                />
-              )}
-            </label>
-            <label>
-              <p>결과 제목</p>
+              <p>{result.result} 제목</p>
               <input
                 type="text"
                 name="resultTitle"
@@ -450,7 +401,7 @@ export default function Register() {
               />
             </label>
             <label>
-              <p>결과 내용</p>
+              <p>{result.result} 내용</p>
               <textarea
                 name="resultContent"
                 value={result.content}
@@ -458,34 +409,22 @@ export default function Register() {
                 required
                 rows={4}
                 cols={50}
-                maxLength={100}
+                maxLength={500}
               />
             </label>
             <label>
-              <p>결과 이미지</p>
+              <p>{result.result} 이미지</p>
               <input
                 type="file"
                 name="resultImage"
                 accept="image/*"
                 className={styles.inputFile}
-                onChange={(e) => handleFileChange(e, i + 1)}
+                onChange={(e) => handleFileChange(e, i)}
                 required
               />
             </label>
-            {results.length > 1 && (
-              <button
-                type="button"
-                className={cx('blue', styles.miniBtn)}
-                onClick={() => removeResult(i)}
-              >
-                – Results
-              </button>
-            )}
           </div>
         ))}
-        <button type="button" className={cx('deepPink', styles.addBtn)} onClick={addResult}>
-          + Results
-        </button>
       </div>
       <Button type="submit" color="green" text="완료" />
     </form>
