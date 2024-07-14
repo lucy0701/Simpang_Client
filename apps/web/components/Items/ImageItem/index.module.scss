@@ -6,13 +6,13 @@
 }
 
 .preview {
-  @include m.imageWrap(_, 220px);
+  @include m.imageWrap(_, 250px);
 }
 .thumbnail {
   @include m.imageWrap(45px, 45px);
 }
 .reuslt {
-  @include m.imageWrap(340px, 450px);
+  @include m.imageWrap(_, 250px);
 }
 
 .square {
