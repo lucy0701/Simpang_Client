@@ -42,6 +42,13 @@ const MBTI_RESULT_TYPE = [
   'ISTJ',
   'ISTP',
 ];
+
+const initialResults = MBTI_RESULT_TYPE.map((type) => ({
+  result: type,
+  title: '',
+  content: '',
+}));
+
 const MBTI_QUESTIONS_TYPE = [
   ['I', 'E'],
   ['S', 'N'],
@@ -74,13 +81,7 @@ export default function Register() {
     },
   ]);
 
-  const [results, setResults] = useState<ResultData[]>([
-    {
-      result: '',
-      title: '',
-      content: '',
-    },
-  ]);
+  const [results, setResults] = useState<ResultData[]>(initialResults);
 
   const handleInputChange = (value: string | number, field: string) => {
     setData((prev) => ({ ...prev, [field]: value }));
@@ -118,7 +119,6 @@ export default function Register() {
   const handleResultChange = (index: number, field: string, value: string) => {
     setResults(results.map((r, i) => (i === index ? { ...r, [field]: value } : r)));
   };
-  const getSelectedValues = () => results.map((result) => result.result);
 
   const addQuestion = () => {
     const newQuestion: IQuestion = {
@@ -148,16 +148,6 @@ export default function Register() {
     });
   };
 
-  const addResult = () =>
-    setResults([
-      ...results,
-      {
-        result: '',
-        title: '',
-        content: '',
-      },
-    ]);
-
   const removeQuestion = (index: number) => {
     setQuestions((prev) => prev.filter((_, i) => i !== index));
   };
@@ -174,10 +164,6 @@ export default function Register() {
         return question;
       }),
     );
-  };
-
-  const removeResult = (index: number) => {
-    setResults((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -313,7 +299,7 @@ export default function Register() {
               <p>질문 {i + 1}</p>
               <textarea
                 name={`question-${i}`}
-                rows={2}
+                rows={4}
                 value={question.question}
                 onChange={(e) => handleQuestionChange(i, 'question', e.target.value)}
                 required
@@ -366,8 +352,7 @@ export default function Register() {
 
                 <label>
                   <p>대답</p>
-                  <input
-                    type="text"
+                  <textarea
                     name={`answer-${i}-${j}`}
                     value={answer.text}
                     onChange={(e) => handleAnswerChange(i, j, 'text', e.target.value)}
@@ -407,39 +392,9 @@ export default function Register() {
         <h3>Results ( total : {results.length} )</h3>
         {results.map((result, i) => (
           <div key={i} className={styles.labelBox}>
+            <h3 className={styles.resultH3}>{result.result}</h3>
             <label>
-              <p>결과 타입</p>
-              {data.type === 'MBTI' ? (
-                <select
-                  name="result"
-                  value={result.result}
-                  className="yellow"
-                  onChange={(e) => handleResultChange(i, 'result', e.target.value)}
-                >
-                  <option value="">결과를 선택하세요.</option>
-                  {MBTI_RESULT_TYPE.map((resultOption) => (
-                    <option
-                      key={resultOption}
-                      value={resultOption}
-                      disabled={getSelectedValues().includes(resultOption)}
-                    >
-                      {resultOption}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <input
-                  type="text"
-                  name="result"
-                  value={result.result}
-                  className="yellow"
-                  onChange={(e) => handleResultChange(i, 'result', e.target.value)}
-                  required
-                />
-              )}
-            </label>
-            <label>
-              <p>결과 제목</p>
+              <p>{result.result} 제목</p>
               <input
                 type="text"
                 name="resultTitle"
@@ -450,7 +405,7 @@ export default function Register() {
               />
             </label>
             <label>
-              <p>결과 내용</p>
+              <p>{result.result} 내용</p>
               <textarea
                 name="resultContent"
                 value={result.content}
@@ -462,7 +417,7 @@ export default function Register() {
               />
             </label>
             <label>
-              <p>결과 이미지</p>
+              <p>{result.result} 이미지</p>
               <input
                 type="file"
                 name="resultImage"
@@ -472,20 +427,8 @@ export default function Register() {
                 required
               />
             </label>
-            {results.length > 1 && (
-              <button
-                type="button"
-                className={cx('blue', styles.miniBtn)}
-                onClick={() => removeResult(i)}
-              >
-                – Results
-              </button>
-            )}
           </div>
         ))}
-        <button type="button" className={cx('deepPink', styles.addBtn)} onClick={addResult}>
-          + Results
-        </button>
       </div>
       <Button type="submit" color="green" text="완료" />
     </form>
