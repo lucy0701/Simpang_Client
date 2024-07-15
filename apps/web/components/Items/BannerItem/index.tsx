@@ -4,16 +4,14 @@ import Link from 'next/link';
 import { PATHS, SIMPANG_ALT } from '@/constants';
 
 import styles from './index.module.scss';
-import Button from '@/components/Buttons/Button';
 
 interface Props {
   id: string;
   imageUrl: string;
   title: string;
-  btnText?: string;
 }
 
-const BannerItem = ({ id, imageUrl, title, btnText = '시작 하기' }: Props) => (
+const BannerItem = ({ id, imageUrl, title }: Props) => (
   <>
     <Link href={`${PATHS.CONTENTS.BASE}/${id}`} className={styles.wrap}>
       <div className={styles.imgWrap}>
@@ -27,7 +25,6 @@ const BannerItem = ({ id, imageUrl, title, btnText = '시작 하기' }: Props) =
         />
         <div className={styles.titleWrap}>
           <h3>{title}</h3>
-          <Button size="small" text={btnText} />
         </div>
       </div>
     </Link>
