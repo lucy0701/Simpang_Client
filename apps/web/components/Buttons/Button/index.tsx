@@ -5,7 +5,6 @@ import { FloatButtonPosition } from '@/types';
 
 import styles from './index.module.scss';
 
-
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   skin?: 'base' | 'float';
@@ -31,6 +30,7 @@ const Button = ({
       skin === 'base' ? styles[size] : styles[position!],
       color,
       styles.buttonWrap,
+      'back_shadow',
     )}
     onClick={onClick}
     {...rest}
