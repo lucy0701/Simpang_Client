@@ -95,7 +95,6 @@ export default function ContentPlay({ questions, contentId }: Props) {
             {currentIndex + 1} / {playScores.length}
           </p>
         </div>
-
         <p className={styles.question}>{questions[currentIndex]?.question}</p>
       </div>
 
