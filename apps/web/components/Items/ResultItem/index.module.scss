@@ -22,7 +22,6 @@
     width: 60%;
     height: 100%;
     white-space: pre-wrap;
-
     @include m.flexboxColumn(between, end);
 
     padding: 10px;
@@ -37,8 +36,6 @@
     .content {
       width: 100%;
       padding: 0 5px;
-
-      background-color: antiquewhite;
 
       height: 70%;
       font-size: 0.9rem;
