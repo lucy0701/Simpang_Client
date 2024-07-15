@@ -1,7 +1,8 @@
 @use 'styles/mixins' as m;
+
 .resultItemWrap {
   width: 100%;
-  height: 200px;
+  height: 210px;
   @include m.borderStyles();
   @include m.flexbox(between);
   overflow: hidden;
@@ -28,17 +29,24 @@
 
     .title {
       @include m.textEllipsis();
-      padding: 0 5px;
-      border: 2px dashed var(--border-color);
-      font-size: 1.1rem;
+      padding: 0 6px 5px;
+      border-bottom: 1.5px dashed var(--color-gray-a);
+      font-size: 1rem;
     }
 
     .content {
       width: 100%;
       padding: 0 5px;
+
+      background-color: antiquewhite;
+
       height: 70%;
       font-size: 0.9rem;
 
+      overflow: hidden;
+      word-wrap: break-word;
+      word-break: keep-all;
+      text-overflow: ellipsis;
     }
 
     .date {

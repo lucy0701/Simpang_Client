@@ -16,7 +16,7 @@
 }
 
 .square {
-  @include m.borderStyles();
+  border-radius: 1rem;
 }
 .circle {
   @include m.borderStyles($radius_size: --border-radius-circle);
