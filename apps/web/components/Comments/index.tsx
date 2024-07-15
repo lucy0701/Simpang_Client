@@ -55,13 +55,13 @@ const Comments = ({ contentId }: Props) => {
   return (
     <WindowStyle title="댓글" content={commentCount} color="blue">
       <div className={styles.wrap}>
-        <div className={styles.inputWrap}>
+        <div className={cx(styles.inputWrap, 'back_shadow')}>
           {user && user ? (
             <>
               <input
                 value={text}
                 onKeyDown={onKeyDown}
-                className={styles.commentInput}
+                className={cx(styles.commentInput)}
                 onChange={(e) => setText(e.target.value)}
                 maxLength={100}
               />
