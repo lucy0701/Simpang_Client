@@ -50,7 +50,7 @@ export default function Home({ latestContents }: Props) {
   ) : (
     <div className={styles.wrap}>
       <div className={styles.speechBubbleWrap}>
-        <p>Today&apos;s Pick </p>
+        <p>Today&apos;s Pick ❤️</p>
         <div className={styles.speechBubblePoint} />
       </div>
       <Swiper
@@ -71,11 +71,13 @@ export default function Home({ latestContents }: Props) {
         ))}
       </Swiper>
 
-      <WindowStyle title="NEW" color="green">
-        <div className={styles.btnBox}>
-          <Button size="small" text="등록순" color="yellow" onClick={() => handleSort('asc')} />
-          <Button size="small" text="최신순" color="yellow" onClick={() => handleSort('desc')} />
-        </div>
+      <div className={styles.contents}>
+        <WindowStyle color="green">
+          <div className={styles.btnBox}>
+            <Button size="medium" text="등록순" color="yellow" onClick={() => handleSort('asc')} />
+            <Button size="medium" text="최신순" color="yellow" onClick={() => handleSort('desc')} />
+          </div>
+        </WindowStyle>
 
         {contents &&
           contents.map((content) => (
@@ -83,8 +85,8 @@ export default function Home({ latestContents }: Props) {
               <ContentItem key={content._id} {...content} />
             </div>
           ))}
-      </WindowStyle>
-      {isFetching && <RoundLoading />}
+        {isFetching && <RoundLoading />}
+      </div>
 
       <FloatBtnBox />
     </div>

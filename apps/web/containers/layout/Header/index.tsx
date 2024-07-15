@@ -54,7 +54,7 @@ export default function Header() {
         </Link>
 
         <div className={styles.btnBox}>
-          <button className={styles.searchBtn} />
+          {/* <button className={styles.searchBtn} /> */}
           <button className={styles.loginBtn} onClick={() => router.push(PATHS.LOGIN)} />
         </div>
       </div>

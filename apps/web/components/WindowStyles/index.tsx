@@ -10,7 +10,7 @@ interface Props {
 }
 
 const WindowStyle = ({ children, title, content, color = 'pink' }: Props) => (
-  <div className={styles.wrap}>
+  <div className={cx(styles.wrap,'back_shadow')}>
     <div className={cx(styles.titleBar, color)}>
       <div className={styles.title}>
         <h3>{title}</h3>

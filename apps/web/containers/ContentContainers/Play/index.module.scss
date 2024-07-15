@@ -7,11 +7,14 @@
 
   @include m.textEllipsis();
   white-space: pre-wrap;
-
+  word-break: keep-all;
+  
   .question {
     width: 100%;
     padding: 5px;
     min-height: 250px;
+    text-align: center;
+    line-height: 1.8;
     @include m.flexboxColumn();
     font-size: var(--font-size-xl);
   }

@@ -13,7 +13,14 @@ interface Props {
 
 const ImageItem = ({ imageUrl, shape = 'square', skin = 'preview' }: Props) => (
   <div className={cx(styles[shape], styles[skin], styles.imgWrap)}>
-    <Image src={imageUrl!} alt={SIMPANG_ALT} fill priority sizes="100%" className={styles.image} />
+    <Image
+      src={imageUrl!}
+      alt={SIMPANG_ALT}
+      fill
+      priority
+      sizes="100%"
+      className={styles.image}
+    />
   </div>
 );
 

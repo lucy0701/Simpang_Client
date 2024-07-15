@@ -16,25 +16,18 @@ $icon-size: 0.8rem;
       width: 100%;
 
       h3 {
-        width: 40%;
         font-weight: 800;
-
-        position: absolute;
-        top: 20px;
-        left: 20px;
-
-        font-size: var(--font-size-xl);
-        overflow-wrap: break-word;
-        -webkit-text-stroke: 1.5px var(--color-white);
-      }
-
-      button {
-        width: 25%;
-        @include m.borderStyles();
+        padding: 0 15px;
 
         position: absolute;
         bottom: 30px;
         right: 15px;
+
+        font-size: var(--font-size-l);
+        overflow-wrap: break-word;
+
+        border-radius: 1rem;
+        background-color: rgba(255, 255, 255, 0.707);
       }
     }
 

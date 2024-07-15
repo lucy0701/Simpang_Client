@@ -1,6 +1,5 @@
 'use client';
 
-
 import { shareKakaotalk, shareKakaotalkResult } from '@/services';
 import { postShareAPI } from '@/services/contents';
 
@@ -60,5 +59,5 @@ export const ResultKakaoSharingBtn = ({ resultData }: ResultData) => {
     postShareAPI({ contentId, type: 'Kakao' });
   };
 
-  return <Button text="공유하기" onClick={onClickRsultShareBtn} />;
+  return <Button text="공유하기" size="medium" onClick={onClickRsultShareBtn} />;
 };

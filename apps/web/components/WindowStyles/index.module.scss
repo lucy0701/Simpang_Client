@@ -3,7 +3,6 @@
 .wrap {
   width: 100%;
   @include m.borderStyles();
-  box-shadow: 3px 4px var(--border-color);
 
   .titleBar {
     padding: 2px 10px;
