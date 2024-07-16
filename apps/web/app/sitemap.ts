@@ -4,23 +4,24 @@ import { BE_URL } from '@/constants';
 import { getHeaders } from '@/services';
 import { IContents } from '@/types';
 
-export const getTests = (): Promise<IContents[]> => {
+export const getTests = async (): Promise<IContents[]> => {
   const headers = getHeaders();
-  return fetch(`${BE_URL}/api/v1/contents?size=10&sort=asc&page=1`, { headers })
-    .then((res) => {
-      if (!res.ok) {
-        return Promise.reject();
-      }
-      return res.json();
-    })
-    .catch(() => []);
+  try {
+    const res = await fetch(`${BE_URL}/api/v1/contents?size=10&sort=asc&page=1`, { headers });
+    if (!res.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return (await res.json()) as IContents[];
+  } catch (error) {
+    return [];
+  }
 };
 
 export const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
-  const tests: IContents[] = await getTests();
+  const contents: IContents[] = await getTests();
 
-  const simpangContents = tests.map((test) => ({
-    url: `https://simpang.kr/contents/${test._id}`,
+  const simpangContents = contents.map((content) => ({
+    url: `https://simpang.kr/contents/${content._id}`,
     lastModified: new Date(),
   }));
 
