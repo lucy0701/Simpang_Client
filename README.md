@@ -1,14 +1,22 @@
 # 심팡 (Simpang)
 
-__SKILL__
+__Site__ : https://simpang.kr/
 
-Next.js, OAuth2, TypeScript, TurboRepo, SCSS, React-query
+__Server Github__ : https://github.com/lucy0701/Simpang_Server.git
 
-__Site__
+---
 
-https://simpang.kr/
+### Environment and Technology
+- Framework
+  - Next.js
+- Skill
+  - OAuth2
+  - TypeScript
+  - TurboRepo
+  - SCSS
+  - React Query
 
-## 기능
+## Features
 - kakao login / logout
 - Main
   - Random Content
@@ -17,11 +25,11 @@ https://simpang.kr/
   - Contents
     - useInfiniteScroll
 - Content
-  - 심리테스트
-  - 댓글
-  - 좋아요
-  - 카카오톡 공유
+  - Personality tests
+  - Comments
+  - Likes
+  - Share on KakaoTalk
 - MyPage
-  - 심리테스트 생성
-  - 유저 정보
-  - 심리테스트 결과 목록
+  - Create personality tests
+  - Member information
+  - List of personality test results
