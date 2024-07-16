@@ -3,13 +3,14 @@
 .commentBox {
   width: 100%;
   border-radius: var(--border-radius-m);
-  padding: 5px 10px;
+  padding: 10px;
 
   @include m.flexbox(between);
 
   .commentTextBox {
     width: 85%;
     @include m.flexboxColumn(_, start);
+    gap: 5px;
 
     .topBox {
       width: 100%;
@@ -21,6 +22,7 @@
         font-size: var(--font-size-s);
 
         .createTime {
+          color: var(--color-gray-6);
           font-size: var(--font-size-xs);
         }
       }
@@ -31,10 +33,15 @@
         margin-right: 5px;
 
         button {
-          font-size: var(--font-size-s);
+          font-size: 0.7rem;
           color: var(--color-gray-6);
         }
       }
+    }
+
+    .text {
+      font-size: 0.9rem;
+      margin-left: 4px;
     }
 
     .inputWrap {
