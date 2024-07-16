@@ -44,6 +44,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta
+          name="google-site-verification"
+          content="HFApnmNt0MJobDHpjw9go06M0GkuMMZFG4fXvljTkQs"
+        />
+        <meta name="naver-site-verification" content="d247534d9de576f74edc6b0b3eabf55b3350835c" />
         <script
           async
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.js"
