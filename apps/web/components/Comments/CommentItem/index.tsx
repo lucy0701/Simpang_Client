@@ -2,7 +2,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useState } from 'react';
 
-
 import { deleteCommentAPI, patchCommentAPI } from '@/services/comment';
 import { DecodedToken, IComment } from '@/types';
 import { getTimeDifference } from '@/utils/dateTime';
@@ -59,8 +58,8 @@ const CommentItem = ({ contentId, comment, user }: Props) => {
       <div className={styles.commentTextBox}>
         <div className={styles.topBox}>
           <div className={styles.userWrap}>
-            <p className={styles.userName}>{comment.user?.name}</p>
-            <p className={styles.createTime}>{getTimeDifference(comment.createdAt)}</p>
+            <p>{comment.user?.name}</p>
+            <p className={styles.createTime}>{getTimeDifference(comment.updatedAt)}</p>
             {comment.updatedAt !== comment.createdAt && (
               <p className={styles.createTime}>• 수정 됨</p>
             )}
