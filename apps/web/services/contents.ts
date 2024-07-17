@@ -15,7 +15,7 @@ interface Props {
 export const getContentsAPI = (params: PageParams) =>
   apiBe<GetPageData<IContent>>(`/v1/contents`, { params });
 
-export const getResultAPI = async (resultId: string) => apiBe<IResult>(`/v1/results/${resultId}`);
+export const getResultAPI = (resultId: string) => apiBe<IResult>(`/v1/results/${resultId}`);
 
 export const getUserResultsAPI = async (params: PageParams) => {
   const headers = getHeaders();
