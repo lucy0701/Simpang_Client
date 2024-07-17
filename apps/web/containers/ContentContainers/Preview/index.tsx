@@ -17,7 +17,10 @@ export default function ContentPreview({ contentData, onClickPlayBtn }: Props) {
 
   return (
     <div className={styles.wrap}>
-      <ImageItem imageUrl={imageUrl} />
+      <div className={styles.imageContainer}>
+        <ImageItem imageUrl={imageUrl} />
+        <p>@ {creator}</p>
+      </div>
 
       <div className={styles.contentWrap}>
         <div>

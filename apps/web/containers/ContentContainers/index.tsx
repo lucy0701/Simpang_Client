@@ -23,7 +23,7 @@ export default function ContentContainer({ contentData }: Props) {
         {!onPlay ? (
           <ContentPreview contentData={content} onClickPlayBtn={onClickPlayBtn} />
         ) : (
-          <ContentPlay questions={questions} contentId={content._id} />
+          <ContentPlay questions={questions!} contentId={content._id} />
         )}
       </div>
     )
