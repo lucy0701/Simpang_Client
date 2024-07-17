@@ -5,6 +5,17 @@
   @include m.flexboxColumn();
   gap: 30px;
 
+  .imageContainer {
+    width: 100%;
+    @include m.flexboxColumn(_, end);
+    gap: 5px;
+
+    p {
+      font-size: var(--font-size-m);
+      color: var(--color-gray-9);
+      margin-right: 10px;
+    }
+  }
   .contentWrap {
     width: 100%;
     @include m.flexboxColumn();
