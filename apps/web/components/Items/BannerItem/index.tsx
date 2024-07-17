@@ -21,6 +21,8 @@ const BannerItem = ({ id, imageUrl, title }: Props) => (
           alt={SIMPANG_ALT}
           fill
           sizes="100%"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
           className={styles.image}
         />
         <div className={styles.titleWrap}>

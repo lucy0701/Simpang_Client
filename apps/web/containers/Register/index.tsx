@@ -93,7 +93,6 @@ export default function Register() {
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>, index?: number) => {
     const file = e.target.files?.[0] ?? null;
     const imageUrl = await uploadToImageBB(file!);
-    console.log('PSJ: imageUrl', imageUrl);
 
     if (index === -1) setContent((prev) => ({ ...prev, imageUrl }));
     setResults(results.map((r, i) => (i === index ? { ...r, imageUrl } : r)));

@@ -2,22 +2,18 @@
 
 .imgWrap {
   width: 100%;
-  position: relative;
 }
 
-.preview {
-  @include m.imageWrap(_, 250px);
-}
 .thumbnail {
   @include m.imageWrap(45px, 45px);
 }
-.reuslt {
-  @include m.imageWrap(_, 250px);
-}
 
 .square {
-  border-radius: 1rem;
+  img {
+    border-radius: 1rem;
+  }
 }
+
 .circle {
   @include m.borderStyles($radius_size: --border-radius-circle);
 }
