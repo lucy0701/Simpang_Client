@@ -2,25 +2,25 @@ import { MetadataRoute } from 'next';
 
 import { BE_URL } from '@/constants';
 import { getHeaders } from '@/services';
-import { IContents } from '@/types';
+import { GetPageData, IContents } from '@/types';
 
-export const getTests = async (): Promise<IContents[]> => {
+export const getContents = async () => {
   const headers = getHeaders();
   try {
     const res = await fetch(`${BE_URL}/api/v1/contents?size=10&sort=asc&page=1`, { headers });
     if (!res.ok) {
       throw new Error('Network response was not ok');
     }
-    return (await res.json()) as IContents[];
+    return res.json() as Promise<GetPageData<IContents>>;
   } catch (error) {
-    return [];
+    throw new Error('Network response was not ok');
   }
 };
 
 export const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
-  const contents: IContents[] = await getTests();
+  const contents = await getContents();
 
-  const simpangContents = contents.map((content) => ({
+  const simpangContents = contents.data.map((content) => ({
     url: `https://simpang.kr/contents/${content._id}`,
     lastModified: new Date(),
   }));
