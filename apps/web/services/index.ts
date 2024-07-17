@@ -1,5 +1,6 @@
 export * from './kakao';
 export * from './util';
+export * from './user';
 
 import axios from 'axios';
 

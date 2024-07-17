@@ -2,7 +2,7 @@
 
 .wrap {
   width: 100%;
-  @include m.flexboxColumn(_, _);
+  @include m.flexboxColumn(_);
   gap: 30px;
 
   .userWrap {
