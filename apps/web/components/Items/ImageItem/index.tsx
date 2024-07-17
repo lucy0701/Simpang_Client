@@ -8,17 +8,23 @@ import styles from './index.module.scss';
 interface Props {
   imageUrl: string;
   shape?: 'circle' | 'square';
-  skin?: 'preview' | 'thumbnail' | 'reuslt';
+  skin?: 'thumbnail';
 }
 
-const ImageItem = ({ imageUrl, shape = 'square', skin = 'preview' }: Props) => (
-  <div className={cx(styles[shape], styles[skin], styles.imgWrap)}>
+const ImageItem = ({ imageUrl, shape = 'square', skin }: Props) => (
+  <div className={cx(styles[shape], skin && styles[skin], styles.imgWrap)}>
     <Image
       src={imageUrl!}
       alt={SIMPANG_ALT}
-      fill
       priority
-      sizes="100%"
+      width={700}
+      height={475}
+      style={{
+        maxWidth: '100%',
+        height: 'auto',
+      }}
+      placeholder="blur"
+      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
       className={styles.image}
     />
   </div>

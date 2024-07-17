@@ -16,6 +16,8 @@ const ResultItem = ({ results, createdAt }: IUserResult) => (
         alt={SIMPANG_ALT}
         fill
         sizes="100%"
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNcunhpAQAGQQJflMkmGAAAAABJRU5ErkJggg=="
         className={styles.image}
       />
     </div>
