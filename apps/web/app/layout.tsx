@@ -7,10 +7,15 @@ import ReactQueryProviders from '@/components/ReactQueryProviders';
 import Footer from '@/containers/layout/Footer';
 import Header from '@/containers/layout/Header';
 
+const description = '심심할땐 심팡! 심리테스트, MBTI, 다양하게 즐겨봐!';
+const imageUrl = 'https://i.ibb.co/BqTn4By/og-image.jpg';
+const title = '심팡';
+const url = new URL('https://simpang.kr');
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://simpang.kr'),
-  title: '심팡',
-  description: '심심할땐 심팡! 심리테스트, MBTI, 다양하게 즐겨봐!',
+  metadataBase: url,
+  title,
+  description,
   icons: {
     icon: '/favicon.ico',
   },
@@ -28,6 +33,18 @@ export const metadata: Metadata = {
     '궁합',
     '무료 심테',
   ],
+  openGraph: {
+    description,
+    type: 'website',
+    title,
+    url,
+    images: [
+      {
+        url: imageUrl,
+        alt: 'og_image',
+      },
+    ],
+  },
 };
 
 const notoSansKr = Noto_Sans_KR({
