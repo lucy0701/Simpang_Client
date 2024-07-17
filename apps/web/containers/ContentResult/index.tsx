@@ -15,7 +15,7 @@ export default function ContentResult({ resultData }: Props) {
 
   return (
     <div className={styles.wrap}>
-      <ImageItem skin="reuslt" imageUrl={imageUrl!} />
+      <ImageItem imageUrl={imageUrl!} />
       <h3>{title}</h3>
       <div className={styles.content}>
         <p className={styles.contentText}>{content}</p>
