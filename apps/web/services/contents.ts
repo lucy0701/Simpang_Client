@@ -1,4 +1,4 @@
-import { IContents, GetPageData, PageParams, IResult, IUserResult } from '@/types';
+import { IContent, GetPageData, PageParams, IResult, IUserResult } from '@/types';
 
 import { apiBe, getHeaders } from '.';
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const getContentsAPI = (params: PageParams) =>
-  apiBe<GetPageData<IContents>>(`/v1/contents`, { params });
+  apiBe<GetPageData<IContent>>(`/v1/contents`, { params });
 
 export const getResultAPI = async (resultId: string) => apiBe<IResult>(`/v1/results/${resultId}`);
 

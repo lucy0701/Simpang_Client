@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getContentsAPI } from '@/services/contents';
-import { IContents, Sort } from '@/types';
+import { IContent, Sort } from '@/types';
 
 import styles from './index.module.scss';
 import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
@@ -21,7 +21,7 @@ import { Loading, RoundLoading } from '@/components/Loading';
 import WindowStyle from '@/components/WindowStyles';
 
 interface Props {
-  latestContents: IContents[];
+  latestContents: IContent[];
 }
 
 export default function Home({ latestContents }: Props) {
@@ -33,7 +33,7 @@ export default function Home({ latestContents }: Props) {
     status,
     error,
     isFetching,
-  } = useInfiniteScroll<IContents>({
+  } = useInfiniteScroll<IContent>({
     getData: getContentsAPI,
     sort,
     size: 10,

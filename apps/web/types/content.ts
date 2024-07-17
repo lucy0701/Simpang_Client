@@ -5,23 +5,12 @@ export interface IContent {
   title: string;
   content: string;
   imageUrl: string;
-  questions: IQuestion[];
   playCount: number;
   commentCount: number;
   likeCount: number;
   type: ContentType;
-  creator: string;
-}
-
-export interface IContents {
-  _id: string;
-  title: string;
-  content: string;
-  imageUrl: string;
-  playCount: number;
-  commentCount: number;
-  likeCount: number;
-  type: ContentType;
+  questions?: IQuestion[];
+  creator?: string;
 }
 
 export interface IQuestion {

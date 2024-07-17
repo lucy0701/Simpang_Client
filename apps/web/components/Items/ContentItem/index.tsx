@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { PATHS, SIMPANG_ALT } from '@/constants';
-import { IContents } from '@/types';
+import { IContent } from '@/types';
 
 import styles from './index.module.scss';
 
@@ -13,7 +13,7 @@ const ContentItem = ({
   playCount,
   commentCount,
   likeCount,
-}: Partial<IContents>) => (
+}: Partial<IContent>) => (
   <Link href={`${PATHS.CONTENTS.BASE}/${_id}`} className={styles.wrap}>
     <div className={styles.imgWrap}>
       <Image

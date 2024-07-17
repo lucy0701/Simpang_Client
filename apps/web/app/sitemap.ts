@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 import { BE_URL } from '@/constants';
 import { getHeaders } from '@/services';
-import { GetPageData, IContents } from '@/types';
+import { GetPageData, IContent } from '@/types';
 
 export const getContents = async () => {
   const headers = getHeaders();
@@ -11,7 +11,7 @@ export const getContents = async () => {
     if (!res.ok) {
       throw new Error('Network response was not ok');
     }
-    return res.json() as Promise<GetPageData<IContents>>;
+    return res.json() as Promise<GetPageData<IContent>>;
   } catch (error) {
     throw new Error('Network response was not ok');
   }
