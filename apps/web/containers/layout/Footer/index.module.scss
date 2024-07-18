@@ -10,7 +10,7 @@ $icon-size: 1rem;
 
   p {
     font-size: var(--font-size-s);
-    color: var(--color-font);
+    color: var(--font-color);
   }
 
   .contentsBox {
@@ -36,8 +36,9 @@ $icon-size: 1rem;
       gap: 8px;
 
       span {
-        color: var(--color-font);
+        color: var(--font-color);
         font-size: var(--font-size-xs);
+        margin-top: -2px;
       }
     }
   }
