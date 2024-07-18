@@ -62,7 +62,6 @@ export const FloatBtnBox = () => {
 
   return (
     <div className={cx(styles.floatBtnBox, showButton ? styles.show : styles.hide)}>
-      <FloatTopBtn />
       <RandomButton />
     </div>
   );
