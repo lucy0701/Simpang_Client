@@ -15,6 +15,7 @@ __Server Github__ : https://github.com/lucy0701/Simpang_Server.git
   - TurboRepo
   - SCSS
   - React Query
+  - SEO (google, naver)
 
 ## Features
 - kakao login / logout
