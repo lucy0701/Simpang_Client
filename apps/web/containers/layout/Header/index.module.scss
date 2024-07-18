@@ -10,7 +10,7 @@ $button-size: 1.2rem;
 
   position: relative;
 
-  background: linear-gradient(to bottom, var(--color-bg-pink) 50%, transparent);
+  background: linear-gradient(to bottom, var(--color-bg-pink) 40%, transparent);
   transition: height 0.5s ease;
 
   position: fixed;
@@ -63,5 +63,7 @@ $button-size: 1.2rem;
 }
 
 .scrollDown {
-  height: 70px;
+  height: 90px;
+  background: linear-gradient(to bottom, var(--color-bg-pink) 60%, transparent);
+
 }

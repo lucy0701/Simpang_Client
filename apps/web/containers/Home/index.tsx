@@ -4,29 +4,24 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { useState } from 'react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getContentsAPI } from '@/services/contents';
-import { IContent, Sort } from '@/types';
+import { IContent } from '@/types';
 
 import styles from './index.module.scss';
 import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
-import Button from '@/components/Buttons/Button';
 import BannerItem from '@/components/Items/BannerItem';
 import ContentItem from '@/components/Items/ContentItem';
 import { Loading, RoundLoading } from '@/components/Loading';
-import WindowStyle from '@/components/WindowStyles';
 
 interface Props {
   latestContents: IContent[];
 }
 
 export default function Home({ latestContents }: Props) {
-  const [sort, setSort] = useState<Sort>('desc');
-
   const {
     dataList: contents,
     lastElementRef,
@@ -35,14 +30,11 @@ export default function Home({ latestContents }: Props) {
     isFetching,
   } = useInfiniteScroll<IContent>({
     getData: getContentsAPI,
-    sort,
+    sort: 'desc',
     size: 10,
     queryKey: 'contents',
   });
 
-  const handleSort = (sort: Sort) => {
-    setSort(sort);
-  };
   return status === 'pending' ? (
     <Loading />
   ) : status === 'error' ? (
@@ -72,13 +64,6 @@ export default function Home({ latestContents }: Props) {
       </Swiper>
 
       <div className={styles.contents}>
-        <WindowStyle color="green">
-          <div className={styles.btnBox}>
-            <Button size="medium" text="등록순" color="yellow" onClick={() => handleSort('asc')} />
-            <Button size="medium" text="최신순" color="yellow" onClick={() => handleSort('desc')} />
-          </div>
-        </WindowStyle>
-
         {contents &&
           contents.map((content) => (
             <div key={content._id} className={styles.clientArea} ref={lastElementRef}>

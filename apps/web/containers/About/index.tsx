@@ -6,7 +6,7 @@ export default function About() {
   return (
     <main className={styles.wrap}>
       <div className={styles.contentWrap}>
-        <div>
+        <div className={styles.contentBox}>
           <h2>나를 알고, 더 나아가 상대를 알다</h2>
           <p>&quot;나는 어떤 사람일까?&quot;</p>
           <p>&quot;내가 왜 이렇게 느끼는 걸까?&quot;</p>
@@ -17,11 +17,11 @@ export default function About() {
           </p>
           <p>
             그러나 매번 50, 60개의 문제를 풀어야 하는 <br />
-            MBTI 검사는 꽤나 번거로울 수 있습니다.
+            MBTI 검사는 꽤 번거로울 수 있습니다.
           </p>
         </div>
-        <div>
-          <h2>그래서 심팡 탄생했습니다.</h2>
+        <div className={styles.contentBox}>
+          <h2>그래서 심팡이 탄생했습니다.</h2>
           <p>
             MBTI 검사는 물론이고 다양한 심리테스트를 <br />
             <span>누구나 손쉽게 즐길 수 있도록 만들었습니다.</span>

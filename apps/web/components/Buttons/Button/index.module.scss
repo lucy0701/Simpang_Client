@@ -25,7 +25,6 @@
     transition: border-color 0.3s ease;
     border-radius: var(--border-radius-s);
     border: 1.5px dashed transparent;
-
   }
 
   &:hover {
@@ -57,15 +56,12 @@
 }
 
 .float {
-  width: 100px;
-  padding: 3px;
+  width: 85px;
   position: fixed;
   bottom: 30px;
-
+  font-size: var(--font-size-s);
   z-index: 80;
   @include m.borderStyles();
 
   transition: transform 0.3s ease;
 }
-
-

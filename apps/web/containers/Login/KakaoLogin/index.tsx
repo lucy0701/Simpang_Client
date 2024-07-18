@@ -26,7 +26,6 @@ export default function KakaoLogin() {
       <div className={styles.imageBox}>
         <Image alt={SIMPANG_ALT} src="/images/pang.png" width={70} height={70} />
         <Image alt={SIMPANG_ALT} src="/images/simpang_logo.png" width={200} height={80} />
-        <p>© 2024 Simpang. All rights reserved</p>
       </div>
 
       <p>간편하게 로그인하고 즐겨요!</p>

@@ -11,13 +11,14 @@
 
     .title {
       padding: 2px;
-      @include m.flexbox(between, end);
-      gap: 7px;
+      @include m.flexbox(between);
+      gap: 6px;
+
       h3 {
         font-size: var(--font-size-m);
       }
       p {
-        font-size: var(--font-size-s);
+        font-size: 0.9rem;
       }
     }
 
@@ -30,6 +31,7 @@
         font-size: var(--font-size-s);
         font-weight: var(--font-weight-bold);
         color: var(--font-color);
+        user-select: none;
       }
     }
   }

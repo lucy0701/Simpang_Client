@@ -61,7 +61,7 @@ const CommentItem = ({ contentId, comment, user }: Props) => {
             <p>{comment.user?.name}</p>
             <p className={styles.createTime}>{getTimeDifference(comment.updatedAt)}</p>
             {comment.updatedAt !== comment.createdAt && (
-              <p className={styles.createTime}>• 수정 됨</p>
+              <p className={styles.createTime}> ⋆ 수정됨</p>
             )}
           </div>
 

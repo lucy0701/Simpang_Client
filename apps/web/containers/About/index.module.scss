@@ -2,7 +2,6 @@
 
 .wrap {
   text-align: center;
-
   padding: 20px;
 
   .contentWrap {
@@ -19,7 +18,8 @@
 
     h2 {
       width: 100%;
-      font-size: var(--font-size-l);
+      font-size: 1.1rem;
+      padding: 2px;
       border-radius: var(--border-radius-m);
       background-color: var(--color-bg-yellow);
     }
@@ -29,6 +29,9 @@
       margin: 8px;
       line-height: 1.7;
     }
+  }
+  .contentBox {
+    width: 100%;
   }
 
   .iconBox {
