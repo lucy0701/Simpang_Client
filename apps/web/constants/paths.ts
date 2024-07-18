@@ -21,5 +21,6 @@ export const PATHS = {
 
 export const EXTERNAL_Link = {
   GITHUB: 'https://github.com/lucy0701/Simpang_Client',
-  INSTAGRAM: 'https://www.instagram.com/use_client',
+  INSTAGRAM: 'https://www.instagram.com/s.pang',
+  THUMBNAIL: 'https://i.ibb.co/BtMXBc9/Watercolor-For-Procreate-V6-0.png',
 };

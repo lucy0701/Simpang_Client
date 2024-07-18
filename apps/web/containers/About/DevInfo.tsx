@@ -9,14 +9,18 @@ import WindowStyle from '@/components/WindowStyles';
 export default function DevInfo() {
   return (
     <main className={styles.wrap}>
-      <WindowStyle>
+      <WindowStyle title="KIM HI">
         <div className={styles.contentWrap}>
           <Image
             className={styles.logoIcon}
-            src="/images/my_char.png"
+            src={EXTERNAL_Link.THUMBNAIL}
             alt="logo"
-            width={130}
-            height={130}
+            width={200}
+            height={300}
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+            }}
           />
 
           <div className={styles.iconBox}>
@@ -27,8 +31,6 @@ export default function DevInfo() {
               <div className={styles.instagramIcon} />
             </Link>
           </div>
-
-          <p>© 2024 Simpang. All rights reserved</p>
         </div>
       </WindowStyle>
     </main>
