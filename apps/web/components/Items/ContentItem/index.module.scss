@@ -43,6 +43,10 @@ $icon-size: 0.8rem;
         @include m.flexbox(between);
         gap: 0.3rem;
 
+        span {
+          margin-top: -3px;
+        }
+
         .playIcon {
           @include m.iconStyles($icon-size, $icon-size, '/svgs/play.svg');
         }
