@@ -67,11 +67,15 @@ const CommentItem = ({ contentId, comment, user }: Props) => {
 
           {(comment.user._id === user?.id || user?.role === 'Admin') && (
             <div className={styles.buttomBox}>
-              <button
-                onClick={() => (isModifying ? handlePatchComment(comment._id) : onClickModifyBtn())}
-              >
-                {isModifying ? '저장' : '수정'}
-              </button>
+              {comment.user._id === user?.id && (
+                <button
+                  onClick={() =>
+                    isModifying ? handlePatchComment(comment._id) : onClickModifyBtn()
+                  }
+                >
+                  {isModifying ? '저장' : '수정'}
+                </button>
+              )}
               <button
                 onClick={() =>
                   isModifying ? onClickModifyBtn() : handleDeleteComment(comment._id)
