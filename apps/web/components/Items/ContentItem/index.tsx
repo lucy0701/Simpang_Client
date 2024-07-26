@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -15,7 +16,7 @@ const ContentItem = ({
   likeCount,
 }: Partial<IContent>) => (
   <Link href={`${PATHS.CONTENTS.BASE}/${_id}`} className={styles.wrap}>
-    <div className={styles.imgWrap}>
+    <div className={cx(styles.imgWrap, 'back_shadow')}>
       <Image
         src={imageUrl!}
         priority
