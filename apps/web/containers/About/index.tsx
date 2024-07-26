@@ -34,7 +34,7 @@ export default function About() {
         </div>
         <Image
           className={styles.pangLogo}
-          src="/images/pang_logo.png"
+          src="/images/pang_logo_cute.png"
           alt="logo"
           width={200}
           height={200}
