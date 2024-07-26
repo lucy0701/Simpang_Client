@@ -49,6 +49,16 @@
 
   background-color: rgba(88, 88, 88, 0.357);
 
+  .logoLink {
+    margin-top: 15px;
+  }
+
+  .loginBtn {
+    @include m.borderStyles(1.5px);
+    padding: 5px;
+    background-color: var(--color-bg-ivory);
+  }
+
   > ul {
     width: 45%;
     height: 100%;
