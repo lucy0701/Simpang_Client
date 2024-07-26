@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
 
-
 import { getCommentAPI } from '@/services/comment';
 import { PageParams, IComment, DecodedToken } from '@/types';
 
@@ -56,9 +55,16 @@ const CommentList = ({ contentId, user, updateCommentCount }: Props) => {
   ) : (
     <div className={styles.wrap}>
       <div className={styles.commentWrap}>
-        {dataList?.map((comment, i) => (
-          <CommentItem key={i} contentId={contentId} comment={comment} user={user} />
-        ))}
+        {dataList && dataList.length > 0 ? (
+          dataList.map((comment, i) => (
+            <CommentItem key={i} contentId={contentId} comment={comment} user={user} />
+          ))
+        ) : (
+          <div className={styles.noComments}>
+            <h3>아직 댓글이 없어요 🥲</h3>
+            <p>제일 먼저 댓글을 달아봐요!</p>
+          </div>
+        )}
       </div>
       {isFetching && <RoundLoading />}
       {hasNextPage && (

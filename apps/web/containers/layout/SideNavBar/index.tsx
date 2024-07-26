@@ -64,12 +64,12 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
       {isMenuOpen && (
         <div className={`${styles.meunWrap} ${isOpen ? styles.open : styles.closed}`}>
           <ul ref={menuRef}>
-            <li>
+            <li className={styles.logoLink}>
               <Link href={PATHS.HOME}>
-                <Image priority alt="심팡" src="/images/pang.png" width={60} height={60}></Image>
+                <Image priority alt="심팡" src="/images/pang.png" width={60} height={60} />
               </Link>
             </li>
-            {user && (
+            {user ? (
               <li>
                 <h3 className={styles.menuTitle}>회원 전용</h3>
                 <ul>
@@ -80,7 +80,18 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
                   </li>
                 </ul>
               </li>
+            ) : (
+              <li>
+                <ul>
+                  <li className={styles.loginBtn}>
+                    <Link href={PATHS.LOGIN} onClick={onClickMenuBtn}>
+                      로그인 하기
+                    </Link>
+                  </li>
+                </ul>
+              </li>
             )}
+
             <li>
               <h3 className={styles.menuTitle}>About</h3>
               <ul>
