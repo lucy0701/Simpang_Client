@@ -23,7 +23,12 @@
       gap: 5px;
 
       .user {
-        @include m.flexbox(between);
+        @include m.flexbox(between, end);
+
+        .deleteUserBtn {
+          font-size: var(--font-size-xs);
+          color: var(--color-gray-9);
+        }
 
         .userName {
           font-size: var(--font-size-m);
@@ -37,5 +42,4 @@
       }
     }
   }
-
 }
