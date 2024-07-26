@@ -13,8 +13,9 @@ export const PATHS = {
   },
   CONTENTS: {
     BASE: '/contents',
-    REGISTER: '/contents/register',
     RAMDOM: '/contents/random',
+    REGISTER: '/contents/register',
+    SUCCESS: '/contents/register/success',
   },
   RESULTS: '/results',
 };

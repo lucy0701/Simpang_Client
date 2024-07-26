@@ -1,0 +1,20 @@
+@use 'styles/mixins' as m;
+
+.wrap {
+  width: 100%;
+  @include m.flexboxColumn();
+  gap: 20px;
+  padding: 0 0 80px;
+
+  .textBox {
+    height: 50vh;
+    @include m.flexboxColumn();
+    gap: 30px;
+  }
+
+  .btnBox {
+    width: 100%;
+    @include m.flexbox();
+    gap: 20px;
+  }
+}
