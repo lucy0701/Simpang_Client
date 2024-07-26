@@ -9,6 +9,11 @@
     margin: auto;
     padding: 20px 0;
 
+    .pangLogo{
+      background-color: var(--color-bg-yellow);
+      border-radius: 1rem;
+    }
+
     span {
       font-weight: bold;
     }

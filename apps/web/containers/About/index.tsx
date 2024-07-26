@@ -32,7 +32,13 @@ export default function About() {
           </p>
           <p>함께 즐겁고 의미 있는 여정을 떠나봐요! 🚀</p>
         </div>
-        <Image src="/images/pang.png" alt="logo" width={80} height={80} />
+        <Image
+          className={styles.pangLogo}
+          src="/images/pang_logo.png"
+          alt="logo"
+          width={200}
+          height={200}
+        />
       </div>
     </main>
   );
