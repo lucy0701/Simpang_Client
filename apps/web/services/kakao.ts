@@ -36,6 +36,12 @@ export const kakaoLogoutAPI = async () => {
   return res;
 };
 
+export const kakaoUnlinkAPI = async () => {
+  const headers = getHeaders();
+  await apiBe.delete('/oauth2/kakao/unlink', { headers });
+  removeCookie(TOKEN_NAME, { path: '/' });
+};
+
 export const shareKakaotalk = ({
   contentId,
   title,
