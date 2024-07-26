@@ -5,3 +5,13 @@
   @include m.flexboxColumn(_, _);
   gap: 20px;
 }
+.nonContent {
+  width: 100%;
+  height: 40vh;
+  @include m.flexboxColumn();
+
+  p {
+    font-size: var(--font-size-xl);
+    color: var(--color-gray-9);
+  }
+}

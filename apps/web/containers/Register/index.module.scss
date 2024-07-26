@@ -38,8 +38,19 @@
       @include m.borderStyles($radius_size: --border-radius-xs);
     }
 
+    .imageFileWrap {
+      width: 75%;
+      @include m.flexboxColumn(between);
+
+      .imageFileUrlText {
+        width: 100%;
+        font-size: var(--font-size-s);
+        margin-top: 5px;
+      }
+    }
+
     .inputFile {
-      width: 70%;
+      width: 100%;
       border: none;
       background-color: var(--color-gray-e);
     }
@@ -145,5 +156,18 @@
     margin-top: 10px;
     background-color: var(--color-bg-ivory);
     border-radius: var(--border-radius-s);
+  }
+}
+
+.jsonFileForm {
+  @include m.flexbox(center, end);
+  @include m.borderStyles($radius_size: --border-radius-xs);
+  gap: 10px;
+  margin: 20px 0;
+  padding: 10px;
+
+  .jsonFileSubmitButton {
+    width: 30%;
+    background-color: var(--color-bg-green);
   }
 }

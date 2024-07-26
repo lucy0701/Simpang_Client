@@ -26,12 +26,6 @@
     border-radius: var(--border-radius-s);
     border: 1.5px dashed transparent;
   }
-
-  &:hover {
-    p {
-      border-color: var(--border-color);
-    }
-  }
 }
 
 .small {

@@ -28,12 +28,17 @@ const ResultList = () => {
     <p>Error: {error?.message}</p>
   ) : (
     <div className={styles.resultWrap}>
-      {results &&
+      {results && results.length > 0 ? (
         results.map((data) => (
           <div key={data._id} className={styles.result} ref={lastElementRef}>
             <ResultItem {...data} />
           </div>
-        ))}
+        ))
+      ) : (
+        <div className={styles.nonContent}>
+          <p>아직 결과가 없어요 🥲</p>
+        </div>
+      )}
       {isFetching && <RoundLoading />}
     </div>
   );
