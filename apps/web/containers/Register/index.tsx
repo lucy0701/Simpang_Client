@@ -1,9 +1,10 @@
 'use client';
 
 import cx from 'classnames';
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 
-import { CONTENT_TYPE } from '@/constants';
+import { CONTENT_TYPE, PATHS } from '@/constants';
 import { apiBe, getHeaders } from '@/services';
 import { uploadToImageBB } from '@/services/upload';
 import { ContentType, IQuestion } from '@/types';
@@ -60,7 +61,6 @@ const MBTI_QUESTIONS_TYPE = [
   ['P', 'J'],
 ];
 
-// TODO : 전송 완료 표시
 export default function Register() {
   const [content, setContent] = useState<ContentData>({
     type: 'MBTI',
@@ -87,6 +87,8 @@ export default function Register() {
   ]);
 
   const [results, setResults] = useState<ResultData[]>(initialResults);
+
+  const router = useRouter();
 
   const handleInputChange = (value: string | number, field: string) => {
     setContent((prev) => ({ ...prev, [field]: value }));
@@ -205,14 +207,14 @@ export default function Register() {
     };
 
     try {
-      const response = await apiBe.post('/v1/contents', contentData, {
+      await apiBe.post('/v1/contents', contentData, {
         headers: {
           ...headers,
           'Content-Type': 'application/json',
         },
       });
 
-      return response;
+      router.push(PATHS.CONTENTS.SUCCESS);
     } catch (error) {
       throw new Error('Failed to fetch data');
     }

@@ -1,6 +1,8 @@
 import cx from 'classnames';
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 
+import { PATHS } from '@/constants';
 import { apiBe, getHeaders } from '@/services';
 import { IContent } from '@/types';
 
@@ -8,10 +10,10 @@ import styles from './index.module.scss';
 
 const JsonFileUpload = () => {
   const [jsonData, setJsonData] = useState<IContent>();
+  const router = useRouter();
 
   const handleJSON = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? null;
-
     const reader = new FileReader();
 
     reader.onload = (e) => {
@@ -28,14 +30,14 @@ const JsonFileUpload = () => {
     const headers = getHeaders();
 
     try {
-      const response = await apiBe.post('/v1/contents', jsonData, {
+      await apiBe.post('/v1/contents', jsonData, {
         headers: {
           ...headers,
           'Content-Type': 'application/json',
         },
       });
 
-      return response;
+      router.push(PATHS.CONTENTS.SUCCESS);
     } catch (error) {
       throw new Error('Failed to fetch data');
     }
