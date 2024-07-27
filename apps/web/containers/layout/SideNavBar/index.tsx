@@ -82,7 +82,7 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
                 <ul>
                   <li>
                     <Link href={PATHS.MY_PAGE} onClick={onClickMenuBtn}>
-                      mypage
+                      마이페이지
                     </Link>
                   </li>
                 </ul>
