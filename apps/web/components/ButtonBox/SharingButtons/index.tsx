@@ -1,7 +1,6 @@
 'use client';
 
 import { shareKakaotalk, shareKakaotalkResult } from '@/services';
-import { postShareAPI } from '@/services/contents';
 
 import { ContentData, ResultData } from '../IconButtons';
 import Button from '@/components/Buttons/Button';
@@ -28,7 +27,6 @@ export const KakaoSharingBtn = ({ contentData }: ContentData) => {
       likeCount,
       commentCount,
     });
-    postShareAPI({ contentId, type: 'Kakao' });
   };
 
   return (
@@ -56,7 +54,6 @@ export const ResultKakaoSharingBtn = ({ resultData }: ResultData) => {
       imageUrl: defaultImageUrl,
       description,
     });
-    postShareAPI({ contentId, type: 'Kakao' });
   };
 
   return <Button text="공유하기" size="medium" onClick={onClickRsultShareBtn} />;

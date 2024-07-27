@@ -33,6 +33,7 @@ export interface IResult {
 export interface IUserResult {
   _id: string;
   contentId: string;
+  contentTitle: string;
   results: {
     _id: string;
     title: string;
