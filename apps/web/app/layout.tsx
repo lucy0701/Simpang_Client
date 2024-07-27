@@ -1,5 +1,6 @@
 import '../styles/_globals.scss';
 import { Noto_Sans_KR } from 'next/font/google';
+import Script from 'next/script';
 
 import type { Metadata } from 'next';
 
@@ -61,6 +62,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <Script strategy="afterInteractive" id="gtm-script">
+          {`
+            (function(w, d, s, l, i) {
+              w[l] = w[l] || [];
+              w[l].push({'gtm.start':
+                new Date().getTime(), event: 'gtm.js'});
+              var f = d.getElementsByTagName(s)[0],
+                  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+              j.async = true;
+              j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+              f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-WCT3PX2H');
+          `}
+        </Script>
         <meta
           name="google-site-verification"
           content="HFApnmNt0MJobDHpjw9go06M0GkuMMZFG4fXvljTkQs"
@@ -74,6 +89,14 @@ export default function RootLayout({
         />
       </head>
       <body className={notoSansKr.className}>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WCT3PX2H"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+        </noscript>
         <ReactQueryProviders>
           <div className="mediaquery_wrap">
             <Header />
