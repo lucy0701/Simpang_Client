@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { PATHS } from '@/constants';
-import { postShareAPI } from '@/services/contents';
+// import { postShareAPI } from '@/services/contents';
 import { getLikeAPI, postLikeAPI } from '@/services/like';
 import { IContent, IResult } from '@/types';
 import { decodeToken_csr } from '@/utils';
@@ -103,7 +103,7 @@ export const LikeButton = ({ contentId }: Props) => {
   );
 };
 
-export const LinkButton = ({ contentId }: Props) => {
+export const LinkButton = () => {
   const [linkCopyCommand, setLinkCopyCommand] = useState('링크 복사');
   const [copyLink, setCopyLink] = useState('');
   const [active, setActive] = useState(false);
@@ -117,7 +117,6 @@ export const LinkButton = ({ contentId }: Props) => {
       await navigator.clipboard.writeText(copyLink);
       setLinkCopyCommand('복사 완료');
       setActive(true);
-      postShareAPI({ contentId, type: 'Link' });
       setTimeout(() => {
         setLinkCopyCommand('링크 복사');
         setActive(false);
@@ -134,7 +133,7 @@ export const LinkButton = ({ contentId }: Props) => {
       text={linkCopyCommand}
       state={active}
       iconSrc="/svgs/link.svg"
-      altText="좋아요 버튼"
+      altText="링크복사 버튼"
     />
   );
 };
