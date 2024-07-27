@@ -7,11 +7,6 @@ export interface PostResultParams {
   scores: number[];
 }
 
-interface Props {
-  contentId: string;
-  type: 'Kakao' | 'Link';
-}
-
 export const getContentsAPI = (params: PageParams) =>
   apiBe<GetPageData<IContent>>(`/v1/contents`, { params });
 
@@ -29,10 +24,6 @@ export const postResultAPI = async ({ contentId, scores }: PostResultParams): Pr
   return res.data;
 };
 
-export const postShareAPI = async ({ contentId, type }: Props) => {
-  const headers = getHeaders();
-  await apiBe.post(`/v1/shares/${contentId}?type=${type}`, {}, { headers });
-};
 
 export const getRandomContentAPI = async ({ size }: { size: number }) => {
   const res = await apiBe<IContent[]>(`/v1/contents/random?size=${size}`);

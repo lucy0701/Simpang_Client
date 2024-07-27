@@ -8,7 +8,7 @@ export const IconButtonBox = ({ contentData }: ContentData) => (
   <div className={cx(styles.btnBox, styles.baseBox)}>
     <LikeButton contentId={contentData._id} />
     <KakaoSharingBtn contentData={contentData} />
-    <LinkButton contentId={contentData._id} />
+    <LinkButton />
   </div>
 );
 
@@ -16,6 +16,6 @@ export const ResultIconButtonBox = ({ resultData }: ResultData) => (
   <div className={cx(styles.btnBox, styles.resultBox)}>
     <LikeButton contentId={resultData.contentId} />
     <ReplayButton contentId={resultData.contentId} />
-    <LinkButton contentId={resultData.contentId} />
+    <LinkButton />
   </div>
 );
