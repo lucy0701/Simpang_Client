@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import { PATHS } from '@/constants';
@@ -16,6 +17,7 @@ interface Props {
 export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>();
   const menuRef = useRef<HTMLUListElement>(null);
+  const router = useRouter();
 
   const queryClient = useQueryClient();
   const user = decodeToken_csr();
@@ -32,6 +34,11 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
 
   const onClickLogoutBtn = () => {
     kakaoLogout();
+    onClickMenuBtn();
+  };
+
+  const onClickHomeLogoBtn = () => {
+    router.push(PATHS.HOME);
     onClickMenuBtn();
   };
 
@@ -65,9 +72,9 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
         <div className={`${styles.meunWrap} ${isOpen ? styles.open : styles.closed}`}>
           <ul ref={menuRef}>
             <li className={styles.logoLink}>
-              <Link href={PATHS.HOME}>
+              <button onClick={onClickHomeLogoBtn}>
                 <Image priority alt="심팡" src="/images/pang.png" width={60} height={60} />
-              </Link>
+              </button>
             </li>
             {user ? (
               <li>
