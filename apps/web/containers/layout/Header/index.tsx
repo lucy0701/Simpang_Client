@@ -3,7 +3,6 @@
 import cx from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { PATHS, SIMPANG_ALT } from '@/constants';
@@ -14,7 +13,6 @@ import SideNavBar from '../SideNavBar';
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDown, setIsDown] = useState<boolean>(false);
-  const router = useRouter();
 
   const onClickMenuBtn = () => {
     setIsOpen(!isOpen);
@@ -40,9 +38,7 @@ export default function Header() {
       <SideNavBar isOpen={isOpen} onClickMenuBtn={onClickMenuBtn} />
 
       <div className={styles.headerBox}>
-        <div className={styles.btnBox}>
-          <button className={styles.menuBtn} onClick={onClickMenuBtn} />
-        </div>
+        <button className={styles.menuBtn} onClick={onClickMenuBtn} />
 
         <Link className={styles.logo} href={PATHS.HOME}>
           <h1>심팡</h1>
@@ -53,9 +49,7 @@ export default function Header() {
           </div>
         </Link>
 
-        <div className={styles.btnBox}>
-          <button className={styles.searchBtn} />
-        </div>
+        {/* <button className={styles.searchBtn} /> */}
       </div>
     </header>
   );
