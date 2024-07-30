@@ -38,6 +38,7 @@ $button-size: 1.2rem;
         position: absolute;
         left: calc(50% - 100px);
       }
+
       .scrollDownLogo {
         width: 140px;
         height: 60px;
@@ -56,14 +57,10 @@ $button-size: 1.2rem;
     .menuBtn {
       @include m.iconStyles($button-size, $button-size, '/svgs/menu.svg');
     }
-    .loginBtn {
-      @include m.iconStyles($button-size, $button-size, '/svgs/login.svg');
-    }
   }
 }
 
 .scrollDown {
   height: 90px;
   background: linear-gradient(to bottom, var(--color-bg-pink) 60%, transparent);
-
 }
