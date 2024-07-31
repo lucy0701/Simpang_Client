@@ -11,7 +11,7 @@
 
   .contents {
     @include m.flexboxColumn(_, between);
-    gap: 20px;
+    gap: 30px;
     .clientArea {
       @include m.flexbox();
     }

@@ -1,6 +1,6 @@
 @use 'styles/mixins' as m;
 
-$icon-size: 0.8rem;
+$icon-size: 0.9rem;
 
 .wrap {
   width: 100%;
@@ -26,16 +26,16 @@ $icon-size: 0.8rem;
   .contentBox {
     @include m.flexbox(between, end);
     gap: 1rem;
-    padding: 3px 10px;
+    padding: 5px 10px;
 
     .title {
-      font-size: var(--font-size-m);
+      font-size: var(--font-size-l);
       @include m.textEllipsis();
       font-weight: var(--font-weight-bold);
     }
 
     .countBox {
-      font-size: var(--font-size-s);
+      font-size: 1rem;
       @include m.flexbox(between);
       gap: 0.8rem;
 
@@ -44,7 +44,7 @@ $icon-size: 0.8rem;
         gap: 0.3rem;
 
         span {
-          margin-top: -3px;
+          margin-top: -2px;
         }
 
         .playIcon {
