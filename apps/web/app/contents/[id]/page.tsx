@@ -1,7 +1,30 @@
+import { Metadata, ResolvingMetadata } from 'next';
+
 import { BE_URL } from '@/constants';
+import { METADATA } from '@/constants';
 import { IContent } from '@/types';
 
 import ContentContainer from '@/containers/ContentContainers';
+
+type Props = {
+  params: { id: string };
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const contentData = await getData(params.id);
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: METADATA.title + ' | ' + contentData.title,
+    description: contentData.content,
+    openGraph: {
+      images: [contentData.imageUrl, ...previousImages],
+    },
+  };
+}
 
 async function getData(id: string): Promise<IContent> {
   const res = await fetch(`${BE_URL}/api/v1/contents/${id}`, { cache: 'no-store' });
@@ -11,7 +34,7 @@ async function getData(id: string): Promise<IContent> {
   return res.json();
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: Props) {
   const contentData = await getData(params.id);
   return <ContentContainer contentData={contentData} />;
 }

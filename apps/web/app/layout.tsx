@@ -2,16 +2,14 @@ import '../styles/_globals.scss';
 import { Noto_Sans_KR } from 'next/font/google';
 import Script from 'next/script';
 
+import { METADATA } from '@/constants';
 import type { Metadata } from 'next';
 
 import ReactQueryProviders from '@/components/ReactQueryProviders';
 import Footer from '@/containers/layout/Footer';
 import Header from '@/containers/layout/Header';
 
-const description = '심심할땐 심팡! 심리테스트, MBTI, 다양하게 즐겨봐!';
-const imageUrl = 'https://i.ibb.co/BqTn4By/og-image.jpg';
-const title = '심팡';
-const url = new URL('https://simpang.kr');
+const { title, description, imageUrl, url } = METADATA;
 
 export const metadata: Metadata = {
   metadataBase: url,
