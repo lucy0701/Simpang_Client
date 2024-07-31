@@ -2,21 +2,23 @@ import '../styles/_globals.scss';
 import { Noto_Sans_KR } from 'next/font/google';
 import Script from 'next/script';
 
+import { METADATA } from '@/constants';
 import type { Metadata } from 'next';
 
 import ReactQueryProviders from '@/components/ReactQueryProviders';
 import Footer from '@/containers/layout/Footer';
 import Header from '@/containers/layout/Header';
 
-const description = '심심할땐 심팡! 심리테스트, MBTI, 다양하게 즐겨봐!';
-const imageUrl = 'https://i.ibb.co/BqTn4By/og-image.jpg';
-const title = '심팡';
-const url = new URL('https://simpang.kr');
+const { title, description, imageUrl, url } = METADATA;
 
 export const metadata: Metadata = {
   metadataBase: url,
   title,
   description,
+  verification: {
+    google: 'HFApnmNt0MJobDHpjw9go06M0GkuMMZFG4fXvljTkQs',
+    other: { 'naver-site-verification': 'd247534d9de576f74edc6b0b3eabf55b3350835c' },
+  },
   icons: {
     icon: '/favicon.ico',
   },
@@ -62,25 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script strategy="afterInteractive" id="gtm-script">
-          {`
-            (function(w, d, s, l, i) {
-              w[l] = w[l] || [];
-              w[l].push({'gtm.start':
-                new Date().getTime(), event: 'gtm.js'});
-              var f = d.getElementsByTagName(s)[0],
-                  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-              j.async = true;
-              j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-              f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-WCT3PX2H');
-          `}
-        </Script>
-        <meta
-          name="google-site-verification"
-          content="HFApnmNt0MJobDHpjw9go06M0GkuMMZFG4fXvljTkQs"
-        />
-        <meta name="naver-site-verification" content="d247534d9de576f74edc6b0b3eabf55b3350835c" />
+        <Script src="/scripts/gtm-script.js" strategy="afterInteractive" />
         <script
           async
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.js"
