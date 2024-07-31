@@ -1,7 +1,6 @@
 import { Metadata, ResolvingMetadata } from 'next';
 
-import { BE_URL } from '@/constants';
-import { METADATA } from '@/constants';
+import { BE_URL, METADATA } from '@/constants';
 import { IContent } from '@/types';
 
 import ContentContainer from '@/containers/ContentContainers';
@@ -18,7 +17,7 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: METADATA.title + ' | ' + contentData.title,
+    title: contentData.title + 'ㅤ|ㅤ' + METADATA.title,
     description: contentData.content,
     openGraph: {
       images: [contentData.imageUrl, ...previousImages],
