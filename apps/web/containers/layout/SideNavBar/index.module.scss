@@ -50,13 +50,7 @@
   background-color: rgba(88, 88, 88, 0.357);
 
   .logoLink {
-    margin-top: 15px;
-  }
-
-  .loginBtn {
-    @include m.borderStyles(1.5px);
-    padding: 5px;
-    background-color: var(--color-bg-ivory);
+    margin: 20px 0;
   }
 
   > ul {
@@ -66,39 +60,55 @@
     position: relative;
 
     @include m.flexboxColumn(start);
-    gap: 20px;
+    gap: 15px;
 
     background-color: var(--color-white);
     box-shadow: 10px 0 10px -5px rgba(85, 85, 85, 0.1);
 
+    .loginLink {
+      @include m.borderStyles(1.5px);
+      background-color: var(--color-bg-ivory);
+      padding: 5px;
+      margin: 15px 0;
+      @include m.flexbox();
+
+      a {
+        @include m.flexbox();
+      }
+    }
+
     li {
       width: 100%;
-      @include m.flexboxColumn();
-      gap: 8px;
+      @include m.flexboxColumn(start, center);
 
-      ul {
+      a {
         width: 100%;
-        @include m.flexboxColumn();
+        font-size: 1.2rem;
+        @include m.flexbox(start);
         gap: 8px;
-
-        a {
-          width: 100%;
-          font-size: var(--font-size-m);
-          text-align: center;
-        }
       }
 
-      .menuTitle {
-        font-size: var(--font-size-l);
+      .ghostIcon {
+        @include m.iconStyles(1rem, 1rem, '/svgs/ghost.svg');
+      }
+
+      .infoIcon {
+        @include m.iconStyles(1rem, 1rem, '/svgs/info.svg');
+      }
+
+      .mypageIcon {
+        @include m.iconStyles(1rem, 1rem, '/svgs/user.svg');
       }
     }
   }
+
   .logoutBtn {
-    width: 50%;
+    width: 60%;
     height: 30px;
 
     position: absolute;
     bottom: 30px;
+    font-size: 1rem;
 
     @include m.flexbox(around);
     @include m.borderStyles(1.5px);

@@ -37,6 +37,10 @@
       width: 100%;
       @include m.flexboxColumn();
       gap: 5px;
+
+      span {
+        font-weight: var(--font-weight-bold);
+      }
     }
   }
 }

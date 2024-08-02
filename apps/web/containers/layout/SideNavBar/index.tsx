@@ -78,41 +78,29 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
             </li>
             {user ? (
               <li>
-                <h3 className={styles.menuTitle}>회원 전용</h3>
-                <ul>
-                  <li>
-                    <Link href={PATHS.MY_PAGE} onClick={onClickMenuBtn}>
-                      마이페이지
-                    </Link>
-                  </li>
-                </ul>
+                <Link href={PATHS.MY_PAGE} onClick={onClickMenuBtn}>
+                  <div className={styles.mypageIcon} />
+                  마이페이지
+                </Link>
               </li>
             ) : (
-              <li>
-                <ul>
-                  <li className={styles.loginBtn}>
-                    <Link href={PATHS.LOGIN} onClick={onClickMenuBtn}>
-                      로그인 하기
-                    </Link>
-                  </li>
-                </ul>
+              <li className={styles.loginLink}>
+                <Link href={PATHS.LOGIN} onClick={onClickMenuBtn}>
+                  로그인 하기
+                </Link>
               </li>
             )}
-
             <li>
-              <h3 className={styles.menuTitle}>About</h3>
-              <ul>
-                <li>
-                  <Link href={PATHS.ABOUT.SITE_INFO} onClick={onClickMenuBtn}>
-                    심팡 소개
-                  </Link>
-                </li>
-                <li>
-                  <Link href={PATHS.ABOUT.DEV_INFO} onClick={onClickMenuBtn}>
-                    개발자 소개
-                  </Link>
-                </li>
-              </ul>
+              <Link href={PATHS.ABOUT.SITE_INFO} onClick={onClickMenuBtn}>
+                <div className={styles.infoIcon} />
+                심팡 소개
+              </Link>
+            </li>
+            <li>
+              <Link href={PATHS.ABOUT.DEV_INFO} onClick={onClickMenuBtn}>
+                <div className={styles.ghostIcon} />
+                개발자 소개
+              </Link>
             </li>
             {user && (
               <li>

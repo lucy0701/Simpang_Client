@@ -2,8 +2,8 @@
 
 .wrap {
   width: 100%;
-  @include m.flexboxColumn(_);
-  gap: 30px;
+  @include m.flexboxColumn(between);
+  gap: 25px;
 
   .userWrap {
     width: 80%;
@@ -25,11 +25,6 @@
       .user {
         @include m.flexbox(between, end);
 
-        .deleteUserBtn {
-          font-size: var(--font-size-xs);
-          color: var(--color-gray-9);
-        }
-
         .userName {
           font-size: var(--font-size-m);
         }
@@ -39,7 +34,21 @@
           padding: 1px 5px;
           @include m.borderStyles();
         }
+
+        .createdAt {
+          font-size: var(--font-size-s);
+        }
       }
+    }
+  }
+
+  .windowWrap {
+    width: 100%;
+
+    .deleteUserBtn {
+      margin-top: 10px;
+      font-size: var(--font-size-s);
+      color: var(--color-gray-9);
     }
   }
 }
