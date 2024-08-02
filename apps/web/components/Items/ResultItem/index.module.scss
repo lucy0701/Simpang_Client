@@ -17,7 +17,6 @@
     h2 {
       @include m.textEllipsis();
       font-size: var(--font-size-m);
-      width: 80%;
       overflow: hidden;
       font-weight: 500;
       color: var(--color-white);
