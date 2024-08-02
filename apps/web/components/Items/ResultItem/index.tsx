@@ -10,6 +10,11 @@ import styles from './index.module.scss';
 const ResultItem = ({ contentTitle, results, createdAt }: IUserResult) => (
   <Link href={`${PATHS.RESULTS}/${results._id}`} className={styles.wrap}>
     <div className={styles.resultItemWrap}>
+      <div className={styles.contentBox}>
+        <h3 className={styles.title}>{results.title}</h3>
+        <p className={styles.content}>{results.content}</p>
+      </div>
+
       <div className={styles.imgWrap}>
         <Image
           src={results!.imageUrl!}
@@ -22,12 +27,8 @@ const ResultItem = ({ contentTitle, results, createdAt }: IUserResult) => (
           className={styles.image}
         />
       </div>
-
-      <div className={styles.contentBox}>
-        <h3 className={styles.title}>{results.title}</h3>
-        <p className={styles.content}>{results.content}</p>
-      </div>
     </div>
+
     <div className={styles.titleWrap}>
       <h2>{contentTitle}</h2>
       <span className={styles.date}>{dateSplit(createdAt)}</span>

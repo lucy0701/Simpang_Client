@@ -14,23 +14,33 @@
       width: 100%;
       height: 100%;
       padding: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--font-color);
     }
 
     .commentInput {
-      width: 73%;
-      padding: 10px;
+      width: 70%;
+      padding: 8px;
     }
     .textCount {
       text-align: end;
-      width: 10%;
-      font-size: var(--font-size-xs);
+      width: 15%;
+      padding: 2px;
+      font-size: 0.7rem;
+      color: var(--color-gray-9);
     }
 
     .submitBtn {
-      width: 15%;
+      width: 12%;
       height: 36px;
       border-left: 2px solid var(--border-color);
       background-color: var(--color-bg-yellow);
+
+      .submitBtnIcon {
+        margin: auto;
+        @include m.iconStyles(1.2rem, 1.2rem, '/svgs/submit.svg');
+      }
     }
   }
 }

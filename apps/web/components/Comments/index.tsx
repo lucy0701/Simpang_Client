@@ -67,7 +67,7 @@ const Comments = ({ contentId }: Props) => {
               />
               <p className={styles.textCount}> {text.length} / 100</p>
               <button className={styles.submitBtn} onClick={() => handlePostComment()}>
-                저장
+                <div className={styles.submitBtnIcon} />
               </button>
             </>
           ) : (

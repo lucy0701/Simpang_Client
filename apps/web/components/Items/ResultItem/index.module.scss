@@ -2,6 +2,7 @@
 
 .wrap {
   position: relative;
+  width: 100%;
 
   .titleWrap {
     width: 100%;
@@ -68,7 +69,7 @@
         height: 70%;
         font-size: 0.9rem;
 
-        overflow: hidden;
+        overflow: auto;
         word-wrap: break-word;
         word-break: keep-all;
         text-overflow: ellipsis;
