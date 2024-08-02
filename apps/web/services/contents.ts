@@ -24,7 +24,6 @@ export const postResultAPI = async ({ contentId, scores }: PostResultParams): Pr
   return res.data;
 };
 
-
 export const getRandomContentAPI = async ({ size }: { size: number }) => {
   const res = await apiBe<IContent[]>(`/v1/contents/random?size=${size}`);
   return res.data;
