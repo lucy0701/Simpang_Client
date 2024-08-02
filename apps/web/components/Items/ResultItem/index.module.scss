@@ -4,29 +4,6 @@
   position: relative;
   width: 100%;
 
-  .titleWrap {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    padding: 5px 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 0 0 0.5rem 0.5rem;
-
-    @include m.flexbox(between);
-
-    h2 {
-      @include m.textEllipsis();
-      font-size: var(--font-size-m);
-      overflow: hidden;
-      font-weight: 500;
-      color: var(--color-white);
-    }
-    .date {
-      font-size: var(--font-size-s);
-      color: var(--color-gray-c);
-    }
-  }
-
   .resultItemWrap {
     width: 100%;
     height: 245px;
@@ -74,5 +51,29 @@
         text-overflow: ellipsis;
       }
     }
+  }
+}
+
+.titleWrap {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 0 0 0.5rem 0.5rem;
+
+  @include m.flexbox(between);
+
+  .contentTitle {
+    width: 100%;
+    @include m.textEllipsis();
+    font-size: var(--font-size-m);
+    overflow: hidden;
+    font-weight: 500;
+    color: var(--color-white);
+  }
+  .date {
+    font-size: var(--font-size-s);
+    color: var(--color-gray-c);
   }
 }

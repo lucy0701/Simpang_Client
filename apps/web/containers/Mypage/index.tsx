@@ -99,8 +99,8 @@ export default function Mypage() {
     <WindowStyle>
       <div className={styles.nonLoginContainer}>
         <h2 className={styles.nonLoginText}>로그인이 필요합니다.</h2>
-        <Button color="yellow" text="홈으로" />
-        <Button color="yellow" text="로그인 하기" />
+        <Button onClick={() => router.push(PATHS.HOME)} color="yellow" text="홈으로" />
+        <Button onClick={() => router.push(PATHS.LOGIN)} color="yellow" text="로그인 하기" />
       </div>
     </WindowStyle>
   );
