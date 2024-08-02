@@ -49,58 +49,59 @@ export default function Mypage() {
 
   return isLoading ? (
     <Loading />
-  ) : (
-    user && (
-      <>
-        <div className={styles.wrap}>
-          <div className={styles.userWrap}>
-            <Image alt={SIMPANG_ALT + '유저 프로필'} src={user.thumbnail} width={50} height={50} />
+  ) : user ? (
+    <>
+      <div className={styles.wrap}>
+        <div className={styles.userWrap}>
+          <Image alt={SIMPANG_ALT + '유저 프로필'} src={user.thumbnail} width={50} height={50} />
 
-            <div className={styles.userInfo}>
-              <div className={styles.user}>
-                <p className={styles.userName}>{user.name}</p>
-                <p className={styles.roleTag}>{user.role}</p>
-              </div>
-
-              <div className={styles.user}>
-                <p className={styles.createdAt}>{dateSplit(user.createdAt)}</p>
-              </div>
+          <div className={styles.userInfo}>
+            <div className={styles.user}>
+              <p className={styles.userName}>{user.name}</p>
+              <p className={styles.roleTag}>{user.role}</p>
             </div>
-          </div>
 
-          {(user.role === 'Admin' || user.role === 'Creator') && (
-            <Button
-              color="yellow"
-              size="medium"
-              text={'컨텐츠 만들기'}
-              onClick={onClikeCreateBtn}
-            />
-          )}
-
-          <div className={styles.windowWrap}>
-            <WindowStyle title="나의 결과 목록">
-              <ResultList />
-            </WindowStyle>
-
-            <button className={styles.deleteUserBtn} onClick={handleModal}>
-              회원 탈퇴
-            </button>
+            <div className={styles.user}>
+              <p className={styles.createdAt}>{dateSplit(user.createdAt)}</p>
+            </div>
           </div>
         </div>
 
-        <FloatBtnBox />
+        {(user.role === 'Admin' || user.role === 'Creator') && (
+          <Button color="yellow" size="medium" text={'컨텐츠 만들기'} onClick={onClikeCreateBtn} />
+        )}
 
-        <ModalPortal>
-          <ModalContent
-            title="회원 탈퇴"
-            content={`회원 탈퇴시 \n 모든 데이터가 삭제됩니다.\n 탈퇴 하시겠습니까? 🥺`}
-            buttonText="탈퇴하기"
-            onClickCheckBtn={onClikeDeleteUserBtn}
-            onClickCancelBtn={handleModal}
-            showModal={showModal}
-          />
-        </ModalPortal>
-      </>
-    )
+        <div className={styles.windowWrap}>
+          <WindowStyle title="나의 결과 목록">
+            <ResultList />
+          </WindowStyle>
+
+          <button className={styles.deleteUserBtn} onClick={handleModal}>
+            회원 탈퇴
+          </button>
+        </div>
+      </div>
+
+      <FloatBtnBox />
+
+      <ModalPortal>
+        <ModalContent
+          title="회원 탈퇴"
+          content={`회원 탈퇴시 \n 모든 데이터가 삭제됩니다.\n 탈퇴 하시겠습니까? 🥺`}
+          buttonText="탈퇴하기"
+          onClickCheckBtn={onClikeDeleteUserBtn}
+          onClickCancelBtn={handleModal}
+          showModal={showModal}
+        />
+      </ModalPortal>
+    </>
+  ) : (
+    <WindowStyle>
+      <div className={styles.nonLoginContainer}>
+        <h2 className={styles.nonLoginText}>로그인이 필요합니다.</h2>
+        <Button color="yellow" text="홈으로" />
+        <Button color="yellow" text="로그인 하기" />
+      </div>
+    </WindowStyle>
   );
 }
