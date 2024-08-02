@@ -29,7 +29,9 @@ export default function ContentPreview({ contentData, onClickPlayBtn }: Props) {
         </div>
         <div className={styles.playBtnWrap}>
           <Button size="medium" text="시작하기" onClick={onClickPlayBtn} />
-          <p>지금까지 {count.playCount}명이 함께 했어요!</p>
+          <p>
+            지금까지 <span>{count.playCount}</span>명이 함께 했어요!
+          </p>
         </div>
       </div>
 
