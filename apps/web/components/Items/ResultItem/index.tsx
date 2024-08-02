@@ -30,7 +30,7 @@ const ResultItem = ({ contentTitle, results, createdAt }: IUserResult) => (
     </div>
 
     <div className={styles.titleWrap}>
-      <h2>{contentTitle}</h2>
+      <h2 className={styles.contentTitle}>{contentTitle}</h2>
       <span className={styles.date}>{dateSplit(createdAt)}</span>
     </div>
   </Link>
