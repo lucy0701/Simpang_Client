@@ -21,12 +21,12 @@
 
     th,
     td {
-      padding: 8px 15px;
+      padding: 10px 15px;
       border: 1.5px solid var(--color-bg-ivory);
     }
 
     .iconTd {
-      width: 40px;
+      width: 30px;
       text-align: center;
     }
 
@@ -49,11 +49,11 @@
 
   .updateIcon {
     margin: auto;
-    @include m.iconStyles(0.9rem, 0.9rem, '/svgs/update.svg');
+    @include m.iconStyles(0.8rem, 0.8rem, '/svgs/update.svg');
   }
   .noticeIcon {
     margin: auto;
-    @include m.iconStyles(0.9rem, 0.9rem, '/svgs/bullhorn.svg');
+    @include m.iconStyles(0.8rem, 0.8rem, '/svgs/bullhorn.svg');
   }
 }
 
