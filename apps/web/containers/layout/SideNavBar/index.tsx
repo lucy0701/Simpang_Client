@@ -91,6 +91,12 @@ export default function SideNavBar({ isOpen, onClickMenuBtn }: Props) {
               </li>
             )}
             <li>
+              <Link href={PATHS.NOTICES.BASE} onClick={onClickMenuBtn}>
+                <div className={styles.noticeIcon} />
+                공지 사항
+              </Link>
+            </li>
+            <li>
               <Link href={PATHS.ABOUT.SITE_INFO} onClick={onClickMenuBtn}>
                 <div className={styles.infoIcon} />
                 심팡 소개

@@ -15,7 +15,7 @@ export const getResultAPI = (resultId: string) => apiBe<IResult>(`/v1/results/${
 export const getUserResultsAPI = async (params: PageParams) => {
   const headers = getHeaders();
   const res = await apiBe<GetPageData<IUserResult>>(`/v1/results`, { params, headers });
-  return res;
+  return res.data;
 };
 
 export const postResultAPI = async ({ contentId, scores }: PostResultParams): Promise<IResult> => {

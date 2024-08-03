@@ -1,7 +1,6 @@
 'use client';
 
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import cx from 'classnames';
 import { useState } from 'react';
 
 import { getUserResultsAPI } from '@/services/contents';
@@ -9,6 +8,7 @@ import { getUserResultsAPI } from '@/services/contents';
 import styles from './index.module.scss';
 import ResultItem from '@/components/Items/ResultItem';
 import { Loading } from '@/components/Loading';
+import PageNavigator from '@/components/PageNavigator';
 
 const ResultList = () => {
   const [page, setPage] = useState(1);
@@ -23,24 +23,10 @@ const ResultList = () => {
     placeholderData: keepPreviousData,
   });
 
-  const dataList = results?.data.data;
-  const totalPages = results?.data.totalPage || 0;
+  const dataList = results?.data;
+  const totalPages = results?.totalPage || 0;
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handlePreviousPage = () => {
-    if (page > 1) {
-      setPage((prev) => prev - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (page < totalPages) {
-      setPage((prev) => prev + 1);
-    }
-  };
+  const handlePage = (pageNum: number) => setPage(pageNum);
 
   return status === 'pending' ? (
     <Loading />
@@ -59,27 +45,7 @@ const ResultList = () => {
           <p>아직 결과가 없어요 🥲</p>
         </div>
       )}
-      <div className={styles.pagination}>
-        <button onClick={handlePreviousPage} disabled={page === 1} className={styles.pageButton}>
-          &lt; 이전
-        </button>
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-          <button
-            key={pageNum}
-            className={page === pageNum ? styles.activePage : ''}
-            onClick={() => handlePageChange(pageNum)}
-          >
-            {pageNum}
-          </button>
-        ))}
-        <button
-          onClick={handleNextPage}
-          disabled={page === totalPages}
-          className={cx(styles.pageButton, styles.pageMovementButton)}
-        >
-          다음 &gt;
-        </button>
-      </div>
+      <PageNavigator page={page} totalPages={totalPages} setPage={handlePage} />
     </div>
   );
 };

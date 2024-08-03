@@ -2,7 +2,6 @@ export const PATHS = {
   HOME: '/',
   LOGIN: '/login',
   MY_PAGE: '/mypage',
-  RSS: '/api/rss',
   LEGAL: {
     POLICY: '/legal/policy',
     TERMS: '/legal/terms',
@@ -18,6 +17,10 @@ export const PATHS = {
     SUCCESS: '/contents/register/success',
   },
   RESULTS: '/results',
+  NOTICES: {
+    BASE: '/notices',
+    REGISTER: '/notices/register',
+  },
 };
 
 export const EXTERNAL_Link = {
