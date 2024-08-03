@@ -7,7 +7,7 @@ import { GetPageData, IContent } from '@/types';
 export const getContents = async () => {
   const headers = getHeaders();
   try {
-    const res = await fetch(`${BE_URL}/api/v1/contents?size=10&sort=asc&page=1`, { headers });
+    const res = await fetch(`${BE_URL}/api/v1/contents?size=20&sort=asc&page=1`, { headers });
     if (!res.ok) {
       throw new Error('Network response was not ok');
     }
@@ -36,6 +36,10 @@ export const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     },
     {
       url: 'https://simpang.kr/about/dev',
+      lastModified: new Date(),
+    },
+    {
+      url: 'https://simpang.kr/notices',
       lastModified: new Date(),
     },
     ...simpangContents,
