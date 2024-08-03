@@ -1,0 +1,50 @@
+@use 'styles/mixins' as m;
+
+.formWrap {
+  width: 100%;
+  @include m.flexboxColumn();
+  gap: 20px;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 1rem;
+  background-color: var(--color-bg-ivory);
+
+  .titleBox {
+    width: 100%;
+    @include m.flexbox(between);
+
+    select {
+      width: 25%;
+      padding: 7px 12px;
+      @include m.borderStyles();
+    }
+
+    .titleLabel {
+      width: 70%;
+      font-size: var(--font-size-m);
+
+      input {
+        width: 100%;
+        padding: 7px 12px;
+        background-color: white;
+        @include m.borderStyles();
+      }
+    }
+  }
+
+  .contentLabel {
+    width: 100%;
+
+    textarea {
+      width: 100%;
+      padding: 7px 12px;
+      @include m.borderStyles();
+    }
+  }
+
+  .btnBox {
+    width: 100%;
+    @include m.flexbox();
+    gap: 20px;
+  }
+}
