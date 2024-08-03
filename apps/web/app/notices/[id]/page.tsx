@@ -10,7 +10,7 @@ type Props = {
 };
 
 async function getData(id: string): Promise<INotice> {
-  const res = await fetch(`${BE_URL}/api/v1/notices/${id}`);
+  const res = await fetch(`${BE_URL}/api/v1/notices/${id}`, { cache: 'no-store' });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
