@@ -1,0 +1,84 @@
+@use 'styles/mixins' as m;
+
+.tableContainer {
+  width: 100%;
+  padding: 20px 15px;
+  border-radius: 8px;
+  background-color: var(--color-bg-ivory);
+  margin-bottom: 20px;
+  overflow-x: auto;
+  color: var(--font-color);
+
+  table {
+    border-collapse: collapse;
+    background-color: var(--color-white);
+    user-select: none;
+
+    thead {
+      background-color: var(--color-bg-yellow);
+      font-size: 0.9rem;
+    }
+
+    th,
+    td {
+      padding: 8px 15px;
+      border: 1.5px solid var(--color-bg-ivory);
+    }
+
+    .iconTd {
+      width: 40px;
+      text-align: center;
+    }
+
+    .title {
+      max-width: 230px;
+      min-width: 230px;
+      @include m.textEllipsis(100%);
+    }
+
+    .createAt {
+      width: 100px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .tableContent {
+      cursor: pointer;
+    }
+  }
+
+  .updateIcon {
+    margin: auto;
+    @include m.iconStyles(0.9rem, 0.9rem, '/svgs/update.svg');
+  }
+  .noticeIcon {
+    margin: auto;
+    @include m.iconStyles(0.9rem, 0.9rem, '/svgs/bullhorn.svg');
+  }
+}
+
+.btnContainer {
+  @include m.flexbox(between);
+  padding: 0 10px;
+
+  .btnBox {
+    @include m.flexbox(between);
+    gap: 5px;
+
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 0.8rem 0.8rem 0 0;
+      font-size: 0.9rem;
+      color: var(--font-color);
+    }
+  }
+
+  .addBtn {
+    color: white;
+    padding: 5px 12px;
+    font-size: var(--font-size-xl);
+    background-color: var(--color-bg-blue);
+    border-radius: 0.5rem;
+  }
+}
