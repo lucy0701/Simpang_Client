@@ -6,35 +6,35 @@
   gap: 30px;
 }
 
-.pagination {
-  @include m.flexbox();
-  margin: 10px;
-  gap: 10px;
+// .pagination {
+//   @include m.flexbox();
+//   margin: 10px;
+//   gap: 10px;
 
-  button {
-    padding: 3px 5px;
-    cursor: pointer;
-    color: var(--color-gray-6);
-    font-size: var(--font-size-m);
-  }
+//   button {
+//     padding: 3px 5px;
+//     cursor: pointer;
+//     color: var(--color-gray-6);
+//     font-size: var(--font-size-m);
+//   }
 
-  .pageButton {
-    font-size: 0.9rem;
-    margin: 0 10px;
-    padding: 5px 10px;
-  }
+//   .pageButton {
+//     font-size: 0.9rem;
+//     margin: 0 10px;
+//     padding: 5px 10px;
+//   }
 
-  .pageButton:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
+//   .pageButton:disabled {
+//     cursor: not-allowed;
+//     opacity: 0.5;
+//   }
 
-  .activePage {
-    font-weight: bold;
-    color: var(--color-bg-deep-pink);
-    border-bottom: 2px solid var(--color-bg-green);
-  }
-}
+//   .activePage {
+//     font-weight: bold;
+//     color: var(--color-bg-deep-pink);
+//     border-bottom: 2px solid var(--color-bg-green);
+//   }
+// }
 
 .nonContent {
   width: 100%;
