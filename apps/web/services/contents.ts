@@ -4,7 +4,7 @@ import { apiBe, getHeaders } from '.';
 
 export interface PostResultParams {
   contentId: string;
-  scores: number[];
+  result: string;
 }
 
 export const getContentsAPI = (params: PageParams) =>
@@ -18,9 +18,9 @@ export const getUserResultsAPI = async (params: PageParams) => {
   return res.data;
 };
 
-export const postResultAPI = async ({ contentId, scores }: PostResultParams): Promise<IResult> => {
+export const postResultAPI = async ({ contentId, result }: PostResultParams): Promise<IResult> => {
   const headers = getHeaders();
-  const res = await apiBe.post<IResult>(`/v1/results/${contentId}`, { score: scores }, { headers });
+  const res = await apiBe.post<IResult>(`/v1/results/${contentId}`, { result }, { headers });
   return res.data;
 };
 

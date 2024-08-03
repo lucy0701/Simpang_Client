@@ -22,10 +22,22 @@ interface ScoreArr {
   score: number;
 }
 
+type Score = [number, number, number, number];
+
+const calculateResult = (score: Score) => {
+  const resultMapping = ['E', 'I', 'N', 'S', 'T', 'F', 'J', 'P'];
+  return [
+    score[0] > 0 ? resultMapping[0] : resultMapping[1],
+    score[1] > 0 ? resultMapping[2] : resultMapping[3],
+    score[2] > 0 ? resultMapping[4] : resultMapping[5],
+    score[3] > 0 ? resultMapping[6] : resultMapping[7],
+  ].join('');
+};
+
 export default function ContentPlay({ questions, contentId }: Props) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [scores, setScores] = useState<Array<number>>([0, 0, 0, 0]);
+  const [result, setResult] = useState<string>('');
   const [playScores, setPlayScores] = useState<ScoreArr[]>(
     questions.map((question) => ({ index: question.index, score: 0 })),
   );
@@ -35,23 +47,23 @@ export default function ContentPlay({ questions, contentId }: Props) {
 
   const { mutate: postResult } = useMutation({
     mutationFn: postResultAPI,
-    onSuccess: (data) => {
+    onSuccess: (resultId) => {
       queryClient.invalidateQueries({ queryKey: ['result'] });
-      router.push(`${PATHS.RESULTS}/${data._id}`);
+      router.push(`${PATHS.RESULTS}/${resultId}`);
     },
   });
 
   const handlePostResult = () => {
     setIsLoading(true);
-    postResult({ contentId, scores });
+    postResult({ contentId, result });
   };
 
   useEffect(() => {
     if (playScores.length - 1 === currentIndex) handlePostResult();
-  }, [scores]);
+  }, [result]);
 
   const calculateScoreSum = () => {
-    const newScores = [0, 0, 0, 0];
+    const newScores: Score = [0, 0, 0, 0];
 
     playScores.forEach(({ index, score }) => {
       if (newScores[index] === undefined) {
@@ -60,7 +72,8 @@ export default function ContentPlay({ questions, contentId }: Props) {
       newScores[index] += score;
     });
 
-    setScores(newScores);
+    const newResult = calculateResult(newScores);
+    setResult(newResult);
   };
 
   const onClickAnswerBtn = (currentScore: number) => {
