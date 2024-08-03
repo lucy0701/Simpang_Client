@@ -1,0 +1,32 @@
+@use 'styles/mixins' as m;
+
+.wrap {
+  margin-top: 30px;
+
+  .contentWrap {
+    width: 100%;
+    @include m.flexboxColumn();
+    gap: 20px;
+
+    .content {
+      width: 100%;
+      min-height: 150px;
+      background-color: var(--color-bg-ivory);
+      padding: 10px;
+      border-radius: 1rem;
+    }
+  }
+
+  .btnBox {
+    width: 100%;
+    @include m.flexbox(end);
+    gap: 10px;
+    margin-top: 20px;
+
+    button {
+      padding: 8px 12px;
+      background-color: var(--color-bg-ivory);
+      border-radius: 1rem;
+    }
+  }
+}

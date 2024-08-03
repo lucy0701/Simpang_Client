@@ -99,6 +99,10 @@
       .mypageIcon {
         @include m.iconStyles(1rem, 1rem, '/svgs/user.svg');
       }
+
+      .noticeIcon {
+        @include m.iconStyles(1rem, 1rem, '/svgs/bullhorn.svg');
+      }
     }
   }
 
