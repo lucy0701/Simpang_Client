@@ -1,4 +1,4 @@
-export type ContentType = 'MBTI';
+export type ContentType = 'MBTI' | 'MBTI_mini';
 
 export interface IContent {
   _id: string;

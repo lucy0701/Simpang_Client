@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react';
 
 import { PATHS } from '@/constants';
 import { postResultAPI } from '@/services/contents';
-import { IQuestion } from '@/types';
+import { ContentType, IQuestion } from '@/types';
 
 import styles from './index.module.scss';
 import Button from '@/components/Buttons/Button';
 import { CatLoading } from '@/components/Loading';
 
 interface Props {
+  contentType: ContentType;
   questions: IQuestion[];
   contentId: string;
 }
@@ -34,7 +35,7 @@ const calculateResult = (score: Score) => {
   ].join('');
 };
 
-export default function ContentPlay({ questions, contentId }: Props) {
+export default function ContentPlay({ contentType, questions, contentId }: Props) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [result, setResult] = useState<string>('');
@@ -62,7 +63,7 @@ export default function ContentPlay({ questions, contentId }: Props) {
     if (playScores.length - 1 === currentIndex) handlePostResult();
   }, [result]);
 
-  const calculateScoreSum = () => {
+  const calculateScoreSum_MBTI = () => {
     const newScores: Score = [0, 0, 0, 0];
 
     playScores.forEach(({ index, score }) => {
@@ -76,6 +77,36 @@ export default function ContentPlay({ questions, contentId }: Props) {
     setResult(newResult);
   };
 
+  const calculateScoreSum_MBTI_mini = () => {
+    const sumScore = playScores.reduce((acc, cur) => (acc += cur.score), 0);
+    const maxScore = questions.length;
+    let percent: string;
+    let calculatedPercent: number;
+
+    if (sumScore > maxScore) {
+      calculatedPercent = 200;
+    } else {
+      const ratio = sumScore / maxScore;
+      calculatedPercent = ratio * 100;
+    }
+
+    if (calculatedPercent <= 0) {
+      percent = '0%';
+    } else if (calculatedPercent <= 25) {
+      percent = '25%';
+    } else if (calculatedPercent <= 50) {
+      percent = '50%';
+    } else if (calculatedPercent <= 75) {
+      percent = '75%';
+    } else if (calculatedPercent <= 100) {
+      percent = '100%';
+    } else {
+      percent = '200%';
+    }
+
+    setResult(percent);
+  };
+
   const onClickAnswerBtn = (currentScore: number) => {
     setPlayScores((prev) => {
       const newScore = [...prev];
@@ -84,7 +115,8 @@ export default function ContentPlay({ questions, contentId }: Props) {
     });
 
     if (playScores.length - 1 === currentIndex) {
-      calculateScoreSum();
+      if (contentType === 'MBTI') calculateScoreSum_MBTI();
+      if (contentType === 'MBTI_mini') calculateScoreSum_MBTI_mini();
     } else {
       setCurrentIndex((prev) => prev + 1);
     }
