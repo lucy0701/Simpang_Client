@@ -10,4 +10,4 @@ export const USER_INFO = 'simpang_user_info';
 export const TOKEN_NAME = 'simpang_token';
 export const AUTHORIZATION = 'authorization';
 
-export const CONTENT_TYPE: ContentType[] = ['MBTI'];
+export const CONTENT_TYPE: ContentType[] = ['MBTI', 'MBTI_mini'];
