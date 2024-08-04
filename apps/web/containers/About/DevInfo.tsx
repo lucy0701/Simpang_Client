@@ -23,12 +23,19 @@ export default function DevInfo() {
             }}
           />
 
+          <div>
+            <p>일하고 싶습니다!</p>
+          </div>
+
           <div className={styles.iconBox}>
             <Link href={EXTERNAL_Link.GITHUB} target="_blank" prefetch={false}>
               <div className={styles.gitHubIcon} />
             </Link>
             <Link href={EXTERNAL_Link.INSTAGRAM} target="_blank" prefetch={false}>
               <div className={styles.instagramIcon} />
+            </Link>
+            <Link href={EXTERNAL_Link.KAKAOTALK} target="_blank" prefetch={false}>
+              <div className={styles.talkIcon} />
             </Link>
           </div>
         </div>

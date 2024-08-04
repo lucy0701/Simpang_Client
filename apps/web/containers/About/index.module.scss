@@ -9,7 +9,7 @@
     margin: auto;
     padding: 20px 0;
 
-    .pangLogo{
+    .pangLogo {
       background-color: var(--color-bg-yellow);
       border-radius: 1rem;
     }
@@ -49,6 +49,10 @@
 
     .instagramIcon {
       @include m.iconStyles(2rem, 2rem, '/svgs/instagram.svg');
+    }
+
+    .talkIcon {
+      @include m.iconStyles(2rem, 2rem, '/images/kakaotalk_sharing.png');
     }
   }
 }

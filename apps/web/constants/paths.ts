@@ -24,7 +24,8 @@ export const PATHS = {
 };
 
 export const EXTERNAL_Link = {
-  GITHUB: 'https://github.com/lucy0701/Simpang_Client',
-  INSTAGRAM: 'https://www.instagram.com/s.pang',
+  GITHUB: 'https://github.com/lucy0701',
+  INSTAGRAM: 'https://www.instagram.com/simpang.kr',
+  KAKAOTALK: 'https://open.kakao.com/o/gwaiK1Gg',
   THUMBNAIL: 'https://i.ibb.co/BtMXBc9/Watercolor-For-Procreate-V6-0.png',
 };
