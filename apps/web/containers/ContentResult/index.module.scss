@@ -5,6 +5,10 @@
   @include m.flexboxColumn();
   gap: 30px;
 
+  .imageWrap {
+    width: 80%;
+  }
+
   h3 {
     text-align: center;
     font-size: var(--font-size-xl);

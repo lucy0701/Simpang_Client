@@ -58,7 +58,7 @@ export default function Home({ latestContents }: Props) {
       >
         {latestContents.map((t, i) => (
           <SwiperSlide key={i} className={styles.slideItem}>
-            <BannerItem imageUrl={t.imageUrl} id={t._id} title={t.title} />
+            <BannerItem imageUrl={t.imageUrl} id={t._id} />
           </SwiperSlide>
         ))}
       </Swiper>
