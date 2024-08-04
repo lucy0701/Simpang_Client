@@ -12,25 +12,6 @@ $icon-size: 0.8rem;
 
     position: relative;
 
-    .titleWrap {
-      width: 100%;
-
-      h3 {
-        font-weight: 800;
-        padding: 0 15px;
-
-        position: absolute;
-        bottom: 30px;
-        right: 15px;
-
-        font-size: var(--font-size-l);
-        overflow-wrap: break-word;
-
-        border-radius: 1rem;
-        background-color: rgba(255, 255, 255, 0.707);
-      }
-    }
-
     .image {
       object-fit: cover;
       object-position: center;

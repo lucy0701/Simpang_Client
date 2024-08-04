@@ -8,10 +8,9 @@ import styles from './index.module.scss';
 interface Props {
   id: string;
   imageUrl: string;
-  title: string;
 }
 
-const BannerItem = ({ id, imageUrl, title }: Props) => (
+const BannerItem = ({ id, imageUrl }: Props) => (
   <>
     <Link href={`${PATHS.CONTENTS.BASE}/${id}`} className={styles.wrap}>
       <div className={styles.imgWrap}>
@@ -25,9 +24,6 @@ const BannerItem = ({ id, imageUrl, title }: Props) => (
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
           className={styles.image}
         />
-        <div className={styles.titleWrap}>
-          <h3>{title}</h3>
-        </div>
       </div>
     </Link>
   </>
