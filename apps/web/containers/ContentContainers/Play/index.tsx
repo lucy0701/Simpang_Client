@@ -36,14 +36,15 @@ const calculateResult = (score: Score) => {
 };
 
 export default function ContentPlay({ contentType, questions, contentId }: Props) {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [result, setResult] = useState<string>('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState('');
   const [playScores, setPlayScores] = useState<ScoreArr[]>(
     questions.map((question) => ({ index: question.index, score: 0 })),
   );
-  const queryClient = useQueryClient();
+  const [isPlay, setIsPlay] = useState(true);
 
+  const queryClient = useQueryClient();
   const router = useRouter();
 
   const { mutate: postResult } = useMutation({
@@ -58,10 +59,6 @@ export default function ContentPlay({ contentType, questions, contentId }: Props
     setIsLoading(true);
     postResult({ contentId, result });
   };
-
-  useEffect(() => {
-    if (playScores.length - 1 === currentIndex) handlePostResult();
-  }, [result]);
 
   const calculateScoreSum_MBTI = () => {
     const newScores: Score = [0, 0, 0, 0];
@@ -115,8 +112,7 @@ export default function ContentPlay({ contentType, questions, contentId }: Props
     });
 
     if (playScores.length - 1 === currentIndex) {
-      if (contentType === 'MBTI') calculateScoreSum_MBTI();
-      if (contentType === 'MBTI_mini') calculateScoreSum_MBTI_mini();
+      setIsPlay(false);
     } else {
       setCurrentIndex((prev) => prev + 1);
     }
@@ -126,6 +122,17 @@ export default function ContentPlay({ contentType, questions, contentId }: Props
     const percentage = ((currentIndex + 1) / playScores.length) * 100;
     return `${percentage}%`;
   };
+
+  useEffect(() => {
+    if (playScores.length - 1 === currentIndex) handlePostResult();
+  }, [result]);
+
+  useEffect(() => {
+    if (!isPlay) {
+      if (contentType === 'MBTI') calculateScoreSum_MBTI();
+      if (contentType === 'MBTI_mini') calculateScoreSum_MBTI_mini();
+    }
+  }, [isPlay]);
 
   return isLoading ? (
     <CatLoading />
