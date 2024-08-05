@@ -72,6 +72,11 @@ export default function RootLayout({
           integrity="sha384-4isBVZ02Sicjf8XHbphmDqKPF9IdtDHzQm7IdcIhsBHx14UU9s4FrOKdDrjDCm9M"
           crossOrigin="anonymous"
         />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5811396262412902"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body className={notoSansKr.className}>
         <noscript>
