@@ -1,0 +1,38 @@
+@use 'styles/mixins' as m;
+
+.wrap {
+  height: 100vh;
+  @include m.flexboxColumn();
+
+  .contentsWrap {
+    @include m.flexboxColumn();
+    gap: 50px;
+
+    .coupangButton {
+      padding: 20px 30px;
+      font-size: 1.2rem;
+      background-color: #faef9a;
+      color: var(--font-color);
+      border-radius: 1rem;
+    }
+
+    .textBox {
+      p {
+        text-align: center;
+        color: #fff;
+      }
+    }
+
+    .bannerWrap {
+      position: relative;
+
+      .closeBtn {
+        width: 20px;
+        height: 20px;
+        color: #333;
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+}

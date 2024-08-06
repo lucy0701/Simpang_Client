@@ -6,6 +6,7 @@ import { IconButtonBox } from '@/components/ButtonBox/IconButtonBox';
 import Button from '@/components/Buttons/Button';
 import Comments from '@/components/Comments';
 import ImageItem from '@/components/Items/ImageItem';
+import { CoupangBanner_01 } from '@/components/lib/CoupangBanner';
 
 interface Props {
   contentData: Omit<IContent, 'questions'>;
@@ -36,7 +37,7 @@ export default function ContentPreview({ contentData, onClickPlayBtn }: Props) {
       </div>
 
       <IconButtonBox contentData={contentData} />
-
+      <CoupangBanner_01 />
       <Comments contentId={_id} />
     </div>
   );
