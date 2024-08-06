@@ -11,3 +11,6 @@ export const TOKEN_NAME = 'simpang_token';
 export const AUTHORIZATION = 'authorization';
 
 export const CONTENT_TYPE: ContentType[] = ['MBTI', 'MBTI_mini'];
+
+export const COUPANG_VISIT = 'mbCoupangVisitDate';
+export const IS_COUPANG = 'isCoupang';
