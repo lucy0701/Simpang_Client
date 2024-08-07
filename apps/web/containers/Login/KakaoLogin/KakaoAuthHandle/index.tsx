@@ -7,8 +7,7 @@ import { useEffect } from 'react';
 import { AUTHORIZATION, PATHS, TOKEN_NAME } from '@/constants';
 import { kakaoLoginAPI } from '@/services';
 import { DecodedToken } from '@/types';
-import { decodeToken, setCookie } from '@/utils';
-import { getExpirationDate } from '@/utils/dateTime';
+import { decodeToken, setCookie, getExpirationDate } from '@/utils';
 
 import { Loading } from '@/components/Loading';
 
