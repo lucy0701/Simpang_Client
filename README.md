@@ -21,8 +21,8 @@ __Server Github__ : https://github.com/lucy0701/Simpang_Server.git
 - kakao login / logout
 - Main
   - Random Content
-    - banner
-    - button
+    - banner type
+    - button type
   - Contents
     - useInfiniteScroll
 - Content
@@ -33,4 +33,8 @@ __Server Github__ : https://github.com/lucy0701/Simpang_Server.git
 - MyPage
   - Create personality tests
   - Member information
-  - List of personality test results
+  - List of personality test results (Pagination)
+  - Like contents (Pagination)
+- Notices
+  - Update
+  - Notic
