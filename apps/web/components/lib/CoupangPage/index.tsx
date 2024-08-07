@@ -61,13 +61,19 @@ const CoupangPage = () => {
               {count > 0 ? `${count}` : 'X'}
             </button>
 
-            <button onClick={onClickCoupangBtn} id="coupangBtn" className={styles.coupangButton}>
+            <button onClick={onClickCoupangBtn} className={styles.coupangButton}>
               쿠팡 다녀와서 결과 확인 하기
             </button>
 
             <div className={styles.textBox}>
               <p>쿠팡 다녀오면</p>
-              <p>12시간 동안 광고 없이 무제한 이용</p>
+              <p>
+                <span>12시간 </span>
+                동안 광고 없이
+              </p>
+              <p>
+                <span> 무제한 이용 가능!</span>
+              </p>
             </div>
           </div>
           <CoupangBanner_02 />
