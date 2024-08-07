@@ -4,9 +4,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { PATHS } from '@/constants';
+import { IS_COUPANG, PATHS } from '@/constants';
 import { postResultAPI } from '@/services/contents';
 import { ContentType, IQuestion } from '@/types';
+import { checkCoupangSiteVisit } from '@/utils';
 
 import styles from './index.module.scss';
 import Button from '@/components/Buttons/Button';
@@ -51,6 +52,10 @@ export default function ContentPlay({ contentType, questions, contentId }: Props
     mutationFn: postResultAPI,
     onSuccess: (resultId) => {
       queryClient.invalidateQueries({ queryKey: ['result'] });
+
+      const checkCoupang = checkCoupangSiteVisit();
+      if (checkCoupang) sessionStorage.setItem(IS_COUPANG, 'true');
+
       router.push(`${PATHS.RESULTS}/${resultId}`);
     },
   });
