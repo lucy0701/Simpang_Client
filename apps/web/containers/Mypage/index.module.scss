@@ -8,7 +8,6 @@
   .userWrap {
     width: 80%;
     padding: 8px 10px;
-    margin: auto;
 
     @include m.flexbox(between);
     @include m.borderStyles();
@@ -18,7 +17,7 @@
     }
 
     .userInfo {
-      width: 73%;
+      width: 78%;
       @include m.flexboxColumn(between, _);
       gap: 5px;
 
@@ -40,6 +39,29 @@
         }
       }
     }
+  }
+
+  .categoryContainer {
+    width: 80%;
+
+    .categoryBtnBox {
+      width: 100%;
+      @include m.flexbox(around);
+
+      button {
+        @include m.flexboxColumn();
+        gap: 10px;
+        font-weight: var(--font-weight-bold);
+      }
+    }
+  }
+
+  .addContentBtn {
+    padding: 3px 8px;
+    color: var(--font-color);
+    font-size: 0.7rem;
+    background-color: var(--color-bg-pink);
+    border-radius: 1rem;
   }
 
   .windowWrap {

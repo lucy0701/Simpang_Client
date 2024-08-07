@@ -1,6 +1,8 @@
 export * from './kakao';
 export * from './util';
 export * from './user';
+export * from './like';
+export * from './contents';
 
 import axios from 'axios';
 

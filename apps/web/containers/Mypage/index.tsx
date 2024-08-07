@@ -6,13 +6,15 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { PATHS, SIMPANG_ALT } from '@/constants';
-import { getUserAPI, kakaoUnlinkAPI } from '@/services';
+import { getLikeContentsAPI, getUserAPI, getUserResultsAPI, kakaoUnlinkAPI } from '@/services';
 import { dateSplit } from '@/utils';
 
+import ContentList from './ContentList';
 import styles from './index.module.scss';
-import ResultList from './ResultList';
 import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
 import Button from '@/components/Buttons/Button';
+import ContentItem from '@/components/Items/ContentItem';
+import ResultItem from '@/components/Items/ResultItem';
 import { Loading } from '@/components/Loading';
 import ModalContent from '@/components/ModalContent';
 import ModalPortal from '@/components/ModalPortal';
@@ -20,6 +22,7 @@ import WindowStyle from '@/components/WindowStyles';
 
 export default function Mypage() {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [category, setCategory] = useState<'results' | 'likes'>('results');
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -33,16 +36,14 @@ export default function Mypage() {
     mutationFn: kakaoUnlinkAPI,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
+      router.push(PATHS.HOME);
     },
   });
 
-  const handleModal = () => {
-    setShowModal(!showModal);
-  };
+  const handleModal = () => setShowModal(!showModal);
 
   const onClikeDeleteUserBtn = () => {
     deleteUser();
-    router.push(PATHS.HOME);
   };
 
   const onClikeCreateBtn = () => router.push(PATHS.CONTENTS.REGISTER);
@@ -63,17 +64,59 @@ export default function Mypage() {
 
             <div className={styles.user}>
               <p className={styles.createdAt}>{dateSplit(user.createdAt)}</p>
+              {(user.role === 'Admin' || user.role === 'Creator') && (
+                <button className={styles.addContentBtn} onClick={onClikeCreateBtn}>
+                  컨텐츠 추가
+                </button>
+              )}
             </div>
           </div>
         </div>
 
-        {(user.role === 'Admin' || user.role === 'Creator') && (
-          <Button color="yellow" size="medium" text={'컨텐츠 만들기'} onClick={onClikeCreateBtn} />
-        )}
+        <div className={styles.categoryContainer}>
+          <WindowStyle color="yellow" title="카테고리">
+            <div className={styles.categoryBtnBox}>
+              <button onClick={() => setCategory('results')}>
+                {category === 'results' ? (
+                  <Image src="/images/folder_open.png" width={70} height={70} alt={SIMPANG_ALT} />
+                ) : (
+                  <Image src="/images/folder.png" width={70} height={70} alt={SIMPANG_ALT} />
+                )}
+                나의 결과
+              </button>
+              <button onClick={() => setCategory('likes')}>
+                {category === 'likes' ? (
+                  <Image src="/images/folder_open.png" width={70} height={70} alt={SIMPANG_ALT} />
+                ) : (
+                  <Image src="/images/folder.png" width={70} height={70} alt={SIMPANG_ALT} />
+                )}
+                좋아요
+              </button>
+            </div>
+          </WindowStyle>
+        </div>
 
         <div className={styles.windowWrap}>
-          <WindowStyle title="나의 결과 목록">
-            <ResultList />
+          <WindowStyle
+            title={category === 'likes' ? '좋아요 ❤️ 목록' : '결과 ⭐️ 목록'}
+            color={category === 'likes' ? 'pink' : 'green'}
+          >
+            {category === 'results' && (
+              <ContentList
+                queryKey={['userResult']}
+                queryFn={getUserResultsAPI}
+                itemComponent={ResultItem}
+                contentIdKey="_id"
+              />
+            )}
+            {category === 'likes' && (
+              <ContentList
+                queryKey={['likeContents']}
+                queryFn={getLikeContentsAPI}
+                itemComponent={ContentItem}
+                contentIdKey="contentId"
+              />
+            )}
           </WindowStyle>
 
           <button className={styles.deleteUserBtn} onClick={handleModal}>
