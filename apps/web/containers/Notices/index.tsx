@@ -8,8 +8,7 @@ import { useState } from 'react';
 import { PATHS } from '@/constants';
 import { apiBe, getHeaders } from '@/services';
 import { GetPageData, INotice, NoticeType } from '@/types';
-import { decodeToken_csr } from '@/utils';
-import { dateSplit } from '@/utils/dateTime';
+import { decodeToken_csr, dateSplit } from '@/utils';
 
 import styles from './index.module.scss';
 import { Loading } from '@/components/Loading';

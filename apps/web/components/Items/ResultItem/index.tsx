@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { PATHS, SIMPANG_ALT } from '@/constants';
 import { IUserResult } from '@/types';
-import { dateSplit } from '@/utils/dateTime';
+import { dateSplit } from '@/utils';
 
 import styles from './index.module.scss';
 

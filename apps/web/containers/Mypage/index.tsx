@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import { PATHS, SIMPANG_ALT } from '@/constants';
 import { getUserAPI, kakaoUnlinkAPI } from '@/services';
-import { dateSplit } from '@/utils/dateTime';
+import { dateSplit } from '@/utils';
 
 import styles from './index.module.scss';
 import ResultList from './ResultList';
