@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { deleteCommentAPI, patchCommentAPI } from '@/services/comment';
 import { DecodedToken, IComment } from '@/types';
-import { getTimeDifference } from '@/utils/dateTime';
+import { getTimeDifference } from '@/utils';
 
 import styles from './index.module.scss';
 import ImageItem from '@/components/Items/ImageItem';
