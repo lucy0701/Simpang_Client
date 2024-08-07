@@ -1,6 +1,6 @@
 @use 'styles/mixins' as m;
 
-.resultWrap {
+.wrap {
   width: 100%;
   @include m.flexboxColumn(_, _);
   gap: 30px;

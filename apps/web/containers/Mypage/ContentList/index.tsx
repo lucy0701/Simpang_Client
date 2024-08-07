@@ -3,28 +3,35 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { getUserResultsAPI } from '@/services/contents';
+import { GetPageData, PageParams } from '@/types';
 
 import styles from './index.module.scss';
-import ResultItem from '@/components/Items/ResultItem';
 import { Loading } from '@/components/Loading';
 import PageNavigator from '@/components/PageNavigator';
 
-const ResultList = () => {
+type ContentListProps<T> = {
+  queryKey: string[];
+  queryFn: (params: PageParams) => Promise<GetPageData<T>>;
+  itemComponent: React.ComponentType<T>;
+  contentIdKey: string;
+};
+
+const ContentList = <T,>({
+  queryKey,
+  queryFn,
+  itemComponent: ItemComponent,
+  contentIdKey,
+}: ContentListProps<T>) => {
   const [page, setPage] = useState(1);
 
-  const {
-    data: results,
-    error,
-    status,
-  } = useQuery({
-    queryKey: ['userResult', page],
-    queryFn: () => getUserResultsAPI({ page, size: 5, sort: 'desc' }),
+  const { data, error, status } = useQuery({
+    queryKey: [...queryKey, page],
+    queryFn: () => queryFn({ page, size: 5, sort: 'desc' }),
     placeholderData: keepPreviousData,
   });
 
-  const dataList = results?.data;
-  const totalPages = results?.totalPage || 0;
+  const dataList = data?.data;
+  const totalPages = data?.totalPage || 0;
 
   const handlePage = (pageNum: number) => setPage(pageNum);
 
@@ -33,11 +40,11 @@ const ResultList = () => {
   ) : status === 'error' ? (
     <p>Error: {error?.message}</p>
   ) : (
-    <div className={styles.resultWrap}>
+    <div className={styles.wrap}>
       {dataList && dataList.length > 0 ? (
-        dataList.map((data) => (
-          <div key={data._id} className={styles.result}>
-            <ResultItem {...data} />
+        dataList.map((item: any) => (
+          <div key={item._id}>
+            <ItemComponent {...item} _id={item[contentIdKey]} />
           </div>
         ))
       ) : (
@@ -50,4 +57,4 @@ const ResultList = () => {
   );
 };
 
-export default ResultList;
+export default ContentList;

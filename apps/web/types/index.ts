@@ -3,6 +3,7 @@ import { AxiosResponse } from 'axios';
 export * from './login';
 export * from './content';
 export * from './notice';
+export * from './like';
 
 export type Sort = 'asc' | 'desc';
 export type FloatButtonPosition = 'right' | 'left';

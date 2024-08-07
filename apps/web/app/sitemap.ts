@@ -31,7 +31,7 @@ export const Sitemap = async (): Promise<MetadataRoute.Sitemap> => {
       lastModified: new Date(),
     },
     {
-      url: 'https://simpang.kr/about/',
+      url: 'https://simpang.kr/about',
       lastModified: new Date(),
     },
     {
