@@ -14,6 +14,7 @@ type ContentListProps<T> = {
   queryFn: (params: PageParams) => Promise<GetPageData<T>>;
   itemComponent: React.ComponentType<T>;
   contentIdKey: string;
+  size?: number;
 };
 
 const ContentList = <T,>({
@@ -21,12 +22,13 @@ const ContentList = <T,>({
   queryFn,
   itemComponent: ItemComponent,
   contentIdKey,
+  size,
 }: ContentListProps<T>) => {
   const [page, setPage] = useState(1);
 
   const { data, error, status } = useQuery({
-    queryKey: [...queryKey, page],
-    queryFn: () => queryFn({ page, size: 5, sort: 'desc' }),
+    queryKey: [...queryKey, page, size],
+    queryFn: () => queryFn({ page, size: size || 5, sort: 'desc' }),
     placeholderData: keepPreviousData,
   });
 

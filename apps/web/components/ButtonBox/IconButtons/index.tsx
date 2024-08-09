@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 import { PATHS } from '@/constants';
 // import { postShareAPI } from '@/services/contents';
+import useDebounce from '@/hooks/useDebounce';
 import { getLikeAPI, postLikeAPI } from '@/services/like';
 import { IContent, IResult } from '@/types';
 import { decodeToken_csr } from '@/utils';
@@ -53,6 +54,8 @@ export const LikeButton = ({ contentId }: Props) => {
     },
   });
 
+  const debouncedPostLike = useDebounce(postLike, 500);
+
   const handleModal = () => {
     setShowModal(!showModal);
   };
@@ -63,8 +66,11 @@ export const LikeButton = ({ contentId }: Props) => {
   };
 
   const handlePostLike = () => {
-    if (isLogin) handleModal();
-    else postLike();
+    if (isLogin) {
+      handleModal();
+    } else {
+      debouncedPostLike();
+    }
   };
 
   useEffect(() => {

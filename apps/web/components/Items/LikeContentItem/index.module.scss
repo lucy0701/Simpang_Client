@@ -1,0 +1,47 @@
+@use 'styles/mixins' as m;
+
+$icon-size: 2.5rem;
+
+.wrap {
+  width: 100%;
+  border-bottom: 1px dashed var(--color-gray-d);
+  padding-bottom: 8px;
+  @include m.flexbox();
+  gap: 20px;
+
+  .linkWrap {
+    width: 100%;
+    @include m.flexbox();
+    gap: 20px;
+
+    .imgWrap {
+      width: 40%;
+      height: 50px;
+
+      position: relative;
+      overflow: hidden;
+
+      @include m.flexboxColumn();
+      margin-bottom: 3px;
+
+      .image {
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    .title {
+      font-size: 1rem;
+      @include m.textEllipsis();
+      font-weight: var(--font-weight-bold);
+    }
+  }
+
+  .likeIcon {
+    width: 1.7rem;
+  }
+
+  .iconRed {
+    filter: invert(41%) sepia(77%) saturate(3177%) hue-rotate(338deg) brightness(85%) contrast(103%);
+  }
+}
