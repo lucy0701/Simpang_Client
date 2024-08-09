@@ -31,6 +31,9 @@ export default function DevInfo() {
             <Link href={EXTERNAL_Link.GITHUB} target="_blank" prefetch={false}>
               <div className={styles.gitHubIcon} />
             </Link>
+            <Link href={EXTERNAL_Link.NOTION} target="_blank" prefetch={false}>
+              <div className={styles.notion} />
+            </Link>
             <Link href={EXTERNAL_Link.INSTAGRAM} target="_blank" prefetch={false}>
               <div className={styles.instagramIcon} />
             </Link>

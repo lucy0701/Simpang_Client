@@ -28,4 +28,5 @@ export const EXTERNAL_Link = {
   INSTAGRAM: 'https://www.instagram.com/simpang.kr',
   KAKAOTALK: 'https://open.kakao.com/o/gwaiK1Gg',
   THUMBNAIL: 'https://i.ibb.co/BtMXBc9/Watercolor-For-Procreate-V6-0.png',
+  NOTION: 'https://www.notion.so/FrontEnd-Kim-Hi-d32b4df83f3242fc97e81added985686'
 };

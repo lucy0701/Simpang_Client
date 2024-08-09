@@ -34,7 +34,7 @@ export const KakaoSharingBtn = ({ contentData }: ContentData) => {
       size={ICON_SIZE}
       onClick={onClickTestShareBtn}
       text="공유하기"
-      iconSrc="/images/kakaotalk_sharing.png"
+      iconSrc="/svgs/kakao_w.svg"
       altText="카카오 공유 버튼"
       isFullIcon={true}
     />
@@ -56,5 +56,7 @@ export const ResultKakaoSharingBtn = ({ resultData }: ResultData) => {
     });
   };
 
-  return <Button text="공유하기" size="medium" onClick={onClickRsultShareBtn} />;
+  return (
+    <Button color="yellow" text="카카오톡 공유하기" size="medium" onClick={onClickRsultShareBtn} />
+  );
 };
