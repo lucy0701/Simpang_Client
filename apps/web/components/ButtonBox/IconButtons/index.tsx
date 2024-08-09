@@ -5,8 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { PATHS } from '@/constants';
-// import { postShareAPI } from '@/services/contents';
-import useDebounce from '@/hooks/useDebounce';
+import useThrottle from '@/hooks/useThrottle';
 import { getLikeAPI, postLikeAPI } from '@/services/like';
 import { IContent, IResult } from '@/types';
 import { decodeToken_csr } from '@/utils';
@@ -54,7 +53,7 @@ export const LikeButton = ({ contentId }: Props) => {
     },
   });
 
-  const debouncedPostLike = useDebounce(postLike, 500);
+  const throttledPostLike = useThrottle(postLike, 1000);
 
   const handleModal = () => {
     setShowModal(!showModal);
@@ -69,7 +68,7 @@ export const LikeButton = ({ contentId }: Props) => {
     if (isLogin) {
       handleModal();
     } else {
-      debouncedPostLike();
+      throttledPostLike();
     }
   };
 
