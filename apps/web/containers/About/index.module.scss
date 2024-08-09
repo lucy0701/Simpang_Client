@@ -52,7 +52,10 @@
     }
 
     .talkIcon {
-      @include m.iconStyles(2rem, 2rem, '/images/kakaotalk_sharing.png');
+      @include m.iconStyles(1.7rem, 1.7rem, '/svgs/kakao.svg');
+    }
+    .notion {
+      @include m.iconStyles(1.7rem, 1.7rem, '/svgs/notion.svg');
     }
   }
 }
