@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { PATHS, SIMPANG_ALT } from '@/constants';
-import useDebounce from '@/hooks/useDebounce';
+import useThrottle from '@/hooks/useThrottle';
 import { postLikeAPI } from '@/services';
 import { IContent } from '@/types';
 
@@ -24,10 +24,10 @@ const LikeContentItem = ({ _id, imageUrl, title }: Partial<IContent>) => {
     },
   });
 
-  const debouncedPostLike = useDebounce(postLike, 500);
+  const throttledPostLike = useThrottle(postLike, 1000);
 
   const handlePostLike = () => {
-    debouncedPostLike();
+    throttledPostLike();
   };
 
   return (
