@@ -13,7 +13,7 @@ import ContentList from './ContentList';
 import styles from './index.module.scss';
 import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
 import Button from '@/components/Buttons/Button';
-import ContentItem from '@/components/Items/ContentItem';
+import LikeContentItem from '@/components/Items/LikeContentItem';
 import ResultItem from '@/components/Items/ResultItem';
 import { Loading } from '@/components/Loading';
 import ModalContent from '@/components/ModalContent';
@@ -113,8 +113,9 @@ export default function Mypage() {
               <ContentList
                 queryKey={['likeContents']}
                 queryFn={getLikeContentsAPI}
-                itemComponent={ContentItem}
+                itemComponent={LikeContentItem}
                 contentIdKey="contentId"
+                size={10}
               />
             )}
           </WindowStyle>
