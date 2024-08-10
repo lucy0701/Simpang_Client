@@ -29,6 +29,9 @@ $icon-size: 1rem;
       .instagramIcon {
         @include m.iconStyles(1.4rem, 1.4rem, '/svgs/instagram.svg');
       }
+      .talkIcon {
+        @include m.iconStyles(1.2rem, 1.2rem, '/svgs/kakao.svg');
+      }
     }
 
     .docsBox {

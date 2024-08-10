@@ -15,6 +15,9 @@ export default function Footer() {
           <Link href={EXTERNAL_Link.INSTAGRAM} target="_blank" prefetch={false}>
             <div className={styles.instagramIcon} />
           </Link>
+          <Link href={EXTERNAL_Link.KAKAOTALK} target="_blank" prefetch={false}>
+            <div className={styles.talkIcon} />
+          </Link>
         </div>
         <div className={styles.docsBox}>
           <Link href={PATHS.LEGAL.TERMS} target="_blank" prefetch={false}>
