@@ -26,7 +26,7 @@ export async function generateMetadata(
 }
 
 async function getData(id: string): Promise<IResult> {
-  const res = await fetch(`${BE_URL}/api/v1/results/${id}`);
+  const res = await fetch(`${BE_URL}/api/v1/results/${id}`, { cache: 'no-store' });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
