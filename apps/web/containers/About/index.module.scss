@@ -39,23 +39,29 @@
     width: 100%;
   }
 
-  .iconBox {
-    @include m.flexbox(between);
-    gap: 15px;
-
-    .gitHubIcon {
-      @include m.iconStyles(1.8rem, 1.8rem, '/svgs/gitHub.svg');
+  .message {
+    width: 100%;
+    padding: 20px;
+    background-color: var(--color-bg-ivory);
+    @include m.flexboxColumn();
+    gap: 20px;
+    p {
+      margin: 0;
+      line-height: 0.5;
     }
+    border-radius: 1rem;
 
-    .instagramIcon {
-      @include m.iconStyles(2rem, 2rem, '/svgs/instagram.svg');
-    }
+    .iconBox {
+      @include m.flexbox(between);
+      gap: 15px;
+      
+      .notion {
+        @include m.iconStyles(1.7rem, 1.7rem, '/svgs/notion.svg');
+      }
 
-    .talkIcon {
-      @include m.iconStyles(1.7rem, 1.7rem, '/svgs/kakao.svg');
-    }
-    .notion {
-      @include m.iconStyles(1.7rem, 1.7rem, '/svgs/notion.svg');
+      .gitHubIcon {
+        @include m.iconStyles(1.8rem, 1.8rem, '/svgs/gitHub.svg');
+      }
     }
   }
 }
