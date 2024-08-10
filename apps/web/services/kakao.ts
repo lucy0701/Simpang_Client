@@ -60,11 +60,10 @@ export const shareKakaotalk = ({
       title,
       description,
       imageUrl,
-      button1: '심팡',
       button2: '테스트 하기',
       likeCount,
       commentCount,
-      REGI_WEB_DOMAIN: `${FE_URL}/contents/${contentId}`,
+      contents: `/contents/${contentId}`,
     },
   });
 };
