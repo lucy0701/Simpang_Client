@@ -12,6 +12,7 @@ export interface PageParams {
   page: number;
   size: number;
   sort?: Sort;
+  filter?: object;
 }
 
 export interface GetPageData<T> {
@@ -37,6 +38,7 @@ export interface PaginationOptions<T> {
   getData: (params: PageParams) => Promise<AxiosResponse<GetPageData<T>>>;
   sort: Sort;
   size: number;
+  filter?: object;
   queryKey: string;
 }
 
