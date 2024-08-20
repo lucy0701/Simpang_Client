@@ -4,24 +4,30 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getContentsAPI } from '@/services/contents';
-import { IContent } from '@/types';
+import { getTagsAPI } from '@/services/tags';
+import { IContent, Tag } from '@/types';
 
 import styles from './index.module.scss';
 import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
 import BannerItem from '@/components/Items/BannerItem';
 import ContentItem from '@/components/Items/ContentItem';
 import { Loading, RoundLoading } from '@/components/Loading';
+import WindowStyle from '@/components/WindowStyles';
 
 interface Props {
   latestContents: IContent[];
 }
 
 export default function Home({ latestContents }: Props) {
+  const [category, setCategorys] = useState<Tag>();
+
   const {
     dataList: contents,
     lastElementRef,
@@ -32,14 +38,16 @@ export default function Home({ latestContents }: Props) {
     getData: getContentsAPI,
     sort: 'desc',
     size: 10,
+    filter: { tags: category?._id },
     queryKey: 'contents',
   });
 
-  return status === 'pending' ? (
-    <Loading />
-  ) : status === 'error' ? (
-    <p>Error: {error?.message}</p>
-  ) : (
+  const { data: categorys, isLoading } = useQuery({
+    queryKey: ['tags', category],
+    queryFn: () => getTagsAPI(),
+  });
+
+  return (
     <div className={styles.wrap}>
       <div className={styles.speechBubbleWrap}>
         <p>Today&apos;s Pick ❤️</p>
@@ -63,16 +71,32 @@ export default function Home({ latestContents }: Props) {
         ))}
       </Swiper>
 
-      <div className={styles.contents}>
-        {contents &&
-          contents.map((content) => (
-            <div key={content._id} className={styles.clientArea} ref={lastElementRef}>
-              <ContentItem key={content._id} {...content} />
-            </div>
-          ))}
-        {isFetching && <RoundLoading />}
-      </div>
-
+      <WindowStyle>
+        {isLoading ? (
+          <RoundLoading />
+        ) : (
+          categorys?.map((category) => (
+            <button key={category._id} onClick={() => setCategorys(category)}>
+              {category.name}
+            </button>
+          ))
+        )}
+      </WindowStyle>
+      {status === 'pending' ? (
+        <Loading />
+      ) : status === 'error' ? (
+        <p>Error: {error?.message}</p>
+      ) : (
+        <div className={styles.contents}>
+          {contents &&
+            contents.map((content) => (
+              <div key={content._id} className={styles.clientArea} ref={lastElementRef}>
+                <ContentItem key={content._id} {...content} />
+              </div>
+            ))}
+          {isFetching && <RoundLoading />}
+        </div>
+      )}
       <FloatBtnBox />
     </div>
   );
