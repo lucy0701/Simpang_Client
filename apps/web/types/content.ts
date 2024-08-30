@@ -1,5 +1,10 @@
 export type ContentType = 'MBTI' | 'MBTI_mini';
 
+export type Tag = {
+  _id?: string;
+  name: string;
+};
+
 export interface IContent {
   _id: string;
   title: string;
@@ -9,6 +14,7 @@ export interface IContent {
   commentCount: number;
   likeCount: number;
   type: ContentType;
+  tags?: Tag[];
   questions?: IQuestion[];
   creator?: string;
 }

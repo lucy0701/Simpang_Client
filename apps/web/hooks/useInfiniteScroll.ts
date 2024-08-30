@@ -3,16 +3,16 @@ import { useCallback, useMemo, useRef } from 'react';
 
 import { PaginationOptions } from '@/types';
 
-const useInfiniteScroll = <T>({ getData, sort, size, queryKey }: PaginationOptions<T>) => {
+const useInfiniteScroll = <T>({ getData, sort, size, filter, queryKey }: PaginationOptions<T>) => {
   const observer = useRef<IntersectionObserver>();
 
   const fetchData = async ({ pageParam = 1 }) => {
-    const res = await getData({ page: pageParam, size, sort });
+    const res = await getData({ page: pageParam, size, sort, filter });
     return res.data;
   };
 
   const { data, error, fetchNextPage, hasNextPage, isFetching, status } = useInfiniteQuery({
-    queryKey: [queryKey, sort],
+    queryKey: [queryKey, sort, filter],
     queryFn: fetchData,
     initialPageParam: 1,
     getNextPageParam: (lastPage) =>
