@@ -43,17 +43,6 @@
 
   .categoryContainer {
     width: 80%;
-
-    .categoryBtnBox {
-      width: 100%;
-      @include m.flexbox(around);
-
-      button {
-        @include m.flexboxColumn();
-        gap: 10px;
-        font-weight: var(--font-weight-bold);
-      }
-    }
   }
 
   .addContentBtn {

@@ -13,6 +13,7 @@ import ContentList from './ContentList';
 import styles from './index.module.scss';
 import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
 import Button from '@/components/Buttons/Button';
+import Category from '@/components/Category';
 import LikeContentItem from '@/components/Items/LikeContentItem';
 import ResultItem from '@/components/Items/ResultItem';
 import { Loading } from '@/components/Loading';
@@ -20,9 +21,28 @@ import ModalContent from '@/components/ModalContent';
 import ModalPortal from '@/components/ModalPortal';
 import WindowStyle from '@/components/WindowStyles';
 
+interface CategoryProps {
+  key: string;
+  name: string;
+}
+
+const categorys: CategoryProps[] = [
+  {
+    key: 'results',
+    name: '나의 결과',
+  },
+  {
+    name: '좋아요',
+    key: 'likes',
+  },
+];
+
 export default function Mypage() {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [category, setCategory] = useState<'results' | 'likes'>('results');
+  const [currentCategory, setCurrentCategorys] = useState<CategoryProps>({
+    key: 'results',
+    name: '나의 결과',
+  });
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -75,33 +95,23 @@ export default function Mypage() {
 
         <div className={styles.categoryContainer}>
           <WindowStyle color="yellow" title="카테고리">
-            <div className={styles.categoryBtnBox}>
-              <button onClick={() => setCategory('results')}>
-                {category === 'results' ? (
-                  <Image src="/images/folder_open.png" width={70} height={70} alt={SIMPANG_ALT} />
-                ) : (
-                  <Image src="/images/folder.png" width={70} height={70} alt={SIMPANG_ALT} />
-                )}
-                나의 결과
-              </button>
-              <button onClick={() => setCategory('likes')}>
-                {category === 'likes' ? (
-                  <Image src="/images/folder_open.png" width={70} height={70} alt={SIMPANG_ALT} />
-                ) : (
-                  <Image src="/images/folder.png" width={70} height={70} alt={SIMPANG_ALT} />
-                )}
-                좋아요
-              </button>
-            </div>
+            {categorys.map((category) => (
+              <Category
+                key={category.key}
+                category={category.name}
+                currentCategory={currentCategory?.name}
+                onClick={() => setCurrentCategorys(category)}
+              />
+            ))}
           </WindowStyle>
         </div>
 
         <div className={styles.windowWrap}>
           <WindowStyle
-            title={category === 'likes' ? '좋아요 ❤️ 목록' : '결과 ⭐️ 목록'}
-            color={category === 'likes' ? 'pink' : 'green'}
+            title={currentCategory?.key === 'likes' ? '좋아요 ❤️ 목록' : '결과 ⭐️ 목록'}
+            color={currentCategory?.key === 'likes' ? 'pink' : 'green'}
           >
-            {category === 'results' && (
+            {currentCategory?.key === 'results' && (
               <ContentList
                 queryKey={['userResult']}
                 queryFn={getUserResultsAPI}
@@ -109,7 +119,7 @@ export default function Mypage() {
                 contentIdKey="_id"
               />
             )}
-            {category === 'likes' && (
+            {currentCategory?.key === 'likes' && (
               <ContentList
                 queryKey={['likeContents']}
                 queryFn={getLikeContentsAPI}
