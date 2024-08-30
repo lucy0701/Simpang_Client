@@ -4,14 +4,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getContentsAPI } from '@/services/contents';
-import { getTagsAPI } from '@/services/tags';
 import { IContent, Tag } from '@/types';
 
 import styles from './index.module.scss';
@@ -24,10 +22,11 @@ import WindowStyle from '@/components/WindowStyles';
 
 interface Props {
   latestContents: IContent[];
+  categorys: Tag[];
 }
 
-export default function Home({ latestContents }: Props) {
-  const [currentCategory, setCurrentCategorys] = useState<Tag>({
+export default function Home({ latestContents, categorys }: Props) {
+  const [currentCategory, setCurrentCategory] = useState<Tag>({
     name: '전체보기',
   });
 
@@ -45,12 +44,7 @@ export default function Home({ latestContents }: Props) {
     queryKey: 'contents',
   });
 
-  const { data: categorys = [], isLoading } = useQuery({
-    queryKey: ['tags', currentCategory],
-    queryFn: () => getTagsAPI(),
-  });
-
-  const onClickCategoryBtn = (category: Tag) => setCurrentCategorys(category);
+  const onClickCategoryBtn = (category: Tag) => setCurrentCategory(category);
 
   return (
     <div className={styles.wrap}>
@@ -77,18 +71,14 @@ export default function Home({ latestContents }: Props) {
       </Swiper>
 
       <WindowStyle title="카테고리">
-        {isLoading ? (
-          <RoundLoading />
-        ) : (
-          [{ name: '전체보기' }, ...categorys].map((category) => (
-            <Category
-              key={category.name}
-              category={category.name}
-              currentCategory={currentCategory?.name}
-              onClick={() => onClickCategoryBtn(category)}
-            />
-          ))
-        )}
+        {[{ name: '전체보기' }, ...categorys].map((category) => (
+          <Category
+            key={category.name}
+            category={category.name}
+            currentCategory={currentCategory?.name}
+            onClick={() => onClickCategoryBtn(category)}
+          />
+        ))}
       </WindowStyle>
 
       {status === 'pending' ? (
