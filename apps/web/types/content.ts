@@ -1,7 +1,7 @@
 export type ContentType = 'MBTI' | 'MBTI_mini';
 
 export type Tag = {
-  _id: string;
+  _id?: string;
   name: string;
 };
 
