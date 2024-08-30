@@ -16,6 +16,7 @@ import { IContent, Tag } from '@/types';
 
 import styles from './index.module.scss';
 import { FloatBtnBox } from '@/components/ButtonBox/FloatBtnBox';
+import Category from '@/components/Category';
 import BannerItem from '@/components/Items/BannerItem';
 import ContentItem from '@/components/Items/ContentItem';
 import { Loading, RoundLoading } from '@/components/Loading';
@@ -26,7 +27,9 @@ interface Props {
 }
 
 export default function Home({ latestContents }: Props) {
-  const [category, setCategorys] = useState<Tag>();
+  const [currentCategory, setCurrentCategorys] = useState<Tag>({
+    name: '전체보기',
+  });
 
   const {
     dataList: contents,
@@ -38,14 +41,16 @@ export default function Home({ latestContents }: Props) {
     getData: getContentsAPI,
     sort: 'desc',
     size: 10,
-    filter: { tags: category?._id },
+    filter: { tags: currentCategory?._id },
     queryKey: 'contents',
   });
 
-  const { data: categorys, isLoading } = useQuery({
-    queryKey: ['tags', category],
+  const { data: categorys = [], isLoading } = useQuery({
+    queryKey: ['tags', currentCategory],
     queryFn: () => getTagsAPI(),
   });
+
+  const onClickCategoryBtn = (category: Tag) => setCurrentCategorys(category);
 
   return (
     <div className={styles.wrap}>
@@ -71,17 +76,21 @@ export default function Home({ latestContents }: Props) {
         ))}
       </Swiper>
 
-      <WindowStyle>
+      <WindowStyle title="카테고리">
         {isLoading ? (
           <RoundLoading />
         ) : (
-          categorys?.map((category) => (
-            <button key={category._id} onClick={() => setCategorys(category)}>
-              {category.name}
-            </button>
+          [{ name: '전체보기' }, ...categorys].map((category) => (
+            <Category
+              key={category.name}
+              category={category.name}
+              currentCategory={currentCategory?.name}
+              onClick={() => onClickCategoryBtn(category)}
+            />
           ))
         )}
       </WindowStyle>
+
       {status === 'pending' ? (
         <Loading />
       ) : status === 'error' ? (
