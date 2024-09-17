@@ -35,7 +35,7 @@ const Comments = ({ contentId }: Props) => {
   });
 
   const handlePostComment = () => {
-    postComment({ id: contentId, text });
+    if (text) postComment({ id: contentId, text });
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
