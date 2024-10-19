@@ -21,6 +21,7 @@ export const PATHS = {
     BASE: '/notices',
     REGISTER: '/notices/register',
   },
+  SEARCH: '/search'
 };
 
 export const EXTERNAL_Link = {
