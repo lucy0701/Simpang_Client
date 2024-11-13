@@ -25,13 +25,13 @@ export default function DevInfo() {
 
           <div className={styles.message}>
             <p>
-              <span>인재가 필요한 회사의 연락</span>을
+              <span>작은 즐거움</span>을
             </p>
-            <p>기다리고 있습니다!</p>
+            <p>드리고 싶습니다.</p>
             <div className={styles.iconBox}>
-              <Link href={EXTERNAL_Link.NOTION} target="_blank" prefetch={false}>
+{/*               <Link href={EXTERNAL_Link.NOTION} target="_blank" prefetch={false}>
                 <div className={styles.notion} />
-              </Link>
+              </Link> */}
               <Link href={EXTERNAL_Link.GITHUB} target="_blank" prefetch={false}>
                 <div className={styles.gitHubIcon} />
               </Link>
